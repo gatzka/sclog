@@ -38,7 +38,7 @@ extern "C" {
 #include "sclog.h"
 #include "sclog_export.h"
 
-SCLOG_EXPORT bool sc_log_syslog_sink_init(struct sc_log_sink *sink);
+SCLOG_EXPORT bool sc_log_syslog_sink_init(struct sc_log_sink *sink, struct sc_log *log);
 
 #ifdef __cplusplus
 }

@@ -33,22 +33,15 @@
 //#include "sclog_stderr_sink.h"
 #include "posix/sclog_syslog_sink.h"
 
-int main(int argc, char* argv[])
+int main(void)
 {
-	(void)argc;
-	char *path = argv[0];
-	char *last_slash = strrchr(path, '/');
-	if (last_slash) {
-		path = last_slash + 1;
-	}
-
+	struct sc_log log;
 	struct sc_log_sink sink;
-	if (sc_log_syslog_sink_init(&sink) == false) {
+	if (sc_log_syslog_sink_init(&sink, &log) == false) {
 		return EXIT_FAILURE;
 	}
 
-	struct sc_log log;
-	if (sc_log_init(&log, path, SC_LOG_WARNING, &sink) == false) {
+	if (sc_log_init(&log, "log_example", SC_LOG_WARNING, &sink) == false) {
 		return EXIT_FAILURE;
 	}
 

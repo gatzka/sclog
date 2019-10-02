@@ -35,7 +35,8 @@
 
 static bool init(void *context)
 {
-	(void)context;
+	struct sc_log *log = (struct sc_log*)context;
+	openlog(log->application, 0, LOG_USER);
 	return true;
 }
 
@@ -63,7 +64,7 @@ static void log_message(void *context, enum sc_log_level level, const char *appl
 	syslog(priority, "%s", message);
 }
 
-bool sc_log_syslog_sink_init(struct sc_log_sink *sink)
+bool sc_log_syslog_sink_init(struct sc_log_sink *sink, struct sc_log *log)
 {
 	if (sink == NULL) {
 		return false;
@@ -72,6 +73,7 @@ bool sc_log_syslog_sink_init(struct sc_log_sink *sink)
 	sink->init = init;
 	sink->close = close;
 	sink->log_message = log_message;
+	sink->context = log;
 
 	return true;
 }
