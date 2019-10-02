@@ -1,0 +1,8 @@
+cscope.*
+*.swp
+build/*
+*.qbs.user*
+*.obj
+.vs
+CMakeLists.txt.user
+.vscode/ipch/
