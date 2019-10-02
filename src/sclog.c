@@ -30,12 +30,11 @@
 
 #include "sclog.h"
 
-bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, void *sink, void *sink_context)
+bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink)
 {
 	log->application = application;
 	log->guard_level = init_level;
 	log->sink = sink;
-	log->sink_context = sink_context;
 
 	return true;
 }
