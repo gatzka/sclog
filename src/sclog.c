@@ -26,8 +26,10 @@
  * SOFTWARE.
  */
 
+#include <stdarg.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 
 #include "sclog.h"
 
@@ -41,10 +43,24 @@ bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level 
 	log->guard_level = init_level;
 	log->sink = sink;
 
-	return true;
+	return log->sink->init(log->sink->context);
 }
 
 void sc_log_close(struct sc_log *log)
 {
-	(void)log;
+	log->sink->close(log->sink->context);
+}
+
+__attribute__((format(printf, 3, 4)))
+void sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...)
+{
+	if (level > log->guard_level) {
+		return;
+	}
+
+	va_list args;
+	va_start(args, format);
+	vsnprintf(log->log_buffer, sizeof(log->log_buffer), format, args);
+	log->sink->log_message(log->sink->context, level, log->application, log->log_buffer);
+	va_end(args);
 }

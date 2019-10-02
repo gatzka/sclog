@@ -37,13 +37,6 @@ extern "C" {
 
 #include "sclog_export.h"
 
-struct sc_log_sink {
-	bool (*init)(void *sink_context);
-	bool (*close)(void *sink_context);
-	void (*log_message)(void *sink_context, const char *appliction, const char *format, ...);
-	void *sink_context;
-};
-
 enum sc_log_level {
 	SC_LOG_NONE,
 	SC_LOG_ERROR,
@@ -52,11 +45,19 @@ enum sc_log_level {
 	SC_LOG_DEBUG
 };
 
+struct sc_log_sink {
+	bool (*init)(void *context);
+	bool (*close)(void *context);
+	void (*log_message)(void *context, enum sc_log_level, const char *application, const char *format, ...);
+	void *context;
+};
+
+
 struct sc_log {
 	const char *application;
 	enum sc_log_level guard_level;
-	void *sink;
-	void *sink_context;
+	char log_buffer[200];
+	struct sc_log_sink *sink;
 };
 
 SCLOG_EXPORT bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink);
