@@ -19,6 +19,7 @@ add_library(${PROJECT_NAME}
     "sclog.c"
     "sclog_version.c"
     "sclog_stderr_sink.c"
+    "posix/sclog_syslog_sink.c"
 )
 
 add_library(${PROJECT_NAME}:${PROJECT_NAME} ALIAS ${PROJECT_NAME})

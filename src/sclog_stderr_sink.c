@@ -58,7 +58,6 @@ static const char *get_level_string(enum sc_log_level level)
 static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
 {
 	(void)context;
-
 	fprintf(stderr, "%s: %s: ", application, get_level_string(level));
 	fprintf(stderr, "%s\n", message);
 	fflush(stderr);

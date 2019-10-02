@@ -26,37 +26,54 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <syslog.h>
 
 #include "sclog.h"
-//#include "sclog_stderr_sink.h"
-#include "posix/sclog_syslog_sink.h"
+#include "sclog_syslog_sink.h"
 
-int main(int argc, char* argv[])
+static bool init(void *context)
 {
-	(void)argc;
-	char *path = argv[0];
-	char *last_slash = strrchr(path, '/');
-	if (last_slash) {
-		path = last_slash + 1;
-	}
-
-	struct sc_log_sink sink;
-	if (sc_log_syslog_sink_init(&sink) == false) {
-		return EXIT_FAILURE;
-	}
-
-	struct sc_log log;
-	if (sc_log_init(&log, path, SC_LOG_WARNING, &sink) == false) {
-		return EXIT_FAILURE;
-	}
-
-	sc_log_message(&log, SC_LOG_ERROR, "Hello error!");
-	sc_log_message(&log, SC_LOG_WARNING, "Hello warning!");
-	sc_log_message(&log, SC_LOG_INFO, "Hello info!");
-	sc_log_message(&log, SC_LOG_DEBUG, "Hello debug!");
-	sc_log_close(&log);
-
-	return EXIT_SUCCESS;
+	(void)context;
+	return true;
 }
+
+static void close(void *context)
+{
+	(void)context;
+	closelog();
+}
+
+static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
+{
+	(void)context;
+	(void)application;
+
+	int priority;
+
+	switch (level) {
+		case SC_LOG_NONE: priority = LOG_INFO; break;
+		case SC_LOG_ERROR: priority = LOG_ERR; break;
+		case SC_LOG_WARNING: priority = LOG_WARNING; break;
+		case SC_LOG_INFO: priority = LOG_INFO; break;
+		case SC_LOG_DEBUG: priority = LOG_DEBUG; break;
+	}
+
+	syslog(priority, "%s", message);
+}
+
+bool sc_log_syslog_sink_init(struct sc_log_sink *sink)
+{
+	if (sink == NULL) {
+		return false;
+	}
+
+	sink->init = init;
+	sink->close = close;
+	sink->log_message = log_message;
+
+	return true;
+}
+
+

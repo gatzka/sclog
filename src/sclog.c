@@ -54,7 +54,7 @@ void sc_log_close(struct sc_log *log)
 __attribute__((format(printf, 3, 4)))
 void sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...)
 {
-	if (level > log->guard_level) {
+	if ((level == SC_LOG_NONE) || (level > log->guard_level)) {
 		return;
 	}
 

@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: MIT
  *
- * The MIT License (MIT)
+ *The MIT License (MIT)
  *
  * Copyright (c) <2019> <Stephan Gatzka>
  *
@@ -26,37 +26,22 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef SC_LOG_SYSLOG_H
+#define SC_LOG_SYSLOG_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdbool.h>
 
 #include "sclog.h"
-//#include "sclog_stderr_sink.h"
-#include "posix/sclog_syslog_sink.h"
+#include "sclog_export.h"
 
-int main(int argc, char* argv[])
-{
-	(void)argc;
-	char *path = argv[0];
-	char *last_slash = strrchr(path, '/');
-	if (last_slash) {
-		path = last_slash + 1;
-	}
+SCLOG_EXPORT bool sc_log_syslog_sink_init(struct sc_log_sink *sink);
 
-	struct sc_log_sink sink;
-	if (sc_log_syslog_sink_init(&sink) == false) {
-		return EXIT_FAILURE;
-	}
-
-	struct sc_log log;
-	if (sc_log_init(&log, path, SC_LOG_WARNING, &sink) == false) {
-		return EXIT_FAILURE;
-	}
-
-	sc_log_message(&log, SC_LOG_ERROR, "Hello error!");
-	sc_log_message(&log, SC_LOG_WARNING, "Hello warning!");
-	sc_log_message(&log, SC_LOG_INFO, "Hello info!");
-	sc_log_message(&log, SC_LOG_DEBUG, "Hello debug!");
-	sc_log_close(&log);
-
-	return EXIT_SUCCESS;
+#ifdef __cplusplus
 }
+#endif
+
+#endif
