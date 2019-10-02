@@ -46,7 +46,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 set_property(TARGET ${PROJECT_NAME}
     APPEND
-    PROPERTY PUBLIC_HEADER "sc_log.h"
+    PROPERTY PUBLIC_HEADER "sclog.h;sclog_version.h"
 )
 
 include(GenerateExportHeader)
