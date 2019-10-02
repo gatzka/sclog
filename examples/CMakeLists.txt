@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.7)
 project(sclog-examples C)
 
-add_executable(log_stderr
-    log_stderr.c
+add_executable(log_example
+    log_example.c
 )
-target_link_libraries (log_stderr)
+target_link_libraries (log_example)
 
 get_property(targets DIRECTORY "${CMAKE_CURRENT_LIST_DIR}" PROPERTY BUILDSYSTEM_TARGETS)
 foreach(tgt ${targets})
