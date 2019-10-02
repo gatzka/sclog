@@ -40,7 +40,7 @@ extern "C" {
 struct sc_log_sink {
 	bool (*init)(void *sink_context);
 	bool (*close)(void *sink_context);
-	void (*log_message)(void *sink_context, const char *format, ...);
+	void (*log_message)(void *sink_context, const char *appliction, const char *format, ...);
 	void *sink_context;
 };
 
