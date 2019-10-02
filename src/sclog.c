@@ -39,3 +39,8 @@ bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level 
 
 	return true;
 }
+
+void sc_log_close(struct sc_log *log)
+{
+	(void)log;
+}
