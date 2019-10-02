@@ -28,7 +28,27 @@
 
 #include <stdlib.h>
 
-int main(void)
+#include "sclog.h"
+#include "sclog_stderr_sink.h"
+
+int main(int argc, char* argv[])
 {
+	(void)argc;
+
+	struct sc_log_sink stderr_sink;
+	if (sc_log_stderr_sink_init(&stderr_sink) == false) {
+		return EXIT_FAILURE;
+	}
+
+	struct sc_log log;
+	if (sc_log_init(&log, argv[0], SC_LOG_WARNING, &stderr_sink) == false) {
+		return EXIT_FAILURE;
+	}
+
+	sc_log_message(&log, SC_LOG_ERROR, "Hello error!");
+	sc_log_message(&log, SC_LOG_WARNING, "Hello warning!");
+	sc_log_message(&log, SC_LOG_INFO, "Hello info!");
+	sc_log_message(&log, SC_LOG_DEBUG, "Hello debug!");
+
 	return EXIT_SUCCESS;
 }
