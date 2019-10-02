@@ -27,11 +27,16 @@
  */
 
 #include <stdbool.h>
+#include <stddef.h>
 
 #include "sclog.h"
 
 bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink)
 {
+	if ((log == NULL) || (sink == NULL)) {
+		return false;
+	}
+
 	log->application = application;
 	log->guard_level = init_level;
 	log->sink = sink;
