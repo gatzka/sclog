@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: MIT
  *
- *The MIT License (MIT)
+ * The MIT License (MIT)
  *
  * Copyright (c) <2019> <Stephan Gatzka>
  *
@@ -26,45 +26,44 @@
  * SOFTWARE.
  */
 
-#ifndef SC_LOG_H
-#define SC_LOG_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdbool.h>
+#include <stddef.h>
+#include <stdio.h>
 
-#include "sclog_export.h"
+#include "sclog.h"
+#include "sclog_stderr_sink.h"
 
-enum sc_log_level {
-	SC_LOG_NONE,
-	SC_LOG_ERROR,
-	SC_LOG_WARNING,
-	SC_LOG_INFO,
-	SC_LOG_DEBUG
-};
-
-struct sc_log_sink {
-	bool (*init)(void *context);
-	void(*close)(void *context);
-	void (*log_message)(void *context, enum sc_log_level, const char *application, const char *message);
-	void *context;
-};
-
-struct sc_log {
-	const char *application;
-	enum sc_log_level guard_level;
-	char log_buffer[200];
-	struct sc_log_sink *sink;
-};
-
-SCLOG_EXPORT bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink);
-SCLOG_EXPORT void sc_log_close(struct sc_log *log);
-SCLOG_EXPORT void sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...);
-
-#ifdef __cplusplus
+static bool init(void *context)
+{
+	(void)context;
+	return true;
 }
-#endif
 
-#endif
+static void close(void *context)
+{
+	(void)context;
+}
+
+static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
+{
+	(void)context;
+	(void)level;
+	fprintf(stderr, "%s: ", application);
+	fprintf(stderr, "%s\n", message);
+	fflush(stderr);
+}
+
+bool sc_log_stderr_sink_init(struct sc_log_sink *sink)
+{
+	if (sink == NULL) {
+		return false;
+	}
+
+	sink->init = init;
+	sink->close = close;
+	sink->log_message = log_message;
+
+	return true;
+}
+
+

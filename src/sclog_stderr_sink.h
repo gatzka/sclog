@@ -26,8 +26,8 @@
  * SOFTWARE.
  */
 
-#ifndef SC_LOG_H
-#define SC_LOG_H
+#ifndef SC_LOG_STDERR_H
+#define SC_LOG_STDERR_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,33 +35,10 @@ extern "C" {
 
 #include <stdbool.h>
 
+#include "sclog.h"
 #include "sclog_export.h"
 
-enum sc_log_level {
-	SC_LOG_NONE,
-	SC_LOG_ERROR,
-	SC_LOG_WARNING,
-	SC_LOG_INFO,
-	SC_LOG_DEBUG
-};
-
-struct sc_log_sink {
-	bool (*init)(void *context);
-	void(*close)(void *context);
-	void (*log_message)(void *context, enum sc_log_level, const char *application, const char *message);
-	void *context;
-};
-
-struct sc_log {
-	const char *application;
-	enum sc_log_level guard_level;
-	char log_buffer[200];
-	struct sc_log_sink *sink;
-};
-
-SCLOG_EXPORT bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink);
-SCLOG_EXPORT void sc_log_close(struct sc_log *log);
-SCLOG_EXPORT void sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...);
+SCLOG_EXPORT bool sc_log_stderr_sink_init(struct sc_log_sink *sink);
 
 #ifdef __cplusplus
 }
