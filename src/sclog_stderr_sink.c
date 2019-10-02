@@ -44,11 +44,22 @@ static void close(void *context)
 	(void)context;
 }
 
+static const char *get_level_string(enum sc_log_level level)
+{
+	switch (level) {
+		case SC_LOG_NONE: return "NONE";
+		case SC_LOG_ERROR: return "ERROR";
+		case SC_LOG_WARNING: return "WARNING";
+		case SC_LOG_INFO: return "INFO";
+		case SC_LOG_DEBUG: return "DEBUG";
+	}
+}
+
 static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
 {
 	(void)context;
-	(void)level;
-	fprintf(stderr, "%s: ", application);
+
+	fprintf(stderr, "%s: %s: ", application, get_level_string(level));
 	fprintf(stderr, "%s\n", message);
 	fflush(stderr);
 }
