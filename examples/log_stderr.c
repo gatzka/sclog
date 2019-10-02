@@ -27,6 +27,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "sclog.h"
 #include "sclog_stderr_sink.h"
@@ -34,6 +35,11 @@
 int main(int argc, char* argv[])
 {
 	(void)argc;
+	char *path = argv[0];
+	char *last_slash = strrchr(path, '/');
+	if (last_slash) {
+		path = last_slash + 1;
+	}
 
 	struct sc_log_sink stderr_sink;
 	if (sc_log_stderr_sink_init(&stderr_sink) == false) {
@@ -41,7 +47,7 @@ int main(int argc, char* argv[])
 	}
 
 	struct sc_log log;
-	if (sc_log_init(&log, argv[0], SC_LOG_WARNING, &stderr_sink) == false) {
+	if (sc_log_init(&log, path, SC_LOG_WARNING, &stderr_sink) == false) {
 		return EXIT_FAILURE;
 	}
 
