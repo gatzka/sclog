@@ -29,9 +29,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "posix/sclog_syslog_sink.h"
 #include "sclog.h"
 #include "sclog_stderr_sink.h"
-#include "posix/sclog_syslog_sink.h"
 
 int main(void)
 {

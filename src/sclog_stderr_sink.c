@@ -47,11 +47,16 @@ static void close(void *context)
 static const char *get_level_string(enum sc_log_level level)
 {
 	switch (level) {
-		case SC_LOG_NONE: return "NONE";
-		case SC_LOG_ERROR: return "ERROR";
-		case SC_LOG_WARNING: return "WARNING";
-		case SC_LOG_INFO: return "INFO";
-		case SC_LOG_DEBUG: return "DEBUG";
+	case SC_LOG_NONE:
+		return "NONE";
+	case SC_LOG_ERROR:
+		return "ERROR";
+	case SC_LOG_WARNING:
+		return "WARNING";
+	case SC_LOG_INFO:
+		return "INFO";
+	case SC_LOG_DEBUG:
+		return "DEBUG";
 	}
 }
 
@@ -75,5 +80,3 @@ bool sc_log_stderr_sink_init(struct sc_log_sink *sink)
 
 	return true;
 }
-
-

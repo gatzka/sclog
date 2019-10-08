@@ -47,7 +47,7 @@ enum sc_log_level {
 
 struct sc_log_sink {
 	bool (*init)(void *context);
-	void(*close)(void *context);
+	void (*close)(void *context);
 	void (*log_message)(void *context, enum sc_log_level, const char *application, const char *message);
 	void *context;
 };

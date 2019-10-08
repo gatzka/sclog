@@ -44,7 +44,6 @@ static void close(void *context)
 	(void)context;
 }
 
-
 static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
 {
 	(void)context;
@@ -65,5 +64,3 @@ bool sc_log_null_sink_init(struct sc_log_sink *sink)
 
 	return true;
 }
-
-

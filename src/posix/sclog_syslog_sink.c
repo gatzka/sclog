@@ -35,7 +35,7 @@
 
 static bool init(void *context)
 {
-	struct sc_log *log = (struct sc_log*)context;
+	struct sc_log *log = (struct sc_log *)context;
 	openlog(log->application, 0, LOG_USER);
 	return true;
 }
@@ -54,11 +54,21 @@ static void log_message(void *context, enum sc_log_level level, const char *appl
 	int priority;
 
 	switch (level) {
-		case SC_LOG_NONE: priority = LOG_INFO; break;
-		case SC_LOG_ERROR: priority = LOG_ERR; break;
-		case SC_LOG_WARNING: priority = LOG_WARNING; break;
-		case SC_LOG_INFO: priority = LOG_INFO; break;
-		case SC_LOG_DEBUG: priority = LOG_DEBUG; break;
+	case SC_LOG_NONE:
+		priority = LOG_INFO;
+		break;
+	case SC_LOG_ERROR:
+		priority = LOG_ERR;
+		break;
+	case SC_LOG_WARNING:
+		priority = LOG_WARNING;
+		break;
+	case SC_LOG_INFO:
+		priority = LOG_INFO;
+		break;
+	case SC_LOG_DEBUG:
+		priority = LOG_DEBUG;
+		break;
 	}
 
 	syslog(priority, "%s", message);
@@ -77,5 +87,3 @@ bool sc_log_syslog_sink_init(struct sc_log_sink *sink, struct sc_log *log)
 
 	return true;
 }
-
-
