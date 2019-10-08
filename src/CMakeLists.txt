@@ -15,12 +15,26 @@ add_custom_target(generate_semver
         -P ${CMAKE_CURRENT_SOURCE_DIR}/generate_version.cmake
 )
 
+include(CMakeDependentOption)
+
+SET(IS_POSIX OFF)
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	SET(IS_POSIX ON)
+endif()
+
+cmake_dependent_option(CIO_CONFIG_POSIX "Add POSIX conformant logging support to the library" ON "IS_POSIX" OFF)
+
 add_library(${PROJECT_NAME}
     "sclog.c"
     "sclog_version.c"
     "sclog_stderr_sink.c"
-    "posix/sclog_syslog_sink.c"
 )
+
+if(${IS_POSIX})
+    include(posix/CMakeLists.txt)
+endif()
+
 
 add_library(${PROJECT_NAME}:${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
@@ -31,10 +45,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/>
     $<INSTALL_INTERFACE:include/sclog/>
 )
-
-# if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-#     include(posix/CMakeLists.txt)
-# endif()
 
 target_compile_features(${PROJECT_NAME} PUBLIC $<$<NOT:$<C_COMPILER_ID:MSVC>>:c_std_11>)
 
