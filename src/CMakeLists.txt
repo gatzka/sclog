@@ -23,7 +23,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	SET(IS_POSIX ON)
 endif()
 
-cmake_dependent_option(CIO_CONFIG_POSIX "Add POSIX conformant logging support to the library" ON "IS_POSIX" OFF)
+cmake_dependent_option(SCLOG_CONFIG_POSIX "Add POSIX conformant logging support to the library" ON "IS_POSIX" OFF)
 
 add_library(${PROJECT_NAME}
     "sclog.c"
@@ -35,7 +35,6 @@ add_library(${PROJECT_NAME}
 if(${IS_POSIX})
     include(posix/CMakeLists.txt)
 endif()
-
 
 add_library(${PROJECT_NAME}:${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
@@ -100,7 +99,7 @@ if (DOXYGEN_FOUND)
     set(DOXYGEN_OPTIMIZE_OUTPUT_FOR_C YES)
     set(DOXYGEN_OUTPUT_DIRECTORY docs/)
 	set(DOXYGEN_PROJECT_BRIEF "An ANSI C Conformant Log Library.")
-	#    set(DOXYGEN_PROJECT_NUMBER ${CIO_VERSION})
+	set(DOXYGEN_PROJECT_NUMBER ${${PROJECT_NAME}_VERSION})
     set(DOXYGEN_QUIET YES)
     set(DOXYGEN_RECURSIVE NO)
     set(DOXYGEN_STRICT_PROTO_MATCHING YES)

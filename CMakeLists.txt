@@ -8,18 +8,20 @@ add_subdirectory(src)
 
 add_subdirectory(examples)
 
-#set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
-#
-#include(ClangFormat)
-#
-#file(GLOB FILES_TO_FORMAT
-#   ${PROJECT_SOURCE_DIR}/src/*.c
-#   ${PROJECT_SOURCE_DIR}/src/*.h
-#   ${PROJECT_SOURCE_DIR}/src/linux/*.c
-#   ${PROJECT_SOURCE_DIR}/src/linux/*.h
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
+
+include(ClangFormat)
+
+file(GLOB FILES_TO_FORMAT
+    ${PROJECT_SOURCE_DIR}/examples/*.c
+    ${PROJECT_SOURCE_DIR}/examples/*.h
+    ${PROJECT_SOURCE_DIR}/src/*.c
+    ${PROJECT_SOURCE_DIR}/src/*.h
+    ${PROJECT_SOURCE_DIR}/src/posix/*.c
+    ${PROJECT_SOURCE_DIR}/src/posix/*.h
 #   ${PROJECT_SOURCE_DIR}/tests/*.c
 #   ${PROJECT_SOURCE_DIR}/tests/*.h
-#)
-#
-#add_custom_target(cio-format SOURCES ${FILES_TO_FORMAT})
-#AddClangFormat(cio-format)
+)
+
+add_custom_target(sclog-format SOURCES ${FILES_TO_FORMAT})
+AddClangFormat(sclog-format)
