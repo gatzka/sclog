@@ -29,6 +29,7 @@ add_library(${PROJECT_NAME}
     "sclog.c"
     "sclog_version.c"
     "sclog_stderr_sink.c"
+    "sclog_null_sink.c"
 )
 
 if(${IS_POSIX})
