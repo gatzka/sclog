@@ -51,8 +51,10 @@ void sc_log_close(struct sc_log *log)
 	log->sink->close(log->sink->context);
 }
 
+// clang-format off
 __attribute__((format(printf, 3, 4)))
 void sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...)
+// clang-format on
 {
 	if ((level == SC_LOG_NONE) || (level > log->guard_level)) {
 		return;
