@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "linux/sclog_systemd_sink.h"
 #include "posix/sclog_syslog_sink.h"
 #include "sclog.h"
 #include "sclog_stderr_sink.h"
@@ -42,6 +43,16 @@ int main(void)
 	}
 
 	if (sc_log_init(&syslog_log, "syslog_log_example", SC_LOG_WARNING, &syslog_sink) == false) {
+		return EXIT_FAILURE;
+	}
+
+	struct sc_log systemd_log;
+	struct sc_log_sink systemd_sink;
+	if (sc_log_systemd_sink_init(&systemd_sink) == false) {
+		return EXIT_FAILURE;
+	}
+
+	if (sc_log_init(&systemd_log, "syslog_log_example", SC_LOG_WARNING, &systemd_sink) == false) {
 		return EXIT_FAILURE;
 	}
 
@@ -64,6 +75,11 @@ int main(void)
 	sc_log_message(&stderr_log, SC_LOG_WARNING, "Hello warning!");
 	sc_log_message(&stderr_log, SC_LOG_INFO, "Hello info!");
 	sc_log_message(&stderr_log, SC_LOG_DEBUG, "Hello debug!");
+
+	sc_log_message(&systemd_log, SC_LOG_ERROR, "Hello error!");
+	sc_log_message(&systemd_log, SC_LOG_WARNING, "Hello warning!");
+	sc_log_message(&systemd_log, SC_LOG_INFO, "Hello info!");
+	sc_log_message(&systemd_log, SC_LOG_DEBUG, "Hello debug!");
 
 	sc_log_close(&syslog_log);
 	sc_log_close(&stderr_log);

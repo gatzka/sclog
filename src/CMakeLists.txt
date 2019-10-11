@@ -18,12 +18,15 @@ add_custom_target(generate_semver
 include(CMakeDependentOption)
 
 SET(IS_POSIX OFF)
+SET(IS_LINUX OFF)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	SET(IS_POSIX ON)
+	SET(IS_LINUX ON)
 endif()
 
 cmake_dependent_option(SCLOG_CONFIG_POSIX "Add POSIX conformant logging support to the library" ON "IS_POSIX" OFF)
+cmake_dependent_option(SCLOG_CONFIG_LINUX "Add Linux dependent support to the library" ON "IS_LINUX" OFF)
 
 add_library(${PROJECT_NAME}
     "sclog.c"
@@ -32,8 +35,12 @@ add_library(${PROJECT_NAME}
     "sclog_null_sink.c"
 )
 
-if(${IS_POSIX})
+if(${SCLOG_CONFIG_POSIX})
     include(posix/CMakeLists.txt)
+endif()
+
+if(${SCLOG_CONFIG_LINUX})
+    include(linux/CMakeLists.txt)
 endif()
 
 add_library(${PROJECT_NAME}:${PROJECT_NAME} ALIAS ${PROJECT_NAME})
