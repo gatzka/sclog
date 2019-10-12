@@ -26,44 +26,40 @@
  * SOFTWARE.
  */
 
-#include <stdarg.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdio.h>
+#ifndef SCLOG_COMPILER_H
+#define SCLOG_COMPILER_H
 
-#include "sclog.h"
-#include "sclog_compiler.h"
+/**
+ * @file
+ * @brief Some macros wrapping compiler specific intrinsics.
+ */
 
-bool sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink)
-{
-	if ((log == NULL) || (sink == NULL)) {
-		return false;
-	}
+#ifdef __GNUC__
 
-	log->application = application;
-	log->guard_level = init_level;
-	log->sink = sink;
+/**
+ * @hideinitializer
+ * Use this macro in to mark branches that are likely to be taken
+ */
+#define cio_likely(x) \
+	__builtin_expect((x), 1)
 
-	return log->sink->init(log->sink->context);
-}
+/**
+ * @hideinitializer
+ * Use this macro in to mark branches that are unlikely to be taken
+ */
+#define cio_unlikely(x) \
+	__builtin_expect((x), 0)
 
-void sc_log_close(struct sc_log *log)
-{
-	log->sink->close(log->sink->context);
-}
+#elif defined(_MSC_VER)
 
-// clang-format off
-__attribute__((format(printf, 3, 4)))
-void sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...)
-// clang-format on
-{
-	if ((level == SC_LOG_NONE) || (level > log->guard_level)) {
-		return;
-	}
+#define cio_likely(x) \
+	(x)
+#define cio_unlikely(x) \
+	(x)
 
-	va_list args;
-	va_start(args, format);
-	vsnprintf(log->log_buffer, sizeof(log->log_buffer), format, args);
-	log->sink->log_message(log->sink->context, level, log->application, log->log_buffer);
-	va_end(args);
-}
+#define __attribute__(x)
+#define _Pragma(x)
+
+#endif
+
+#endif
