@@ -26,59 +26,20 @@
  * SOFTWARE.
  */
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdio.h>
+#ifndef SCLOG_VERSION_PRIVATE_H
+#define SCLOG_VERSION_PRIVATE_H
 
-#include "sclog.h"
-#include "sclog_stderr_sink.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-static bool init(void *context)
-{
-	(void)context;
-	return true;
+#define SCLOG_VERSION "0.0.1" "-39+0d81d40"
+#define SCLOG_VERSION_MAJOR 0
+#define SCLOG_VERSION_MINOR 0
+#define SCLOG_VERSION_PATCH 1
+
+#ifdef __cplusplus
 }
+#endif
 
-static void close(void *context)
-{
-	(void)context;
-}
-
-static const char *get_level_string(enum sc_log_level level)
-{
-	switch (level) {
-	case SC_LOG_NONE:
-		return "NONE";
-	case SC_LOG_ERROR:
-		return "ERROR";
-	case SC_LOG_WARNING:
-		return "WARNING";
-	case SC_LOG_INFO:
-		return "INFO";
-	case SC_LOG_DEBUG:
-		return "DEBUG";
-	default:
-		return "UNKNOWN";
-	}
-}
-
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
-{
-	(void)context;
-	fprintf(stderr, "%s: %s: ", application, get_level_string(level));
-	fprintf(stderr, "%s\n", message);
-	fflush(stderr);
-}
-
-bool sc_log_stderr_sink_init(struct sc_log_sink *sink)
-{
-	if (sink == NULL) {
-		return false;
-	}
-
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
-
-	return true;
-}
+#endif

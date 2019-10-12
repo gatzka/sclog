@@ -5,8 +5,10 @@ project(sclog-all C)
 
 add_subdirectory(src)
 #add_subdirectory(tests)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+	add_subdirectory(examples)
+endif()
 
-add_subdirectory(examples)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
 
