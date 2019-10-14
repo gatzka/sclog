@@ -29,6 +29,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "sclog.h"
 #include "sclog_stderr_sink.h"
@@ -62,10 +63,31 @@ static const char *get_level_string(enum sc_log_level level)
 	}
 }
 
+static void get_time(char *buffer, size_t buffer_size)
+{
+	time_t t = time(NULL);
+	if (t == (time_t)-1) {
+		buffer[0] = '\0';
+		return;
+	}
+
+	struct tm *lt = gmtime(&t);
+	if (lt == NULL) {
+		buffer[0] = '\0';
+		return;
+	}
+
+	buffer[strftime(buffer, buffer_size, "%FT%H:%M:%SZ", lt)] = '\0';
+}
+
 static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
 {
 	(void)context;
-	fprintf(stderr, "%s: %s: ", application, get_level_string(level));
+	char timestamp_buffer[21];
+
+	get_time(timestamp_buffer, sizeof(timestamp_buffer));
+
+	fprintf(stderr, "%s " "%s: %s: ", timestamp_buffer, application, get_level_string(level));
 	fprintf(stderr, "%s\n", message);
 	fflush(stderr);
 }
