@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: MIT
  *
- * The MIT License (MIT)
+ *The MIT License (MIT)
  *
  * Copyright (c) <2019> <Stephan Gatzka>
  *
@@ -26,42 +26,20 @@
  * SOFTWARE.
  */
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <systemd/sd-journal.h>
+#ifndef SC_LOG_POSIX_UTIL_H
+#define SC_LOG_POSIX_UTIL_H
 
-#include "posix/sclog_posix_util.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "sclog.h"
-#include "sclog_systemd_sink.h"
+#include "sclog_export.h"
 
-static bool init(void *context)
-{
-	(void)context;
-	return true;
+SCLOG_EXPORT int sc_log_get_syslog_priority(enum sc_log_level level);
+
+#ifdef __cplusplus
 }
+#endif
 
-static void close(void *context)
-{
-	(void)context;
-}
-
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
-{
-	(void)context;
-	(void)application;
-
-	sd_journal_print(sc_log_get_syslog_priority(level), "%s", message);
-}
-
-bool sc_log_systemd_sink_init(struct sc_log_sink *sink)
-{
-	if (sink == NULL) {
-		return false;
-	}
-
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
-
-	return true;
-}
+#endif

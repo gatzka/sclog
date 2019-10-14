@@ -26,42 +26,28 @@
  * SOFTWARE.
  */
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <systemd/sd-journal.h>
+#include <syslog.h>
 
-#include "posix/sclog_posix_util.h"
 #include "sclog.h"
-#include "sclog_systemd_sink.h"
+#include "sclog_posix_util.h"
 
-static bool init(void *context)
+int sc_log_get_syslog_priority(enum sc_log_level level)
 {
-	(void)context;
-	return true;
-}
-
-static void close(void *context)
-{
-	(void)context;
-}
-
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
-{
-	(void)context;
-	(void)application;
-
-	sd_journal_print(sc_log_get_syslog_priority(level), "%s", message);
-}
-
-bool sc_log_systemd_sink_init(struct sc_log_sink *sink)
-{
-	if (sink == NULL) {
-		return false;
+	switch (level) {
+	case SC_LOG_NONE:
+		return LOG_INFO;
+	case SC_LOG_ERROR:
+		return LOG_ERR;
+	case SC_LOG_WARNING:
+		return LOG_WARNING;
+	case SC_LOG_INFO:
+		return LOG_INFO;
+		break;
+	case SC_LOG_DEBUG:
+		return LOG_DEBUG;
+	default:
+		return -1;
 	}
 
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
-
-	return true;
 }
+

@@ -32,6 +32,7 @@
 
 #include "sclog.h"
 #include "sclog_syslog_sink.h"
+#include "sclog_posix_util.c"
 
 static bool init(void *context)
 {
@@ -51,27 +52,7 @@ static void log_message(void *context, enum sc_log_level level, const char *appl
 	(void)context;
 	(void)application;
 
-	int priority;
-
-	switch (level) {
-	case SC_LOG_NONE:
-		priority = LOG_INFO;
-		break;
-	case SC_LOG_ERROR:
-		priority = LOG_ERR;
-		break;
-	case SC_LOG_WARNING:
-		priority = LOG_WARNING;
-		break;
-	case SC_LOG_INFO:
-		priority = LOG_INFO;
-		break;
-	case SC_LOG_DEBUG:
-		priority = LOG_DEBUG;
-		break;
-	}
-
-	syslog(priority, "%s", message);
+	syslog(sc_log_get_syslog_priority(level), "%s", message);
 }
 
 bool sc_log_syslog_sink_init(struct sc_log_sink *sink, struct sc_log *log)
