@@ -26,7 +26,6 @@
  * SOFTWARE.
  */
 
-#include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <time.h>
@@ -34,10 +33,10 @@
 #include "sclog.h"
 #include "sclog_stderr_sink.h"
 
-static bool init(void *context)
+static int init(void *context)
 {
 	(void)context;
-	return true;
+	return 0;
 }
 
 static void close(void *context)
@@ -92,15 +91,15 @@ static void log_message(void *context, enum sc_log_level level, const char *appl
 	fflush(stderr);
 }
 
-bool sc_log_stderr_sink_init(struct sc_log_sink *sink)
+int sc_log_stderr_sink_init(struct sc_log_sink *sink)
 {
 	if (sink == NULL) {
-		return false;
+		return -1;
 	}
 
 	sink->init = init;
 	sink->close = close;
 	sink->log_message = log_message;
 
-	return true;
+	return 0;
 }

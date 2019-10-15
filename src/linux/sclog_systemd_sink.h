@@ -33,12 +33,10 @@
 extern "C" {
 #endif
 
-#include <stdbool.h>
-
 #include "sclog.h"
 #include "sclog_export.h"
 
-SCLOG_EXPORT bool sc_log_systemd_sink_init(struct sc_log_sink *sink);
+SCLOG_EXPORT int sc_log_systemd_sink_init(struct sc_log_sink *sink);
 
 #ifdef __cplusplus
 }

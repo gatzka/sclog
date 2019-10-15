@@ -38,31 +38,31 @@ int main(void)
 {
 	struct sc_log syslog_log;
 	struct sc_log_sink syslog_sink;
-	if (sc_log_syslog_sink_init(&syslog_sink, &syslog_log) == false) {
+	if (sc_log_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	if (sc_log_init(&syslog_log, "syslog_log_example", SC_LOG_WARNING, &syslog_sink) == false) {
+	if (sc_log_init(&syslog_log, "syslog_log_example", SC_LOG_WARNING, &syslog_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
 	struct sc_log systemd_log;
 	struct sc_log_sink systemd_sink;
-	if (sc_log_systemd_sink_init(&systemd_sink) == false) {
+	if (sc_log_systemd_sink_init(&systemd_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	if (sc_log_init(&systemd_log, "syslog_log_example", SC_LOG_WARNING, &systemd_sink) == false) {
+	if (sc_log_init(&systemd_log, "syslog_log_example", SC_LOG_WARNING, &systemd_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
 	struct sc_log stderr_log;
 	struct sc_log_sink stderr_sink;
-	if (sc_log_stderr_sink_init(&stderr_sink) == false) {
+	if (sc_log_stderr_sink_init(&stderr_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	if (sc_log_init(&stderr_log, "stderr_log_example", SC_LOG_WARNING, &stderr_sink) == false) {
+	if (sc_log_init(&stderr_log, "stderr_log_example", SC_LOG_WARNING, &stderr_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
