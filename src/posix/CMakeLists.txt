@@ -10,6 +10,6 @@ target_sources(${PROJECT_NAME}
 )
 
 set_property(TARGET ${PROJECT_NAME} APPEND
-    PROPERTY PUBLIC_HEADER "posix/sclog_stderr_sink.h"
+    PROPERTY PUBLIC_HEADER "posix/sclog_syslog_sink.h"
 )
 
