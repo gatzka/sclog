@@ -33,6 +33,8 @@ add_library(${PROJECT_NAME}
     "sclog_version.c"
     "sclog_stderr_sink.c"
     "sclog_null_sink.c"
+	$<TARGET_OBJECTS:POSIX_OBJECTS>
+	$<TARGET_OBJECTS:LINUX_OBJECTS>
 )
 
 if(${SCLOG_CONFIG_POSIX})
