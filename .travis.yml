@@ -255,7 +255,7 @@ matrix:
       sonarcloud:
         organization: "gatzka-github"
         token:
-          secure: "kkXwc7Ysk8DiyP2laG7u416+AFxDs0iVgy64s9bE+kMHnYt4BUgqh96chovoI1DyX+u5dAaxo5AXtGs89gg6RhmrVPger7awfqf74TzqiXgSCSVVeXT7uL6MJULXKNRRGM/ydUvRRA3xpDaFW1yWWymCEJO+dIs/+OcDQl+w9/dlabGgW8KMYG7ZlABUyVKlzFldswYOH3Q4rgboEMqDbvl9BAqMnHDhTX3tV+9eRW1u6K2xnH1FMBeIEy2WxhPgRUp9s2RlwVrOJjKxCV0xO66a6TCMk33zo+0TcUY0m9DCZZT13PkXo1Wr5aoxcUaxkUfkgJIT7IzJ429Cn4dIxQT4HFTWbnaqSat6puHEFGnOUQWf84COxotd7pCBXmqiTQXKmP7wvB95G1kFCq0y6kkuTI9SNPE28k0vrE9CPE/SgWtS7Acm5LVT8ou3Tcn4BqlmkRygMGlIXzdP6jNbSQ+JSS6exwliLRfRHzzR+h41NrD1qkyvxmEUZb5Y9oIKbunXnVgWRsJDToUMWKkh/4IbwkwWPhEKknnb3zNVp6eBrOUr8O/Rzq7vKKaFiZje9nMvXfZ9pEZX+9APtcY31N4SKFNoYAcvGvbFrnUPx5q3XsVrQ74peq0NXJQw3UDe+pEOSvoWwtbs/49TXLJ/N1MGOhjgyPMBKRv8yPevlfY="
+          secure: "h5ClQS3t+T2buKQivnU9+9XRQucU+54MN4n3lWk0h6MK8VbDlLECoduus+iGyjyUzNDmG99z7Kn5DbE201ZQhaozNk2Z4JU5bzf5NUPW2yk9YaAuqpC/S6i9YyeKLtwe9GsFHbirxmwLxtqx9hU10Hxb9Tm1Pr6RFWkN2KW0cUldyyWRgZ96i3dUPBkL7mflk2GtSjJWHaju6aDYTyQWv8fdBJvtXxALb9TSFDM0+mQ3q9+k/Wz5VIkOk19YDTI3pA53/315UJ+xZzERcTiiePFNzGHN7sso7HLTTTwlQ0UU2tdyXUpwTMlaW4KPXsAF9w2tV4RkUueKMixthMTsscdcTqkCVa8LkaD0gwOQm9oPghN7STbbSLqFPTQup3LAe9uSVjGNjEhehXNMW6wdYi2Tw5jKtuaZcp+N9oDVRgnf0wTnaKLez6/WvPom3OyE4rQnM/DTwm4Nozljo/OouyPwXVYhRK38VX7Ee99EmayuRAXDUsMJDKawrDp0jDmxkWKyAYMatfsBCzSY0ngIb4yx6PYWBBt1HZYm5P1TsmQ8/Tr25Vgo60R/b7kKZGjNi8xsdq/9Jufb+/RWTNudIHJhpTFzWttK6siXWE2CLC4hwiqN+Adl6frmk2kjvB9hzGomPGiYvrEX0012b292ynEitOPmVyMOExsJ3YLTuW4="
       cache:
         directories:
           - '$HOME/.sonar/cache'
