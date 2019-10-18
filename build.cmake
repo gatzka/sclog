@@ -1,0 +1,186 @@
+#
+# This file is supposed to run in ctest script mode:
+# ctest -S <path-to-this-file>/build.cmake
+#
+# You can set some command line variables to change the
+# behaviour of this script:
+
+# -DSCLOG_CTEST_TOOLCHAIN_FILE:STRING=<path-to-toolchain-file>
+
+# -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Debug|Release
+# -DSCLOG_CTEST_MODEL:STRING=Experimental|Nightly|Continuous
+# -DSCLOG_CTEST_COVERAGE:BOOL=OFF|ON
+# -DSCLOG_CTEST_DOCUMENTATION:BOOL=OFF|ON
+# -DSCLOG_CTEST_ANALYZER:STRING=scan-build-<version-number>|clang-tidy-<version-number>
+# -DSCLOG_CTEST_SANITIZER:STRING=AddressSanitizer|MemorySanitizer|UndefinedBehaviorSanitizer|LeakSanitizer|Valgrind
+
+set(CTEST_USE_LAUNCHERS 1)
+
+if(NOT DEFINED SCLOG_CTEST_MODEL)
+    set(SCLOG_CTEST_MODEL "Experimental")
+endif()
+
+if(NOT DEFINED SCLOG_CTEST_TOOLCHAIN_FILE)
+	set(SCLOG_CTEST_TOOLCHAIN_FILE "${CTEST_SCRIPT_DIRECTORY}/cmake/gcc.cmake")
+endif()
+include(${SCLOG_CTEST_TOOLCHAIN_FILE})
+set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS_INIT})
+set(CONFIGURE_OPTIONS "-DCMAKE_TOOLCHAIN_FILE=${SCLOG_CTEST_TOOLCHAIN_FILE}")
+
+if(NOT DEFINED SCLOG_CTEST_COVERAGE)
+    set(SCLOG_CTEST_COVERAGE OFF)
+endif()
+
+if(NOT DEFINED SCLOG_CTEST_DOCUMENTATION)
+    set(SCLOG_CTEST_DOCUMENTATION OFF)
+endif()
+
+set(CTEST_SOURCE_DIRECTORY "${CTEST_SCRIPT_DIRECTORY}")
+set(CTEST_BINARY_DIRECTORY "/tmp/sclog/")
+
+if (NOT DEFINED SCLOG_CTEST_CONFIGURATION_TYPE)
+    set(SCLOG_CTEST_CONFIGURATION_TYPE "Debug")
+endif()
+set(CTEST_CONFIGURATION_TYPE ${SCLOG_CTEST_CONFIGURATION_TYPE})
+
+if(NOT SCLOG_CTEST_MODEL STREQUAL "Experimental")
+    ctest_empty_binary_directory(${CTEST_BINARY_DIRECTORY})
+endif()
+
+if(DEFINED SCLOG_CTEST_SANITIZER)
+    if(SCLOG_CTEST_SANITIZER STREQUAL "Valgrind")
+        find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
+        set(CTEST_MEMORYCHECK_TYPE Valgrind)
+        set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--errors-for-leak-kinds=all --show-leak-kinds=all --leak-check=full --error-exitcode=1")
+        #set(CTEST_MEMORYCHECK_SUPPRESSIONS_FILE ${CTEST_SOURCE_DIRECTORY}/tests/valgrind.supp)
+    elseif(SCLOG_CTEST_SANITIZER STREQUAL "AddressSanitizer")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${ASAN_FLAGS}")
+        set(CTEST_MEMORYCHECK_TYPE "AddressSanitizer")
+        set(CTEST_MEMORYCHECK_SANITIZER_OPTIONS "verbosity=1:exitcode=-1:check_initialization_order=true:detect_stack_use_after_return=true:strict_init_order=true:detect_invalid_pointer_pairs=10:strict_string_checks=true")
+    elseif(SCLOG_CTEST_SANITIZER STREQUAL "MemorySanitizer")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MSAN_FLAGS}")
+        set(CTEST_MEMORYCHECK_TYPE "MemorySanitizer")
+        set(CTEST_MEMORYCHECK_SANITIZER_OPTIONS "verbosity=1:exitcode=-1")
+    elseif(SCLOG_CTEST_SANITIZER STREQUAL "LeakSanitizer")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${LSAN_FLAGS}")
+        set(CTEST_MEMORYCHECK_TYPE "LeakSanitizer")
+        set(CTEST_MEMORYCHECK_SANITIZER_OPTIONS "verbosity=1:exitcode=-1")
+    elseif(SCLOG_CTEST_SANITIZER STREQUAL "UndefinedBehaviorSanitizer")
+		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${UBSAN_FLAGS}")
+        set(CTEST_MEMORYCHECK_TYPE "UndefinedBehaviorSanitizer")
+        set(CTEST_MEMORYCHECK_SANITIZER_OPTIONS "verbosity=1:exitcode=-1:print_stacktrace=1")
+    endif()
+endif()
+
+if(DEFINED SCLOG_CTEST_ANALYZER)
+	string(REGEX MATCH "^scan-build|^clang-tidy" ANALYZER_TYPE ${SCLOG_CTEST_ANALYZER})
+	if(ANALYZER_TYPE STREQUAL "scan-build")
+	    set(C_COMPILER_TYPE "clang")
+	    set(CXX_COMPILER_TYPE "clang++")
+		string(REPLACE ${ANALYZER_TYPE} "" COMPILER_VERSION ${SCLOG_CTEST_ANALYZER})
+	    set(ENV{CCC_CC} "${C_COMPILER_TYPE}${COMPILER_VERSION}")
+	    set(ENV{CCC_CXX} "${CXX_COMPILER_TYPE}${COMPILER_VERSION}")
+		set(CTEST_CONFIGURE_COMMAND "${SCLOG_CTEST_ANALYZER} ${CMAKE_COMMAND} -DCMAKE_C_FLAGS=--coverage -fno-inline -fno-inline-small-functions -fno-default-inline ${CTEST_SOURCE_DIRECTORY}")
+	    set(ANALYZER_REPORT_DIR "${CTEST_BINARY_DIRECTORY}analyzer-scan/")
+		set(CTEST_BUILD_COMMAND "${SCLOG_CTEST_ANALYZER} --status-bugs -o ${ANALYZER_REPORT_DIR} ${CMAKE_COMMAND} --build ${CTEST_BINARY_DIRECTORY}")
+	    set(IS_CLANG_STATIC_ANALYZER TRUE)
+	elseif(ANALYZER_TYPE STREQUAL "clang-tidy")
+		set(CONFIGURE_OPTIONS "${CONFIGURE_OPTIONS};-DCMAKE_C_CLANG_TIDY=${SCLOG_CTEST_ANALYZER}")
+	endif()
+endif()
+
+###########
+cmake_host_system_information(RESULT FQDN QUERY FQDN)
+
+set(CTEST_BUILD_NAME "${FQDN}")
+set(CTEST_SITE "${FQDN}")
+
+include(ProcessorCount)
+ProcessorCount(NUMBER_OF_CORES)
+if(NUMBER_OF_CORES EQUAL 0)
+    set(NUMBER_OF_CORES 1)
+endif()
+
+ctest_start(${SCLOG_CTEST_MODEL})
+
+# Configure step
+
+if(SCLOG_CTEST_COVERAGE)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COVERAGE_FLAGS}")
+endif()
+
+#set(CTEST_CMAKE_GENERATOR "Unix Makefiles")
+set(CTEST_CMAKE_GENERATOR "Ninja")
+set(CONFIGURE_OPTIONS "${CONFIGURE_OPTIONS};-DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
+ctest_configure(OPTIONS "${CONFIGURE_OPTIONS}")
+ctest_configure()
+
+# Build step
+
+if(CTEST_CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+	#set(CTEST_BUILD_FLAGS "${CTEST_BUILD_FLAGS} VERBOSE=1")
+	set(CTEST_BUILD_FLAGS "${CTEST_BUILD_FLAGS} -j${NUMBER_OF_CORES}")
+endif()
+ctest_build(NUMBER_ERRORS SCLOG_NUMBER_OF_ERRORS NUMBER_WARNINGS SCLOG_NUMBER_OF_WARNING)
+
+# Test/Coverage step
+
+find_program(GCOVR_BIN gcovr)
+if(SCLOG_CTEST_COVERAGE AND GCOVR_BIN)
+    string(LENGTH ${CTEST_BINARY_DIRECTORY} CTEST_BINARY_DIRECTORY_LEN)
+    MATH(EXPR CTEST_BINARY_DIRECTORY_LEN "${CTEST_BINARY_DIRECTORY_LEN}-1")
+    string(SUBSTRING ${CTEST_BINARY_DIRECTORY} 0 ${CTEST_BINARY_DIRECTORY_LEN} SCLOG_OBJECT_DIRECTORY)
+    
+    string(TIMESTAMP SCLOG_CTEST_TIMESTAMP UTC)
+    set(SCLOG_CTEST_COVERAGE_DIR "${CTEST_BINARY_DIRECTORY}cov-html/${SCLOG_CTEST_TIMESTAMP}")
+    set(CTEST_CUSTOM_POST_TEST
+        "cmake -E make_directory ${SCLOG_CTEST_COVERAGE_DIR}"
+		"${GCOVR_BIN} \"--gcov-executable=${CTEST_COVERAGE_COMMAND} ${CTEST_COVERAGE_EXTRA_FLAGS}\" --html --html-details --html-title sclog -f ${CTEST_SCRIPT_DIRECTORY}/src/\\* --exclude-directories .\\*CompilerIdC\\* -r ${CTEST_SCRIPT_DIRECTORY} --object-directory=${SCLOG_OBJECT_DIRECTORY} -o ${SCLOG_CTEST_COVERAGE_DIR}/index.html")
+endif()
+ 
+if(SCLOG_NUMBER_OF_ERRORS OR SCLOG_NUMBER_OF_WARNING)
+    if (IS_CLANG_STATIC_ANALYZER )
+        message(" -- Look into ${ANALYZER_REPORT_DIR} to see clang static analyzer report!")
+    endif()
+    message(FATAL_ERROR " -- Error or warning occured while building!")
+    return()
+endif()
+
+if(SCLOG_CTEST_DOCUMENTATION)
+    ctest_build(TARGET docs)
+    message(" -- Open ${CTEST_BINARY_DIRECTORY}src/docs/html/index.html to see generated documentation")
+endif()
+
+ctest_test(RETURN_VALUE TEST_RETURN PARALLEL_LEVEL 1)
+if(TEST_RETURN)
+    message(FATAL_ERROR " -- Error while running tests!")
+    return()
+endif()
+ 
+if(SCLOG_CTEST_COVERAGE AND GCOVR_BIN)
+    ctest_coverage()
+    message(" -- Open ${SCLOG_CTEST_COVERAGE_DIR}/index.html to see collected coverage")
+endif()
+
+
+if(DEFINED SCLOG_CTEST_SANITIZER)
+    ctest_memcheck(RETURN_VALUE MEMCHECK_RETURN PARALLEL_LEVEL ${NUMBER_OF_CORES})
+    if(MEMCHECK_RETURN)
+        message(FATAL_ERROR " -- Error while running memcheck!")
+        return()
+    endif()
+endif()
+
+# include(CTestCoverageCollectGCOV)
+# ctest_coverage_collect_gcov(
+#     TARBALL gcov.tar
+#     SOURCE ${CTEST_SOURCE_DIRECTORY}
+#     BUILD ${CTEST_BINARY_DIRECTORY}
+#     GCOV_COMMAND ${CTEST_COVERAGE_COMMAND}
+# )
+# if(EXISTS "${CTEST_BINARY_DIRECTORY}/gcov.tar")
+#     ctest_submit(CDASH_UPLOAD "${CTEST_BINARY_DIRECTORY}/gcov.tar"
+#     CDASH_UPLOAD_TYPE GcovTar)
+# endif()
+# 
+# ctest_submit()

@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
 project(sclog-all C)
 
-#include(CTest)
+include(CTest)
 
 add_subdirectory(src)
-#add_subdirectory(tests)
+add_subdirectory(tests)
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
 	add_subdirectory(examples)
 endif()
@@ -21,8 +21,8 @@ file(GLOB FILES_TO_FORMAT
     ${PROJECT_SOURCE_DIR}/src/*.h
     ${PROJECT_SOURCE_DIR}/src/posix/*.c
     ${PROJECT_SOURCE_DIR}/src/posix/*.h
-#   ${PROJECT_SOURCE_DIR}/tests/*.c
-#   ${PROJECT_SOURCE_DIR}/tests/*.h
+   ${PROJECT_SOURCE_DIR}/tests/*.c
+   ${PROJECT_SOURCE_DIR}/tests/*.h
 )
 
 add_custom_target(sclog-format SOURCES ${FILES_TO_FORMAT})
