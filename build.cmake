@@ -136,6 +136,11 @@ if(SCLOG_CTEST_COVERAGE AND GCOVR_BIN)
     set(CTEST_CUSTOM_POST_TEST
         "cmake -E make_directory ${SCLOG_CTEST_COVERAGE_DIR}"
 		"${GCOVR_BIN} \"--gcov-executable=${CTEST_COVERAGE_COMMAND} ${CTEST_COVERAGE_EXTRA_FLAGS}\" --html --html-details --html-title sclog -f ${CTEST_SCRIPT_DIRECTORY}/src/\\* --exclude-directories .\\*CompilerIdC\\* -r ${CTEST_SCRIPT_DIRECTORY} --object-directory=${SCLOG_OBJECT_DIRECTORY} -o ${SCLOG_CTEST_COVERAGE_DIR}/index.html")
+
+    set(CTEST_CUSTOM_COVERAGE_EXCLUDE
+    ${CTEST_CUSTOM_COVERAGE_EXCLUDE}
+        ".*/tests/.*"
+    )
 endif()
  
 if(SCLOG_NUMBER_OF_ERRORS OR SCLOG_NUMBER_OF_WARNING)
