@@ -36,6 +36,7 @@ matrix:
         - ca-certificates
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -47,6 +48,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -62,6 +64,7 @@ matrix:
         - gcc-6
         - g++-6
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -77,6 +80,7 @@ matrix:
         - gcc-6
         - g++-6
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -92,6 +96,7 @@ matrix:
         - gcc-7
         - g++-7
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -107,6 +112,7 @@ matrix:
         - gcc-7
         - g++-7
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -123,6 +129,7 @@ matrix:
         - gcc-8
         - g++-8
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -140,6 +147,7 @@ matrix:
         - gcc-8
         - g++-8
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -155,6 +163,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -170,6 +179,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -185,6 +195,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -200,6 +211,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -215,6 +227,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -230,6 +243,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -249,6 +263,7 @@ matrix:
         packages:
         - cmake
         - cmake-data
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -265,6 +280,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -281,6 +297,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -296,6 +313,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -311,6 +329,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -326,6 +345,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
   - os: linux
     compiler: clang
@@ -341,6 +361,7 @@ matrix:
         - cmake
         - cmake-data
         - ninja-build
+        - libsystemd-dev
 
 install:
 - pip install --user gcovr
