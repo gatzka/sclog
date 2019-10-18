@@ -26,41 +26,28 @@
  * SOFTWARE.
  */
 
+#ifndef SCLOG_UTIL_H
+#define SCLOG_UTIL_H
+
 #include <stddef.h>
-#include <stdio.h>
-#include <time.h>
 
-#include "sclog.h"
-#include "sclog_file_write.h"
-#include "sclog_stderr_sink.h"
+/**
+ * @file
+ * @brief Utility functions.
+ */
 
-static int init(void *context)
-{
-	(void)context;
-	return 0;
-}
+/**
+ * @hideinitializer
+ * Get the pointer to a structure encapsulating a structure to which @p ptr points to.
+ */
+#define sc_log_container_of(ptr, type, member) ( \
+    (void *)((char *)(ptr)-offsetof(type, member)))
 
-static void close(void *context)
-{
-	(void)context;
-}
+/**
+ * @hideinitializer
+ * Get a @p const pointer to a structure encapsulating a structure to which @p ptr points to.
+ */
+#define sc_log_const_container_of(ptr, type, member) ( \
+    (const void *)((const char *)(ptr)-offsetof(type, member)))
 
-
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
-{
-	(void)context;
-	sc_log_log_message_to_file(stderr, level, application, message);
-}
-
-int sc_log_stderr_sink_init(struct sc_log_sink *sink)
-{
-	if (sink == NULL) {
-		return -1;
-	}
-
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
-
-	return 0;
-}
+#endif

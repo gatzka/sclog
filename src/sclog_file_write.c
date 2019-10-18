@@ -28,39 +28,62 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 
-#include "sclog.h"
 #include "sclog_file_write.h"
-#include "sclog_stderr_sink.h"
 
-static int init(void *context)
+enum {MAX_TIME_STRING_LENGTH = 21};
+
+static void get_time(char *buffer, size_t buffer_size)
 {
-	(void)context;
-	return 0;
-}
-
-static void close(void *context)
-{
-	(void)context;
-}
-
-
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
-{
-	(void)context;
-	sc_log_log_message_to_file(stderr, level, application, message);
-}
-
-int sc_log_stderr_sink_init(struct sc_log_sink *sink)
-{
-	if (sink == NULL) {
-		return -1;
+	time_t t = time(NULL);
+	if (t == (time_t)-1) {
+		buffer[0] = '\0';
+		return;
 	}
 
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
+	struct tm *lt = gmtime(&t);
+	if (lt == NULL) {
+		buffer[0] = '\0';
+		return;
+	}
 
-	return 0;
+	buffer[strftime(buffer, buffer_size, "%FT%H:%M:%SZ", lt)] = '\0';
 }
+
+static const char *get_level_string(enum sc_log_level level)
+{
+	switch (level) {
+	case SC_LOG_NONE:
+		return "NONE";
+	case SC_LOG_ERROR:
+		return "ERROR";
+	case SC_LOG_WARNING:
+		return "WARNING";
+	case SC_LOG_INFO:
+		return "INFO";
+	case SC_LOG_DEBUG:
+		return "DEBUG";
+	default:
+		return "UNKNOWN";
+	}
+}
+
+long sc_log_log_get_log_message_length(const char *application, const char *message)
+{
+	return (long)(MAX_TIME_STRING_LENGTH + strlen(application) + strlen("UNKNOWN") + strlen(message) + 6);
+}
+
+void sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *application, const char *message)
+{
+	char timestamp_buffer[MAX_TIME_STRING_LENGTH];
+
+	const char *level_string = get_level_string(level);
+
+	get_time(timestamp_buffer, sizeof(timestamp_buffer));
+
+	fprintf(fp, "%s %s: %s: %s\n", timestamp_buffer, application, level_string, message);
+	fflush(fp);
+}
+
