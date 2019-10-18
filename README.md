@@ -5,8 +5,11 @@ license rights and limitations (MIT).
 
 ## Build Status
 [![Travis CI](https://travis-ci.org/gatzka/sclog.svg?branch=master)](https://travis-ci.org/gatzka/sclog)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gatzka/sclog/master/LICENSE)
 [![codecov](https://codecov.io/gh/gatzka/sclog/branch/master/graph/badge.svg)](https://codecov.io/gh/gatzka/sclog)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.gatzka.sclog&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.gatzka.sclog)
+
+[![Open Hub](https://img.shields.io/badge/Open-Hub-0185CA.svg)](https://www.openhub.net/p/sclog)
 
 ## Howto Build
 sclog is always built using cmake. The CMakeLists.txt is written
