@@ -1,0 +1,4 @@
+fixes:
+  - "./Testing/CoverageInfo/::src/"
+ignore:
+  - "tests"
