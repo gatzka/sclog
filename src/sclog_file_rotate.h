@@ -26,41 +26,27 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
-#include <systemd/sd-journal.h>
+#ifndef SC_LOG_FILE_ROTATE_H
+#define SC_LOG_FILE_ROTATE_H
 
-#include "posix/sclog_posix_util.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "sclog.h"
-#include "sclog_systemd_sink.h"
+#include "sclog_export.h"
 
-static int init(void *context)
-{
-	(void)context;
-	return 0;
+struct sc_log_file_rotate_sink {
+	struct sc_log_sink sink;
+	const char *log_file_name;
+	unsigned int number_of_files;
+	long single_file_size;
+};
+
+SCLOG_EXPORT int sc_log_file_rotate_sink_init(struct sc_log_file_rotate_sink *fr_sink);
+
+#ifdef __cplusplus
 }
+#endif
 
-static void close(void *context)
-{
-	(void)context;
-}
-
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
-{
-	(void)context;
-	(void)application;
-
-	sd_journal_print(sc_log_get_syslog_priority(level), "%s", message);
-}
-
-int sc_log_systemd_sink_init(struct sc_log_sink *sink)
-{
-	if (sink == NULL) {
-		return -1;
-	}
-
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
-
-	return 0;
-}
+#endif

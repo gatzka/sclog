@@ -26,7 +26,6 @@
  * SOFTWARE.
  */
 
-#include <stdbool.h>
 #include <stddef.h>
 #include <syslog.h>
 
@@ -34,11 +33,11 @@
 #include "sclog_syslog_sink.h"
 #include "sclog_posix_util.c"
 
-static bool init(void *context)
+static int init(void *context)
 {
 	struct sc_log *log = (struct sc_log *)context;
 	openlog(log->application, 0, LOG_USER);
-	return true;
+	return 0;
 }
 
 static void close(void *context)
@@ -55,10 +54,10 @@ static void log_message(void *context, enum sc_log_level level, const char *appl
 	syslog(sc_log_get_syslog_priority(level), "%s", message);
 }
 
-bool sc_log_syslog_sink_init(struct sc_log_sink *sink, struct sc_log *log)
+int sc_log_syslog_sink_init(struct sc_log_sink *sink, struct sc_log *log)
 {
 	if (sink == NULL) {
-		return false;
+		return -1;
 	}
 
 	sink->init = init;
@@ -66,5 +65,5 @@ bool sc_log_syslog_sink_init(struct sc_log_sink *sink, struct sc_log *log)
 	sink->log_message = log_message;
 	sink->context = log;
 
-	return true;
+	return 0;
 }

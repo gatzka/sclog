@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: MIT
  *
- *The MIT License (MIT)
+ * The MIT License (MIT)
  *
  * Copyright (c) <2019> <Stephan Gatzka>
  *
@@ -33,12 +33,10 @@
 extern "C" {
 #endif
 
-#include <stdbool.h>
-
 #include "sclog.h"
 #include "sclog_export.h"
 
-SCLOG_EXPORT bool sc_log_null_sink_init(struct sc_log_sink *sink);
+SCLOG_EXPORT int sc_log_null_sink_init(struct sc_log_sink *sink);
 
 #ifdef __cplusplus
 }
