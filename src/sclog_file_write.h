@@ -26,41 +26,22 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
+#ifndef SC_LOG_FILE_WRITE_H
+#define SC_LOG_FILE_WRITE_H
+
 #include <stdio.h>
-#include <time.h>
 
 #include "sclog.h"
-#include "sclog_file_write.h"
-#include "sclog_stderr_sink.h"
 
-static int init(void *context)
-{
-	(void)context;
-	return 0;
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *application, const char *message);
+long sc_log_log_get_log_message_length(const char *application, const char *message);
+
+#ifdef __cplusplus
 }
+#endif
 
-static void close(void *context)
-{
-	(void)context;
-}
-
-
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
-{
-	(void)context;
-	sc_log_log_message_to_file(stderr, level, application, message);
-}
-
-int sc_log_stderr_sink_init(struct sc_log_sink *sink)
-{
-	if (sink == NULL) {
-		return -1;
-	}
-
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
-
-	return 0;
-}
+#endif

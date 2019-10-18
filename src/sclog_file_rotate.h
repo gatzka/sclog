@@ -33,6 +33,8 @@
 extern "C" {
 #endif
 
+#include <stdio.h>
+
 #include "sclog.h"
 #include "sclog_export.h"
 
@@ -41,9 +43,11 @@ struct sc_log_file_rotate_sink {
 	const char *log_file_name;
 	unsigned int number_of_files;
 	long single_file_size;
+	FILE *fp;
+	long current_file_size;
 };
 
-SCLOG_EXPORT int sc_log_file_rotate_sink_init(struct sc_log_file_rotate_sink *fr_sink);
+SCLOG_EXPORT int sc_log_file_rotate_sink_init(struct sc_log_file_rotate_sink *fr_sink, struct sc_log *log);
 
 #ifdef __cplusplus
 }
