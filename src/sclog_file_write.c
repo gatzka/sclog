@@ -43,13 +43,14 @@ static void get_time(char *buffer, size_t buffer_size)
 		return;
 	}
 
-	struct tm *lt = gmtime(&t);
+	struct tm result;
+	struct tm *lt = gmtime_r(&t, &result);
 	if (lt == NULL) {
 		buffer[0] = '\0';
 		return;
 	}
 
-	buffer[strftime(buffer, buffer_size, "%FT%H:%M:%SZ", lt)] = '\0';
+	buffer[strftime(buffer, buffer_size, "%FT%H:%M:%SZ", &result)] = '\0';
 }
 
 static const char *get_level_string(enum sc_log_level level)
