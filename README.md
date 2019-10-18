@@ -3,6 +3,11 @@
 Copyright (c) 2019 Stephan Gatzka. See the [LICENSE](LICENSE) file for
 license rights and limitations (MIT).
 
+## Build Status
+[![Travis CI](https://travis-ci.org/gatzka/sclog.svg?branch=master)](https://travis-ci.org/gatzka/sclog)
+[![codecov](https://codecov.io/gh/gatzka/sclog/branch/master/graph/badge.svg)](https://codecov.io/gh/gatzka/sclog)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.gatzka.sclog&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.gatzka.sclog)
+
 ## Howto Build
 sclog is always built using cmake. The CMakeLists.txt is written
 platform independently so you can choose any cmake aware environment,
