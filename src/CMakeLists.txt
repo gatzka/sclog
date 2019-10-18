@@ -30,6 +30,7 @@ cmake_dependent_option(SCLOG_CONFIG_LINUX "Add Linux dependent support to the li
 
 add_library(${PROJECT_NAME}
     "sclog.c"
+    "sclog_file_rotate_sink.c"
     "sclog_file_write.c"
     "sclog_null_sink.c"
     "sclog_stderr_sink.c"
