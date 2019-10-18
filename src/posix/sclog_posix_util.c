@@ -42,7 +42,6 @@ int sc_log_get_syslog_priority(enum sc_log_level level)
 		return LOG_WARNING;
 	case SC_LOG_INFO:
 		return LOG_INFO;
-		break;
 	case SC_LOG_DEBUG:
 		return LOG_DEBUG;
 	default:
