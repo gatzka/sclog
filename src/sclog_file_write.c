@@ -32,6 +32,7 @@
 #include <time.h>
 
 #include "sclog_file_write.h"
+#include "sclog_time.h"
 
 enum {MAX_TIME_STRING_LENGTH = 21};
 
@@ -43,13 +44,14 @@ static void get_time(char *buffer, size_t buffer_size)
 		return;
 	}
 
-	struct tm *lt = gmtime(&t);
-	if (lt == NULL) {
+	struct tm result;
+	int ret = sc_log_gmtime(&t, &result);
+	if (ret < 0) {
 		buffer[0] = '\0';
 		return;
 	}
 
-	buffer[strftime(buffer, buffer_size, "%FT%H:%M:%SZ", lt)] = '\0';
+	buffer[strftime(buffer, buffer_size, "%FT%H:%M:%SZ", &result)] = '\0';
 }
 
 static const char *get_level_string(enum sc_log_level level)

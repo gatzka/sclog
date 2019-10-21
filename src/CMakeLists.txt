@@ -66,6 +66,16 @@ if(${SCLOG_CONFIG_LINUX})
     include(linux/CMakeLists.txt)
 endif()
 
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    include(platform/linux/CMakeLists.txt)
+	target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:LINUX_PLATFORM_OBJECTS>)
+endif()
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+    include(platform/windows/CMakeLists.txt)
+	target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:WINDOWS_PLATFORM_OBJECTS>)
+endif()
+
 add_library(${PROJECT_NAME}:${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 add_dependencies(${PROJECT_NAME} generate_semver)
