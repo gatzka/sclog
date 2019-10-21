@@ -32,8 +32,8 @@
 
 int sc_log_gmtime(const time_t *time_p, struct tm *result)
 {
-	struct tm *ret = gmtime_r(time_p, result);
-	if (ret == NULL) {
+	errno_t err = gmtime_s(result, time_p);
+	if (err == 0) {
 		return -1;
 	}
 
