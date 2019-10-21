@@ -36,8 +36,8 @@ SET(IS_POSIX OFF)
 SET(IS_LINUX OFF)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	SET(IS_POSIX ON)
-	SET(IS_LINUX ON)
+    SET(IS_POSIX ON)
+    SET(IS_LINUX ON)
 endif()
 
 cmake_dependent_option(SCLOG_CONFIG_POSIX "Add POSIX conformant logging support to the library" ON "IS_POSIX" OFF)
@@ -64,6 +64,16 @@ endif()
 
 if(${SCLOG_CONFIG_LINUX})
     include(linux/CMakeLists.txt)
+endif()
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    include(platform/linux/CMakeLists.txt)
+    target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:LINUX_PLATFORM_OBJECTS>)
+endif()
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+    include(platform/windows/CMakeLists.txt)
+    target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:WINDOWS_PLATFORM_OBJECTS>)
 endif()
 
 add_library(${PROJECT_NAME}:${PROJECT_NAME} ALIAS ${PROJECT_NAME})
