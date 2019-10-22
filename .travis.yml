@@ -26,7 +26,7 @@ matrix:
           description: "Build submitted via Travis CI"
         notification_email: stephan.gatzka@gmail.com
         #build_script_url: https://raw.githubusercontent.com/gatzka/sclog/coverity_scan/.travisci_build_coverity_scan.sh
-        build_command_prepend: "cov-configure --comptype gcc"
+        #build_command_prepend: "cov-configure --comptype gcc"
         build_command: "cmake -DCMAKE_BUILD_TYPE:STRING=Debug ./ ; cmake --build ./"
         branch_pattern: coverity_scan
       apt:
