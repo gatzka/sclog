@@ -5,6 +5,7 @@ license rights and limitations (MIT).
 
 ## Build Status
 [![Travis CI](https://travis-ci.org/gatzka/sclog.svg?branch=master)](https://travis-ci.org/gatzka/sclog)
+[![Coverity](https://scan.coverity.com/projects/19467/badge.svg)](https://scan.coverity.com/projects/gatzka-sclog)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gatzka/sclog/master/LICENSE)
 [![codecov](https://codecov.io/gh/gatzka/sclog/branch/master/graph/badge.svg)](https://codecov.io/gh/gatzka/sclog)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.gatzka.sclog&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.gatzka.sclog)
