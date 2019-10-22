@@ -35,7 +35,6 @@
 
 static struct sc_log_file_rotate_sink *get_rotate_sink(void *context)
 {
-
 	struct sc_log *log = (struct sc_log *)context;
 	struct sc_log_sink *sink = log->sink;
 	return sc_log_container_of(sink, struct sc_log_file_rotate_sink, sink);
@@ -67,19 +66,31 @@ static void rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 	char name_buffer[255];
 	if (rot_files > 0) {
 		snprintf(name_buffer, sizeof(name_buffer), "%s.%d", fr_sink->log_file_name, fr_sink->number_of_files - 1);
-		remove(name_buffer);
+		int ret = remove(name_buffer);
+		// Deliberately ignore return value of revmove().
+		// There is nothing specific we can do if an error happens
+		// and logging is a best effort service anyhow.
+		(void)ret;
 	}
 
 	for (unsigned int i = rot_files; i > 1; i--) {
 		char name_buffer_to[255];
 		snprintf(name_buffer_to, sizeof(name_buffer_to), "%s.%d", fr_sink->log_file_name, i);
 		snprintf(name_buffer, sizeof(name_buffer), "%s.%d", fr_sink->log_file_name, i - 1);
-		rename(name_buffer, name_buffer_to);
+		int ret = rename(name_buffer, name_buffer_to);
+		// Deliberately ignore return value of rename().
+		// There is nothing specific we can do if an error happens
+		// and logging is a best effort service anyhow.
+		(void)ret;
 	}
 
 	fclose(fr_sink->fp);
 	if (rot_files > 0) {
-		rename(fr_sink->log_file_name, name_buffer);
+		int ret = rename(fr_sink->log_file_name, name_buffer);
+		// Deliberately ignore return value of rename().
+		// There is nothing specific we can do if an error happens
+		// and logging is a best effort service anyhow.
+		(void)ret;
 	}
 
 	fr_sink->fp = fopen(fr_sink->log_file_name, "a");
