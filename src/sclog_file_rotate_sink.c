@@ -44,7 +44,7 @@ static int init(void *context)
 {
 	struct sc_log_file_rotate_sink *fr_sink = get_rotate_sink(context);
 
-	fr_sink->fp = fopen(fr_sink->log_file_name, "a");
+	fr_sink->fp = fopen(fr_sink->log_file_name, "ae");
 	if (fr_sink->fp == NULL) {
 		return -1;
 	}
@@ -93,7 +93,7 @@ static void rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 		(void)ret;
 	}
 
-	fr_sink->fp = fopen(fr_sink->log_file_name, "a");
+	fr_sink->fp = fopen(fr_sink->log_file_name, "ae");
 	fr_sink->current_file_size = 0;
 }
 
