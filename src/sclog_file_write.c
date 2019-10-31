@@ -72,9 +72,10 @@ static const char *get_level_string(enum sc_log_level level)
 	}
 }
 
+#define EXTRA_LOG_CHARACTERS 6 // white spaces and ":"
 long sc_log_log_get_log_message_length(const char *application, const char *message)
 {
-	return (long)(MAX_TIME_STRING_LENGTH + strlen(application) + strlen("UNKNOWN") + strlen(message) + 6);
+	return (long)(MAX_TIME_STRING_LENGTH + strlen(application) + strlen("UNKNOWN") + strlen(message) + EXTRA_LOG_CHARACTERS);
 }
 
 void sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *application, const char *message)
