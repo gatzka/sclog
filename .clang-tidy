@@ -1,0 +1,5 @@
+---
+Checks: "*,-llvm-header-guard,-clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling,-hicpp-signed-bitwise"
+WarningsAsErrors: "*"
+HeaderFilterRegex: '.*'
+---
