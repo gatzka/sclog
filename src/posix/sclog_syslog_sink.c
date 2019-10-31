@@ -30,8 +30,8 @@
 #include <syslog.h>
 
 #include "sclog.h"
-#include "sclog_syslog_sink.h"
 #include "sclog_posix_util.h"
+#include "sclog_syslog_sink.h"
 
 static int init(void *context)
 {
