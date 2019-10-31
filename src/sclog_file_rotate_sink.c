@@ -33,6 +33,8 @@
 #include "sclog_file_write.h"
 #include "sclog_util.h"
 
+#define FILENAME_BUFFER_SIZE 255
+
 static struct sc_log_file_rotate_sink *get_rotate_sink(void *context)
 {
 	struct sc_log *log = (struct sc_log *)context;
@@ -63,7 +65,7 @@ static void close(void *context)
 static void rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 {
 	unsigned int rot_files = fr_sink->number_of_files - 1;
-	char name_buffer[255];
+	char name_buffer[FILENAME_BUFFER_SIZE];
 	if (rot_files > 0) {
 		snprintf(name_buffer, sizeof(name_buffer), "%s.%d", fr_sink->log_file_name, fr_sink->number_of_files - 1);
 		int ret = remove(name_buffer);
@@ -74,7 +76,7 @@ static void rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 	}
 
 	for (unsigned int i = rot_files; i > 1; i--) {
-		char name_buffer_to[255];
+		char name_buffer_to[FILENAME_BUFFER_SIZE];
 		snprintf(name_buffer_to, sizeof(name_buffer_to), "%s.%d", fr_sink->log_file_name, i);
 		snprintf(name_buffer, sizeof(name_buffer), "%s.%d", fr_sink->log_file_name, i - 1);
 		int ret = rename(name_buffer, name_buffer_to);
