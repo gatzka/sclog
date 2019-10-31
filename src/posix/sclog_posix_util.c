@@ -47,6 +47,5 @@ int sc_log_get_syslog_priority(enum sc_log_level level)
 	default:
 		return -1;
 	}
-
 }
 
