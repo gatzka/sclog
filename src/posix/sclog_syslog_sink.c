@@ -31,7 +31,7 @@
 
 #include "sclog.h"
 #include "sclog_syslog_sink.h"
-#include "sclog_posix_util.c"
+#include "sclog_posix_util.h"
 
 static int init(void *context)
 {
