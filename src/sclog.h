@@ -35,6 +35,8 @@ extern "C" {
 
 #include "sclog_export.h"
 
+#define SCLOG_BUFFER_SIZE 200
+
 enum sc_log_level {
 	SC_LOG_NONE,
 	SC_LOG_ERROR,
@@ -53,7 +55,7 @@ struct sc_log_sink {
 struct sc_log {
 	const char *application;
 	enum sc_log_level guard_level;
-	char log_buffer[200];
+	char log_buffer[SCLOG_BUFFER_SIZE];
 	struct sc_log_sink *sink;
 };
 
