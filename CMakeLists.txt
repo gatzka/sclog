@@ -18,7 +18,7 @@ if(CMAKE_CONFIGURATION_TYPES)
     list(APPEND CMAKE_CONFIGURATION_TYPES Coverage)
   endif()
 else()
-  set(allowableBuildTypes Debug Release MemorySanitizer AddressSanitizer LeakSanitizer Coverage)
+  set(allowableBuildTypes Debug Release MemorySanitizer AddressSanitizer LeakSanitizer UndefinedBehaviorSanitize rCoverage)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY
   STRINGS "${allowableBuildTypes}")
   if(NOT CMAKE_BUILD_TYPE)
