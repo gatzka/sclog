@@ -18,7 +18,7 @@ if(CMAKE_CONFIGURATION_TYPES)
     list(APPEND CMAKE_CONFIGURATION_TYPES Coverage)
   endif()
 else()
-  set(allowableBuildTypes Debug Release MemorySanitizer AddressSanitizer LeakSanitizer UndefinedBehaviorSanitize rCoverage)
+  set(allowableBuildTypes Debug Release MemorySanitizer AddressSanitizer LeakSanitizer UndefinedBehaviorSanitizer Coverage)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY
   STRINGS "${allowableBuildTypes}")
   if(NOT CMAKE_BUILD_TYPE)
@@ -28,12 +28,48 @@ else()
   endif()
 endif()
 
+set(CMAKE_C_FLAGS_ADDRESSSANITIZER "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${ASAN_FLAGS}" CACHE STRING "Flags used by the C compiler during address sanitizer builds." FORCE)
+set(CMAKE_CXX_FLAGS_ADDRESSSANITIZER "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${ASAN_FLAGS}" CACHE STRING "Flags used by the C++ compiler during address sanitizer builds." FORCE)
+set(CMAKE_EXE_LINKER_FLAGS_ADDRESSSANITIZER "${CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO} ${ASAN_FLAGS}" CACHE STRING "Flags used for linking executables during address sanitizer builds." FORCE)
+set(CMAKE_SHARED_LINKER_FLAGS_ADDRESSSANITIZER "${CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO} ${ASAN_FLAGS}" CACHE STRING "Flags used for shared library linking during address sanitizer builds." FORCE)
+set(CMAKE_STATIC_LINKER_FLAGS_ADDRESSSANITIZER "${CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO}" CACHE STRING "Flags used for static library linking during address sanitizer builds." FORCE)
+set(CMAKE_MODULE_LINKER_FLAGS_ADDRESSSANITIZER "${CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO} ${ASAN_FLAGS}" CACHE STRING "Flags used module linking during address sanitizer builds." FORCE)
+
+set(CMAKE_C_FLAGS_MEMORYSANITIZER "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${MSAN_FLAGS}" CACHE STRING "Flags used by the C compiler during memory sanitizer builds." FORCE)
+set(CMAKE_CXX_FLAGS_MEMORYSANITIZER "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${MSAN_FLAGS}" CACHE STRING "Flags used by the C++ compiler during memory sanitizer builds." FORCE)
+set(CMAKE_EXE_LINKER_FLAGS_MEMORYSANITIZER "${CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO} ${MSAN_FLAGS}" CACHE STRING "Flags used for linking executables during memory sanitizer builds." FORCE)
+set(CMAKE_SHARED_LINKER_FLAGS_MEMORYSANITIZER "${CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO} ${MSAN_FLAGS}" CACHE STRING "Flags used for shared library linking during memory sanitizer builds." FORCE)
+set(CMAKE_STATIC_LINKER_FLAGS_MEMORYSANITIZER "${CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO}" CACHE STRING "Flags used for static library linking during memory sanitizer builds." FORCE)
+set(CMAKE_MODULE_LINKER_FLAGS_MEMORYSANITIZER "${CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO} ${MSAN_FLAGS}" CACHE STRING "Flags used module linking during memory sanitizer builds." FORCE)
+
+set(CMAKE_C_FLAGS_LEAKSANITIZER "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${LSAN_FLAGS}" CACHE STRING "Flags used by the C compiler during leak sanitizer builds." FORCE)
+set(CMAKE_CXX_FLAGS_LEAKSANITIZER "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${LSAN_FLAGS}" CACHE STRING "Flags used by the C++ compiler during leak sanitizer builds." FORCE)
+set(CMAKE_EXE_LINKER_FLAGS_LEAKSANITIZER "${CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO} ${LSAN_FLAGS}" CACHE STRING "Flags used for linking executables during leak sanitizer builds." FORCE)
+set(CMAKE_SHARED_LINKER_FLAGS_LEAKSANITIZER "${CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO} ${LSAN_FLAGS}" CACHE STRING "Flags used for shared library linking during leak sanitizer builds." FORCE)
+set(CMAKE_STATIC_LINKER_FLAGS_LEAKSANITIZER "${CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO}" CACHE STRING "Flags used for static library linking during leak sanitizer builds." FORCE)
+set(CMAKE_MODULE_LINKER_FLAGS_LEAKSANITIZER "${CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO} ${LSAN_FLAGS}" CACHE STRING "Flags used module linking during leak sanitizer builds." FORCE)
+
+set(CMAKE_C_FLAGS_UNDEFINEDBEHAVIORSANITIZER "${CMAKE_C_FLAGS_RELWITHDEBINFO} ${UBSAN_FLAGS}" CACHE STRING "Flags used by the C compiler during undefined behavior sanitizer builds." FORCE)
+set(CMAKE_CXX_FLAGS_UNDEFINEDBEHAVIORSANITIZER "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${UBSAN_FLAGS}" CACHE STRING "Flags used by the C++ compiler during undefined behavior sanitizer builds." FORCE)
+set(CMAKE_EXE_LINKER_FLAGS_UNDEFINEDBEHAVIORSANITIZER "${CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO} ${UBSAN_FLAGS}" CACHE STRING "Flags used for linking executables during undefined behavior sanitizer builds." FORCE)
+set(CMAKE_SHARED_LINKER_FLAGS_UNDEFINEDBEHAVIORSANITIZER "${CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO} ${UBSAN_FLAGS}" CACHE STRING "Flags used for shared library linking during undefined behavior sanitizer builds." FORCE)
+set(CMAKE_STATIC_LINKER_FLAGS_UNDEFINEDBEHAVIORSANITIZER "${CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO}" CACHE STRING "Flags used for static library linking during undefined behavior sanitizer builds." FORCE)
+set(CMAKE_MODULE_LINKER_FLAGS_UNDEFINEDBEHAVIORSANITIZER "${CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO} ${UBSAN_FLAGS}" CACHE STRING "Flags used module linking during undefined behavior sanitizer builds." FORCE)
+
+set(CMAKE_C_FLAGS_COVERAGE "${CMAKE_C_FLAGS_DEBUG} ${COVERAGE_FLAGS}" CACHE STRING "Flags used by the C compiler during coverage builds." FORCE)
+set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG} ${COVERAGE_FLAGS}" CACHE STRING "Flags used by the C++ compiler during coverage builds." FORCE)
+set(CMAKE_EXE_LINKER_FLAGS_COVERAGE "${CMAKE_EXE_LINKER_FLAGS_DEBUG} ${COVERAGE_FLAGS}" CACHE STRING "Flags used for linking executables during coverage builds." FORCE)
+set(CMAKE_SHARED_LINKER_FLAGS_COVERAGE "${CMAKE_SHARED_LINKER_FLAGS_DEBUG} ${COVERAGE_FLAGS}" CACHE STRING "Flags used for shared library linking during coverage builds." FORCE)
+set(CMAKE_STATIC_LINKER_FLAGS_COVERAGE "${CMAKE_STATIC_LINKER_FLAGS_DEBUG}" CACHE STRING "Flags used for static library linking during coverage builds." FORCE)
+set(CMAKE_MODULE_LINKER_FLAGS_COVERAGE "${CMAKE_MODULE_LINKER_FLAGS_DEBUG} ${COVERAGE_FLAGS}" CACHE STRING "Flags used module linking during coverage builds." FORCE)
+
 include(CTest)
+
 
 add_subdirectory(src)
 add_subdirectory(tests)
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-	add_subdirectory(examples)
+  add_subdirectory(examples)
 endif()
 
 
@@ -42,14 +78,14 @@ set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
 include(ClangFormat)
 
 file(GLOB FILES_TO_FORMAT
-    ${PROJECT_SOURCE_DIR}/examples/*.c
-    ${PROJECT_SOURCE_DIR}/examples/*.h
-    ${PROJECT_SOURCE_DIR}/src/*.c
-    ${PROJECT_SOURCE_DIR}/src/*.h
-    ${PROJECT_SOURCE_DIR}/src/posix/*.c
-    ${PROJECT_SOURCE_DIR}/src/posix/*.h
-   ${PROJECT_SOURCE_DIR}/tests/*.c
-   ${PROJECT_SOURCE_DIR}/tests/*.h
+  ${PROJECT_SOURCE_DIR}/examples/*.c
+  ${PROJECT_SOURCE_DIR}/examples/*.h
+  ${PROJECT_SOURCE_DIR}/src/*.c
+  ${PROJECT_SOURCE_DIR}/src/*.h
+  ${PROJECT_SOURCE_DIR}/src/posix/*.c
+  ${PROJECT_SOURCE_DIR}/src/posix/*.h
+  ${PROJECT_SOURCE_DIR}/tests/*.c
+  ${PROJECT_SOURCE_DIR}/tests/*.h
 )
 
 add_custom_target(sclog-format SOURCES ${FILES_TO_FORMAT})
