@@ -34,9 +34,8 @@ extern "C" {
 #endif
 
 #include "sclog.h"
-#include "sclog_export.h"
 
-SCLOG_EXPORT int sc_log_get_syslog_priority(enum sc_log_level level);
+int sc_log_get_syslog_priority(enum sc_log_level level);
 
 #ifdef __cplusplus
 }
