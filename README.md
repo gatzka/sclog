@@ -32,4 +32,8 @@ The default is static. If you want a shared library, execute:
 cmake -DBUILD_SHARED_LIBS=ON <path-to-sclog-project>
 ```
 
+## Documentation
+
+The generated [doxygen](https://www.stack.nl/~dimitri/doxygen/) documentation can be found
+[here](https://gatzka.github.io/sclog/doc/).
 
