@@ -150,6 +150,7 @@ if (DOXYGEN_FOUND)
 
     doxygen_add_docs(docs
         ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/doxygen/mainpage.dox
         ${CMAKE_CURRENT_BINARY_DIR}/generated/
         COMMENT "Generating API documentation with Doxygen"
     )
