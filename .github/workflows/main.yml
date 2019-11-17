@@ -4,11 +4,12 @@ on: [push]
 
 jobs:
   build:
-
+    name: First build test
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: Test ctest
       run: ctest --version
     - name: Run a one-line script
