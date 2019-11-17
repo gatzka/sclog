@@ -1,7 +1,13 @@
 name: 'ctest build'
 description: 'GitHub Action that make CI builds using ctest'
 author: 'Stephan Gatzka <@gatzka>'
+inputs: 
+  install_deps:
+  description: 'User defined script to install build dependencies in ubuntu'
+  required: false 
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.install_deps}}
 
