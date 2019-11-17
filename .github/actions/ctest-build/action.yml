@@ -1,0 +1,7 @@
+name: 'ctest build'
+description: 'GitHub Action that make CI builds using ctest'
+author: 'Stephan Gatzka <@gatzka>'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
