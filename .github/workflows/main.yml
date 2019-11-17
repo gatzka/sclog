@@ -20,7 +20,8 @@ jobs:
         echo test, and deploy your project.
     - name: Run on docker image
       uses: docker://gatzka/gh-c-ci:latest
-      run: ls -l
+      env:
+        CMAKE_CONFIGURATION: release
 #    - name: ctest build
 #      uses: ./.github/actions/ctest-build
 #      with:
