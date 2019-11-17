@@ -20,4 +20,5 @@ jobs:
         echo test, and deploy your project.
     - name: ctest build
       uses: ./.github/actions/ctest-build
-
+      with:
+        install_deps: Horst
