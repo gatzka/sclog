@@ -17,7 +17,7 @@ RUN apt-get upgrade -y
 
 RUN apt-get install -y gcc-9 gcc-8 gcc-7 gcc-6 gcc-5 gcc-4.8 cmake clang-9 clang-tidy-9 clang-8 clang-tidy-8 clang-7 clang-tidy-7 clang-6.0 clang-tidy-6.0 ninja-build valgrind git pkg-config libsystemd-dev
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+# COPY entrypoint.sh /entrypoint.sh
+# RUN chmod +x /entrypoint.sh
+# 
+# ENTRYPOINT ["/entrypoint.sh"]
