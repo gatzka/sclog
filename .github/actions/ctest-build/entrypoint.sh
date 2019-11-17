@@ -3,4 +3,4 @@
 set -eu
 echo "Hello action"
 ls -l
-ctest -S build.cmake
+ctest -VV -S build.cmake
