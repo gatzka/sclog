@@ -10,18 +10,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Test ctest
-      run: ctest --version
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-#     - name: Run on docker image
-#       uses: docker://gatzka/gh-c-ci:latest
-#       env:
-#         CMAKE_CONFIGURATION: release
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
