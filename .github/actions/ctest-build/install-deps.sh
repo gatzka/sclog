@@ -1,6 +1,6 @@
 #!/bin/bash
 set -ex
 
-apt update
-apt install -y python-minimal 
+apt-get update
+apt-get install -y python-minimal 
 
