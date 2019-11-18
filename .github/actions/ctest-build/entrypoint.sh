@@ -1,6 +1,5 @@
-#!/bin/sh
-
-set -eu
+#!/bin/bash
+set -ex
 
 if [ "x$INPUT_INSTALL_DEPS" != 'x' ]; then
   apt-get update
