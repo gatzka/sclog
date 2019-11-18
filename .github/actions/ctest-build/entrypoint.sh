@@ -8,4 +8,4 @@ else
   echo "no dependency script"
 fi
 
-ctest -VV -S build.cmake
+ctest -S build.cmake
