@@ -3,9 +3,9 @@
 set -eu
 
 if [ "x$INPUT_INSTALL_DEPS" != 'x' ]; then
-  echo "got dependency script: $INPUT_INSTALL_DEPS"
-else
-  echo "no dependency script"
+  apt-get update
+  source $INPUT_INSTALL_DEPS
+  apt-get clean -y
 fi
 
 ctest -S build.cmake
