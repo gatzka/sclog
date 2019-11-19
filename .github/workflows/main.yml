@@ -14,3 +14,5 @@ jobs:
       uses: ./.github/actions/ctest-build
       with:
         install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-gcc-8.cmake
+        ctest_configuration_type: Debug
