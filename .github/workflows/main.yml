@@ -73,3 +73,58 @@ jobs:
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_configuration_type: Release
 
+  clang-9-UndefinedBehaviorSanitizer:
+    name: clang-9 UndefinedBehaviorSanitizer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: UndefinedBehaviorSanitizer
+
+  clang-9-LeakSanitizer:
+    name: clang-9 LeakSanitizer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: LeakSanitizer
+
+  clang-9-MemorySanitizer:
+    name: clang-9 MemorySanitizer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: MemorySanitizer
+
+  clang-9-AddressSanitizer:
+    name: clang-9 AddressSanitizer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: AddressSanitizer
