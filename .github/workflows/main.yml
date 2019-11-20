@@ -128,3 +128,17 @@ jobs:
         install_deps: ./.github/actions/ctest-build/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_configuration_type: AddressSanitizer
+
+  clang-9-scanbuild:
+    name: clang-9 scan-build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_analyzer: scan-build-9
