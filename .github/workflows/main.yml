@@ -1,0 +1,158 @@
+name: CI sclog
+
+on: [push, pull_request]
+
+jobs:
+  gcc-9-debug:
+    name: gcc-9 Debug
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-gcc-9.cmake
+        ctest_configuration_type: Debug
+
+  gcc-9-release:
+    name: gcc-9 Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-gcc-9.cmake
+        ctest_configuration_type: Release
+
+  gcc-valgrind:
+    name: gcc Valgrind
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-gcc-9.cmake
+        ctest_configuration_type: Valgrind
+
+  clang-9-debug:
+    name: clang-9 Debug
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: Debug
+
+  clang-9-release:
+    name: clang-9 Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: Release
+
+  clang-9-UndefinedBehaviorSanitizer:
+    name: clang-9 UndefinedBehaviorSanitizer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: UndefinedBehaviorSanitizer
+
+  clang-9-LeakSanitizer:
+    name: clang-9 LeakSanitizer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: LeakSanitizer
+
+  clang-9-MemorySanitizer:
+    name: clang-9 MemorySanitizer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: MemorySanitizer
+
+  clang-9-AddressSanitizer:
+    name: clang-9 AddressSanitizer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_configuration_type: AddressSanitizer
+
+  clang-9-scanbuild:
+    name: clang-9 scan-build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_analyzer: scan-build-9
+
+  clang-9-iclangtidy:
+    name: clang-9 clang-tidy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
+        ctest_analyzer: clang-tidy-9
