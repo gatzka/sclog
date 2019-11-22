@@ -1,6 +1,6 @@
 name: CI sclog
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   gcc-9-debug:
