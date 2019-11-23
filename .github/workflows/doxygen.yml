@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: ctest build
+    - name: cmake build
       uses: ./.github/actions/cmake-build
       with:
         install_deps: ./.github/actions/cmake-build/install-deps.sh
