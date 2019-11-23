@@ -8,8 +8,8 @@ inputs:
   cmake_toolchain_file:
     description: 'User defined toolchain file to build project'
     required: false 
-  cmake_configuration_type:
-    description: 'cmake configuration type like Debug|Release'
+  cmake_build_type:
+    description: 'cmake build type like Debug|Release'
     required: false 
   cmake_build_target:
     description: 'target cmake should build'
@@ -20,6 +20,6 @@ runs:
   args:
     - ${{ inputs.install_deps}}
     - ${{ inputs.cmake_toolchain_file}}
-    - ${{ inputs.cmake_configuration_type}}
+    - ${{ inputs.cmake_build_type}}
     - ${{ inputs.cmake_build_target}}
 
