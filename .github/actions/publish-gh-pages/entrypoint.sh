@@ -18,7 +18,7 @@ pwd && \
 git clone --branch=gh-pages ${REMOTE_REPO} gh-pages && \
 cd gh-pages && \
 if [ -d "${GH_PAGES_SUBDIR}" ]; then
-  git rm -rf ${GH_PAGES_SUBDIR} && \
+  git rm -rf ${GH_PAGES_SUBDIR}
 fi && \
 cp -Rf ${BUILD_DIR} ${GH_PAGES_SUBDIR} && \
 git add -f . && \
