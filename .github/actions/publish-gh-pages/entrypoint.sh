@@ -29,6 +29,8 @@ git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
 if [ -z "$(git status --porcelain)" ]; then
     echo "Nothing to commit" && \
     exit 0
+else
+  echo "stuff to commit"
 fi && \
 git add -f . && \
 git commit -m 'Deploy to GitHub Pages' && \
