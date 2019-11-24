@@ -1,0 +1,24 @@
+name: CI doxygen
+
+on: [push, pull_request]
+
+jobs:
+  doxygen:
+    name: generate doxygen doumentation
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: cmake build
+      uses: ./.github/actions/cmake-build
+      with:
+        install_deps: ./.github/actions/cmake-build/install-deps.sh
+        cmake_build_target: docs
+    - name: GitHub Pages Deploy
+      uses: ./.github/actions/publish-gh-pages
+      env:
+        BUILD_DIR: build/src/docs/
+        GH_PAT: ${{ secrets.GH_PAT }}
+        GH_PAGES_SUBDIR: ./doc
+

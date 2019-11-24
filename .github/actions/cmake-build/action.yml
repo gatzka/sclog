@@ -1,0 +1,25 @@
+name: 'cmake build'
+description: 'GitHub Action that make CI builds using cmake'
+author: 'Stephan Gatzka <@gatzka>'
+inputs: 
+  install_deps:
+    description: 'User defined script to install build dependencies in ubuntu'
+    required: false 
+  cmake_toolchain_file:
+    description: 'User defined toolchain file to build project'
+    required: false 
+  cmake_build_type:
+    description: 'cmake build type like Debug|Release'
+    required: false 
+  cmake_build_target:
+    description: 'target cmake should build'
+    required: false 
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.install_deps}}
+    - ${{ inputs.cmake_toolchain_file}}
+    - ${{ inputs.cmake_build_type}}
+    - ${{ inputs.cmake_build_target}}
+
