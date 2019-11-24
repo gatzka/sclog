@@ -1,4 +1,4 @@
-name: CI doxygen
+name: generate doxygen
 
 on:
   push:
