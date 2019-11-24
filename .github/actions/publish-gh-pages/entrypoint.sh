@@ -28,6 +28,8 @@ fi && \
 mkdir ${GH_PAGES_SUBDIR} && \
 cp -Rf ${GITHUB_WORKSPACE}/${BUILD_DIR} ${GH_PAGES_SUBDIR} && \
 echo "here 2" && \
+git config user.name "${GITHUB_ACTOR}" && \
+git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
 git add -f . && \
 git commit -m 'Deploy to GitHub Pages' && \
 echo "here 3" && \
