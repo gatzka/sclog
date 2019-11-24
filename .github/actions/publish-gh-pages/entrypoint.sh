@@ -15,6 +15,7 @@ REMOTE_BRANCH="gh-pages" && \
 TMP_DIR="$(mktemp -d)" && \
 cd ${TMP_DIR} && \
 pwd && \
+git init && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
 echo ${REMOTE_REPO} && \
