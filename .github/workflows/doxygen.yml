@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: cmake build
+    - Name: cmake build
       uses: ./.github/actions/cmake-build
       with:
         install_deps: ./.github/actions/cmake-build/install-deps.sh
@@ -19,5 +19,5 @@ jobs:
       uses: maxheld83/ghpages@v0.2.1
       env:
         BUILD_DIR: build/src/docs/
-        secrets: ${{ secrets.PAT_GH_PAGES }}
+        secrets: ${{ secrets.GH_PAT }}
 
