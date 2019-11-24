@@ -26,7 +26,7 @@ if [ -d "${GH_PAGES_SUBDIR}" ]; then
   git rm -rf ${GH_PAGES_SUBDIR}
 fi && \
 mkdir ${GH_PAGES_SUBDIR} && \
-cp -Rf ${GITHUB_WORKSPACE}/${BUILD_DIR} ${GH_PAGES_SUBDIR} && \
+cp -Rf ${GITHUB_WORKSPACE}/${BUILD_DIR}/* ${GH_PAGES_SUBDIR} && \
 echo "here 2" && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
