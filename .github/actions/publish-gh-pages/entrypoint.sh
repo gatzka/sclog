@@ -17,7 +17,9 @@ cd ${TMP_DIR} && \
 pwd && \
 git clone --branch=gh-pages ${REMOTE_REPO} gh-pages && \
 cd gh-pages && \
-git rm -rf ${GH_PAGES_SUBDIR} && \
+if [ -d "${GH_PAGES_SUBDIR}" ]; then
+  git rm -rf ${GH_PAGES_SUBDIR} && \
+fi && \
 cp -Rf ${BUILD_DIR} ${GH_PAGES_SUBDIR} && \
 git add -f . && \
 git commit -m 'Deploy to GitHub Pages' && \
