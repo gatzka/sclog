@@ -27,9 +27,12 @@ if [ -d "${GH_PAGES_SUBDIR}" ]; then
 fi && \
 mkdir ${GH_PAGES_SUBDIR} && \
 cp -Rf ${GITHUB_WORKSPACE}/${BUILD_DIR} ${GH_PAGES_SUBDIR} && \
+echo "here 2" && \
 git add -f . && \
 git commit -m 'Deploy to GitHub Pages' && \
+echo "here 3" && \
 git push -fq origin gh-pages && \
 rm -fr .git && \
+echo "here 4" && \
 cd $GITHUB_WORKSPACE && \
 echo "Content of $BUILD_DIR has been deployed to GitHub Pages."
