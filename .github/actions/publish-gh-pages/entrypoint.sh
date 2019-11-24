@@ -13,11 +13,10 @@ REPONAME="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 2)" && \
 OWNER="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 1)" && \
 REMOTE_BRANCH="gh-pages" && \
 TMP_DIR="$(mktemp -d)" && \
-cd ${TMP_DIR} && \
-pwd && \
-git init && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
+cd ${TMP_DIR} && \
+pwd && \
 echo ${REMOTE_REPO} && \
 git clone --branch=gh-pages ${REMOTE_REPO} gh-pages && \
 cd gh-pages && \
