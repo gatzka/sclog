@@ -22,4 +22,5 @@ if [ "x$INPUT_CTEST_ANALYZER" != 'x' ]; then
 fi
 
 ctest -VV -S build.cmake ${CTEST_OPTIONS}
+ls -lR 
 
