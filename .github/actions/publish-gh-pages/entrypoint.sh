@@ -14,7 +14,9 @@ OWNER="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 1)" && \
 REMOTE_BRANCH="gh-pages" && \
 TMP_DIR="$(mktemp -d)" && \
 cd ${TMP_DIR} && \
-git clone --branch=gh-pages ${REMOTE_REPO} && \
+pwd && \
+git clone --branch=gh-pages ${REMOTE_REPO} gh-pages && \
+cd gh-pages && \
 git rm -rf ${GH_PAGES_SUBDIR} && \
 cp -Rf ${BUILD_DIR} ${GH_PAGES_SUBDIR} && \
 git add -f . && \
