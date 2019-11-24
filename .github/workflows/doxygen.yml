@@ -19,6 +19,6 @@ jobs:
       uses: ./.github/actions/publish-gh-pages
       env:
         BUILD_DIR: build/src/docs/
-        secrets: ${{ secrets.GH_PAT }}
         GH_PAT: ${{ secrets.GH_PAT }}
+        GH_PAGES_SUBDIR: ./doc
 

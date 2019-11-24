@@ -11,22 +11,15 @@ echo "Now deploying to GitHub Pages..."
 REMOTE_REPO="https://${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git" && \
 REPONAME="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 2)" && \
 OWNER="$(echo $GITHUB_REPOSITORY| cut -d'/' -f 1)" && \
-GHIO="${OWNER}.github.io" && \
-if [[ "$REPONAME" == "$GHIO" ]]; then
-  REMOTE_BRANCH="master"
-else
-  REMOTE_BRANCH="gh-pages"
-fi && \
-git init && \
-git config user.name "${GITHUB_ACTOR}" && \
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
-if [ -z "$(git status --porcelain)" ]; then
-    echo "Nothing to commit" && \
-    exit 0
-fi && \
-git add . && \
+REMOTE_BRANCH="gh-pages" && \
+TMP_DIR="$(mktemp -d)" && \
+cd ${TMP_DIR} && \
+git clone --branch=gh-pages ${REMOTE_REPO} && \
+git rm -rf ${GH_PAGES_SUBDIR} && \
+cp -Rf ${BUILD_DIR} ${GH_PAGES_SUBDIR} && \
+git add -f . && \
 git commit -m 'Deploy to GitHub Pages' && \
-git push --force $REMOTE_REPO master:$REMOTE_BRANCH && \
+git push -fq origin gh-pages && \
 rm -fr .git && \
 cd $GITHUB_WORKSPACE && \
 echo "Content of $BUILD_DIR has been deployed to GitHub Pages."
