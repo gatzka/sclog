@@ -15,4 +15,9 @@ jobs:
       with:
         install_deps: ./.github/actions/cmake-build/install-deps.sh
         cmake_build_target: docs
+    - name: GitHub Pages Deploy
+      uses: maxheld83/ghpages@v0.2.1
+      env:
+        BUILD_DIR: build/docs/
+        secrets: ${{ secrets.PAT_GH_PAGES }}
 
