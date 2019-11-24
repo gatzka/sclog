@@ -18,6 +18,6 @@ jobs:
     - name: GitHub Pages Deploy
       uses: maxheld83/ghpages@v0.2.1
       env:
-        BUILD_DIR: src/docs/
+        BUILD_DIR: build/src/docs/
         secrets: ${{ secrets.PAT_GH_PAGES }}
 
