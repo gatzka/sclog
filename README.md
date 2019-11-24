@@ -35,5 +35,5 @@ cmake -DBUILD_SHARED_LIBS=ON <path-to-sclog-project>
 ## Documentation
 
 The generated [doxygen](https://www.stack.nl/~dimitri/doxygen/) documentation can be found
-[here](https://gatzka.github.io/sclog/doc/).
+[here](https://gatzka.github.io/sclog/doc/html).
 
