@@ -17,6 +17,7 @@ cd ${TMP_DIR} && \
 pwd && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
+echo ${REMOTE_REPO} && \
 git clone --branch=gh-pages ${REMOTE_REPO} gh-pages && \
 cd gh-pages && \
 if [ -d "${GH_PAGES_SUBDIR}" ]; then
