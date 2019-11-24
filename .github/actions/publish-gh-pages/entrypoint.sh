@@ -26,6 +26,10 @@ mkdir ${GH_PAGES_SUBDIR} && \
 cp -Rf ${GITHUB_WORKSPACE}/${BUILD_DIR}/* ${GH_PAGES_SUBDIR} && \
 git config user.name "${GITHUB_ACTOR}" && \
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
+if [ -z "$(git status --porcelain)" ]; then
+    echo "Nothing to commit" && \
+    exit 0
+fi && \
 git add -f . && \
 git commit -m 'Deploy to GitHub Pages' && \
 git push -fq origin gh-pages && \
