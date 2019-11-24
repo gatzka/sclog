@@ -88,10 +88,6 @@ after_success:
     bash <(curl -s https://codecov.io/bash) -s /tmp/sclog/ || echo "Codecov did not collect coverage reports";
   fi
 
-- if [ -n "${CREATE_DOXY}" ]; then
-    $TRAVIS_BUILD_DIR/scripts/push-doxygen-to-gh-pages.sh ;
-  fi
-
 env:
   global:
   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
