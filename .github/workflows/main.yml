@@ -177,4 +177,4 @@ jobs:
         BUILD_DIR: build/src/docs/
         GH_PAT: ${{ secrets.GH_PAT }}
         GH_PAGES_SUBDIR: ./doc
-        TEST_VAR: ${{ github.ref }}
+
