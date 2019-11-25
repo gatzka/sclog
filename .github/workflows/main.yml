@@ -161,6 +161,7 @@ jobs:
     name: generate doxygen doumentation
     runs-on: ubuntu-latest
     needs: [gcc-9-debug, gcc-9-release, gcc-valgrind, clang-9-debug, clang-9-release, clang-9-UndefinedBehaviorSanitizer, clang-9-LeakSanitizer, clang-9-MemorySanitizer, clang-9-AddressSanitizer, clang-9-scanbuild, clang-9-clangtidy]
+    if: contains(github.ref, 'master')
 
     steps:
     - name: Checkout
