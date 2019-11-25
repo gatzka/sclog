@@ -156,3 +156,24 @@ jobs:
         install_deps: ./.github/actions/ctest-build/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_analyzer: clang-tidy-9
+
+  doxygen:
+    name: generate doxygen doumentation
+    runs-on: ubuntu-latest
+    needs: [gcc-9-debug, gcc-9-release, gcc-valgrind, clang-9-debug, clang-9-release, clang-9-UndefinedBehaviorSanitizer, clang-9-LeakSanitizer, clang-9-MemorySanitizer, clang-9-AddressSanitizer, clang-9-scanbuild, clang-9-clangtidy]
+    if: github.ref == 'master'
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: cmake build
+      uses: ./.github/actions/cmake-build
+      with:
+        install_deps: ./.github/actions/cmake-build/install-deps.sh
+        cmake_build_target: docs
+    - name: GitHub Pages Deploy
+      uses: ./.github/actions/publish-gh-pages
+      env:
+        BUILD_DIR: build/src/docs/
+        GH_PAT: ${{ secrets.GH_PAT }}
+        GH_PAGES_SUBDIR: ./doc
