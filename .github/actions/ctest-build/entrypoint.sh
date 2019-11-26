@@ -7,6 +7,9 @@ if [ "x$INPUT_INSTALL_DEPS" != 'x' ]; then
   apt-get clean -y
 fi
 
+echo "-------------------------------"
+echo $CMAKE_OPTIONS
+
 CTEST_OPTIONS="-DSCLOG_CTEST_CONFIGURATION_TYPE:STRING="
 if [ "x$INPUT_CTEST_CONFIGURATION_TYPE" == 'x' ]; then
 	INPUT_CTEST_CONFIGURATION_TYPE="Debug"
