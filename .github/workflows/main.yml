@@ -170,8 +170,8 @@ jobs:
         install_deps: ./.github/actions/ctest-build/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/powerpc-linux-gcc-7.cmake
         ctest_configuration_type: Release
-		cmake_options: SCLOG_CMAKE_OPTIONS
-		#cmake_options: "SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF"
+        cmake_options: SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF
+#cmake_options: "SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF"
 
   doxygen:
     name: generate doxygen doumentation
