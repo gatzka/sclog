@@ -51,10 +51,10 @@ add_library(${PROJECT_NAME}
     "sclog_stderr_sink.c"
     "sclog_version.c"
 )
-if(IS_POSIX)
+if(SCLOG_CONFIG_POSIX)
     target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:POSIX_OBJECTS>)
 endif()
-if(IS_LINUX)
+if(SCLOG_CONFIG_LINUX)
     target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:LINUX_OBJECTS>)
 endif()
 

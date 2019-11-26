@@ -76,9 +76,11 @@ set(CMAKE_MODULE_LINKER_FLAGS_COVERAGE "${CMAKE_MODULE_LINKER_FLAGS_DEBUG} ${COV
 
 include(CTest)
 
+option(SCLOG_EXAMPLES "build examples" ON)
+
 add_subdirectory(src)
 add_subdirectory(tests)
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux" AND SCLOG_EXAMPLES)
   add_subdirectory(examples)
 endif()
 
