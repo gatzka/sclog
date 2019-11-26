@@ -8,7 +8,7 @@ if [ "x$INPUT_INSTALL_DEPS" != 'x' ]; then
 fi
 
 echo "-------------------------------"
-echo $CMAKE_OPTIONS
+echo $INPUT_CMAKE_OPTIONS
 
 CTEST_OPTIONS="-DSCLOG_CTEST_CONFIGURATION_TYPE:STRING="
 if [ "x$INPUT_CTEST_CONFIGURATION_TYPE" == 'x' ]; then
