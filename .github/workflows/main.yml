@@ -157,8 +157,8 @@ jobs:
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_analyzer: clang-tidy-9
 
-  gcc-powerpc-7:
-    name: powerpc-gcc-7 Release
+  gcc-7-arm:
+    name: arm--gcc-7 Release
     runs-on: ubuntu-latest
 
     steps:
@@ -168,10 +168,9 @@ jobs:
       uses: ./.github/actions/ctest-build
       with:
         install_deps: ./.github/actions/ctest-build/install-deps.sh
-        ctest_toolchain_file: /tmp/sclog/toolchains/powerpc-linux-gcc-7.cmake
+        ctest_toolchain_file: /tmp/sclog/toolchains/arm-linux-gnueabihf-gcc-7.cmake
         ctest_configuration_type: Release
         cmake_options: SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF
-#cmake_options: "SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF"
 
   doxygen:
     name: generate doxygen doumentation
