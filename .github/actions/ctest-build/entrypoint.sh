@@ -7,7 +7,6 @@ if [ "x$INPUT_INSTALL_DEPS" != 'x' ]; then
   apt-get clean -y
 fi
 
-echo "-------------------------------"
 echo $INPUT_CMAKE_OPTIONS
 
 CTEST_OPTIONS="-DSCLOG_CTEST_CONFIGURATION_TYPE:STRING="
@@ -22,6 +21,10 @@ fi
 
 if [ "x$INPUT_CTEST_ANALYZER" != 'x' ]; then
 	CTEST_OPTIONS+=" -DSCLOG_CTEST_ANALYZER:STRING="${INPUT_CTEST_ANALYZER}
+fi
+
+if [ "x$INPUT_CMAKE_OPTIONS" != 'x' ]; then
+	CTEST_OPTIONS+=" -D"${INPUT_CMAKE_OPTIONS}
 fi
 
 ctest -VV -S build.cmake ${CTEST_OPTIONS}
