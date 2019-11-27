@@ -158,7 +158,7 @@ jobs:
         ctest_analyzer: clang-tidy-9
 
   gcc-7-arm:
-    name: armi gcc-7 Release
+    name: arm gcc-7 Release
     runs-on: ubuntu-latest
 
     steps:
