@@ -10,6 +10,7 @@
 # -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Debug|Release|MemorySanitizer|AddressSanitizer|LeakSanitizer|UndefinedBehaviorSanitizer|Valgrind|Coverage
 # -DSCLOG_CTEST_MODEL:STRING=Experimental|Nightly|Continuous
 # -DSCLOG_CTEST_DOCUMENTATION:BOOL=OFF|ON
+# -DSCLOG_CTEST_BINARY_DIRECTORY:STRING=<path/to/builddir>
 # -DSCLOG_CTEST_ANALYZER:STRING=scan-build-<version-number>|clang-tidy-<version-number>
 
 set(CTEST_USE_LAUNCHERS 1)
@@ -31,6 +32,12 @@ endif()
 
 if(NOT DEFINED SCLOG_CTEST_DOCUMENTATION)
   set(SCLOG_CTEST_DOCUMENTATION OFF)
+endif()
+
+if(NOT DEFINED SCLOG_CTEST_BINARY_DIRECTORY)
+  set(CTEST_BINARY_DIRECTORY "/tmp/sclog/")
+else()
+	set(CTEST_BINARY_DIRECTORY ${SCLOG_CTEST_BINARY_DIRECTORY})
 endif()
 
 set(CTEST_SOURCE_DIRECTORY "${CTEST_SCRIPT_DIRECTORY}")
