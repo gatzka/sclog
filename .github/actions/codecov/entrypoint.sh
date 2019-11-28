@@ -5,8 +5,7 @@ echo $INPUT_TOKEN
 echo $INPUT_PATH
 
 apt-get install -y curl
-ls -l *
-ls -l build
 
+find ./build/ -name *.gcda
 bash <(curl -s https://codecov.io/bash) -t $INPUT_TOKEN -s $INPUT_PATH
 
