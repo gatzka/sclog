@@ -1,0 +1,32 @@
+name: 'Codecov'
+description: 'GitHub Action that uploads coverage reports for your repository to codecov.io'
+author: 'Ibrahim Ali <@ibrahim0814> | Codecov'
+inputs: 
+  name:
+    description: 'User defined upload name. Visible in Codecov UI'
+    required: false 
+  token:
+    description: 'Repository upload token - get it from codecov.io'
+    required: true 
+  path:
+    description: 'Path to coverage file to upload'
+    required: true
+  flags:
+    description: 'Flag upload to group coverage metrics (e.g. unittests | integration | ui,chrome)'
+    required: false
+  yml:
+    description: 'Specify the location of the .codecov.yml config file'
+    required: false
+branding:
+  color: 'red' 
+  icon: 'umbrella'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.name}}
+    - ${{ inputs.token}}
+    - ${{ inputs.flags}}
+    - ${{ inputs.path}}
+    - ${{ inputs.yml}}
+

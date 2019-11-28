@@ -27,3 +27,4 @@ cd build
 cmake .. ${CMAKE_OPTIONS}
 cmake --build . ${CMAKE_BUILD_TARGET}
 
+ls -l

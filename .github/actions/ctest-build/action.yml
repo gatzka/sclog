@@ -11,6 +11,9 @@ inputs:
   ctest_configuration_type:
     description: 'ctest configuration type like Debug|Release'
     required: false 
+  ctest_binary_directory:
+    description: 'ctest build directory'
+    required: false 
   ctest_analyzer:
     description: 'ctest analyzer like clang-tidy or scan-build'
     required: false 
@@ -21,5 +24,6 @@ runs:
     - ${{ inputs.install_deps}}
     - ${{ inputs.ctest_toolchain_file}}
     - ${{ inputs.ctest_configuration_type}}
+    - ${{ inputs.ctest_binary_directory}}
     - ${{ inputs.ctest_analyzer}}
 

@@ -172,6 +172,27 @@ jobs:
         ctest_configuration_type: Release
         cmake_options: SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF
 
+  gcc-9-coverage:
+    name: x86 code coverage
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      uses: ./.github/actions/ctest-build
+      with:
+        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        ctest_toolchain_file: build/toolchains/x86-linux-gcc-7.cmake
+        ctest_configuration_type: Coverage
+        ctest_binary_directory: build
+    - name: coverage upload
+      uses: ./.github/actions/codecov
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        path: build
+        flags: unittests
+
   doxygen:
     name: generate doxygen doumentation
     runs-on: ubuntu-latest
