@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM gatzka/gh-c-ci:latest
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
