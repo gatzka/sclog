@@ -183,7 +183,7 @@ jobs:
       uses: ./.github/actions/ctest-build
       with:
         install_deps: ./.github/actions/ctest-build/install-deps.sh
-        ctest_toolchain_file: build/toolchains/x86-linux-gcc-8.cmake
+        ctest_toolchain_file: build/toolchains/x86-linux-gcc-7.cmake
         ctest_configuration_type: Coverage
         ctest_binary_directory: build
     - name: coverage upload
