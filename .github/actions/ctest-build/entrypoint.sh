@@ -32,4 +32,4 @@ if [ "x$INPUT_CMAKE_OPTIONS" != 'x' ]; then
 fi
 
 ctest -VV -S build.cmake ${CTEST_OPTIONS}
-
+ls -l
