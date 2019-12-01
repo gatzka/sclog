@@ -22,6 +22,6 @@ mkdir build
 cd build
 cov-build
 
-cmake .. ${CMAKE_OPTIONS}
-cmake --build . ${CMAKE_BUILD_TARGET}
+cmake -GNinja .. ${CMAKE_OPTIONS}
+cov-build --dir cov-int cmake --build .
 
