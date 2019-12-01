@@ -14,6 +14,12 @@ inputs:
   coverity_email:
     description: 'coverity account email'
     required: true 
+  coverity_version:
+    description: 'coverity build version'
+    required: true 
+  coverity_description:
+    description: 'coverity build description'
+    required: true 
   install_deps:
     description: 'User defined script to install build dependencies in ubuntu'
     required: false 

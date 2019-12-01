@@ -231,4 +231,6 @@ jobs:
         coverity_account: gatzka
         coverity_project: sclog
         coverity_email: stephan.gatzka@gmail.com
+        coverity_version: ${{ github.sha }}
+        coverity_description: "Build submitted by github action"
 

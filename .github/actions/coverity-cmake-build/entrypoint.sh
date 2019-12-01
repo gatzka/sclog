@@ -23,5 +23,5 @@ cd build
 cmake -GNinja .. ${CMAKE_OPTIONS}
 cov-build --dir cov-int cmake --build .
 tar czvf ${INPUT_COVERITY_PROJECT}.tgz cov-int
-curl --form token=${INPUT_COVERITY_TOKEN} --form email=${INPUT_COVERITY_EMAIL} --form file=@${INPUT_COVERITY_PROJECT}.tgz --form description="Build submitted by github action" https://scan.coverity.com/builds?project=${INPUT_COVERITY_ACCOUNT}%2F${INPUT_COVERITY_PROJECT}
+curl --form token=${INPUT_COVERITY_TOKEN} --form email=${INPUT_COVERITY_EMAIL} --form file=@${INPUT_COVERITY_PROJECT}.tgz --form version=${INPUT_COVERITY_VERSION} --form description=${INPUT_COVERITY_DESCRIPTION} https://scan.coverity.com/builds?project=${INPUT_COVERITY_ACCOUNT}%2F${INPUT_COVERITY_PROJECT}
 
