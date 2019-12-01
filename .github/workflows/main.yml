@@ -222,7 +222,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: cmake build
+    - name: coverity cmake build
       uses: ./.github/actions/coverity-cmake-build
       with:
         install_deps: ./.github/actions/coverity-cmake-build/install-deps.sh
