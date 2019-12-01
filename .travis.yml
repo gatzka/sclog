@@ -42,18 +42,6 @@ matrix:
     compiler: gcc
     env:
     - MATRIX_EVAL="-DSCLOG_CTEST_TOOLCHAIN_FILE:STRING=/tmp/sclog/toolchains/x86-linux-gcc-8.cmake -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Coverage"
-    - BUILD_WITH_COVERAGE_INFO=1
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - cmake
-        - cmake-data
-        - gcc-8
-        - g++-8
-        - ninja-build
-        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -81,11 +69,6 @@ install:
 script:
 - if [ "$COVERITY_SCAN_BRANCH" != 1 ]; then
     ctest -VV -S build.cmake ${MATRIX_EVAL};
-  fi
-
-after_success:
-- if [ -n "${BUILD_WITH_COVERAGE_INFO}" ]; then
-    bash <(curl -s https://codecov.io/bash) -s /tmp/sclog/ || echo "Codecov did not collect coverage reports";
   fi
 
 env:
