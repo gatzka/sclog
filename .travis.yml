@@ -40,11 +40,6 @@ matrix:
 
   - os: linux
     compiler: gcc
-    env:
-    - MATRIX_EVAL="-DSCLOG_CTEST_TOOLCHAIN_FILE:STRING=/tmp/sclog/toolchains/x86-linux-gcc-8.cmake -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Coverage"
-
-  - os: linux
-    compiler: gcc
     script:
     - cmake -DCMAKE_C_COMPILER:STRING=gcc -DCMAKE_CXX_COMPILER:STRING=g++ -DCMAKE_BUILD_TYPE:STRING=Debug ./
     - build-wrapper-linux-x86-64 --out-dir bw-output make
