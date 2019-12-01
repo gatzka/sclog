@@ -13,7 +13,7 @@ if [ "x$INPUT_CMAKE_BUILD_TYPE" == 'x' ]; then
 fi
 CMAKE_OPTIONS+=${INPUT_CMAKE_BUILD_TYPE}
 
-wget --quiet https://scan.coverity.com/download/linux64 --post-data "token=${INPUT_COVERITY_TOKEN}&project=gatzka%2Fsclog" -O coverity_tool.tgz
+wget --quiet https://scan.coverity.com/download/linux64 --post-data "token=${INPUT_COVERITY_TOKEN}&project=${INPUT_COVERITY_ACCOUNT}%2F${INPUT_COVERITY_PROJECT}" -O coverity_tool.tgz
 tar -xf coverity_tool.tgz
 cd cov-analysis-linux64*
 export PATH=$PATH:`pwd`/bin
@@ -22,6 +22,6 @@ mkdir build
 cd build
 cmake -GNinja .. ${CMAKE_OPTIONS}
 cov-build --dir cov-int cmake --build .
-tar czvf sclog.tgz cov-int
-curl --form token=${INPUT_COVERITY_TOKEN} --form email=stephan.gatzka@gmail.com --form file=@sclog.tgz --form description="Build submitted by github action" https://scan.coverity.com/builds?project=gatzka%2Fsclog
+tar czvf ${INPUT_COVERITY_PROJECT}.tgz cov-int
+curl --form token=${INPUT_COVERITY_TOKEN} --form email=${INPUT_COVERITY_EMAIL} --form file=@${INPUT_COVERITY_PROJECT}.tgz --form description="Build submitted by github action" https://scan.coverity.com/builds?project=${INPUT_COVERITY_ACCOUNT}%2F${INPUT_COVERITY_PROJECT}
 

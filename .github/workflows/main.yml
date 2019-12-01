@@ -228,4 +228,7 @@ jobs:
         install_deps: ./.github/actions/coverity-cmake-build/install-deps.sh
         cmake_build_type: Debug
         coverity_token: ${{ secrets.COVERITY_TOKEN }}
+        coverity_account: gatzka
+        coverity_project: sclog
+        coverity_email: stephan.gatzka@gmail.com
 
