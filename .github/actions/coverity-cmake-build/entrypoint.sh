@@ -26,6 +26,7 @@ tar czvf sclog.tgz cov-int
 curl \ 
   --form token=${INPUT_COVERITY_TOKEN} \
   --form email=stephan.gatzka@gmail.com \
-  --form file=sclog.tgz \
+  --form file=@sclog.tgz \
   --form description="Build submitted by github action" \
   https://scan.coverity.com/builds?project=gatzka%2Fsclog
+
