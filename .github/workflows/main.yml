@@ -214,3 +214,18 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
         GH_PAGES_SUBDIR: ./doc
 
+  coverity:
+    name: coverity scan build
+    runs-on: ubuntu-latest
+    if: contains(github.ref, 'coverity_scan')
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: cmake build
+      uses: ./.github/actions/coverity-cmake-build
+      with:
+        install_deps: ./.github/actions/coverity-cmake-build/install-deps.sh
+        cmake_build_type: Debug
+        coverity_token: ${{ secrets.COVERITY_TOKEN }}
+
