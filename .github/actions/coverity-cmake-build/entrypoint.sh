@@ -20,8 +20,6 @@ export PATH=$PATH:`pwd`/bin
 cd ..
 mkdir build
 cd build
-cov-build
-
 cmake -GNinja .. ${CMAKE_OPTIONS}
 cov-build --dir cov-int cmake --build .
 
