@@ -13,7 +13,7 @@ if [ "x$INPUT_CMAKE_BUILD_TYPE" == 'x' ]; then
 fi
 CMAKE_OPTIONS+=${INPUT_CMAKE_BUILD_TYPE}
 
-https://scan.coverity.com/download/linux64 --post-data "token=${INPUT_COVERITY_TOKEN}&project=gatzka%2Fsclog" -O coverity_tool.tgz
+wget https://scan.coverity.com/download/linux64 --post-data "token=${INPUT_COVERITY_TOKEN}&project=gatzka%2Fsclog" -O coverity_tool.tgz
 mkdir build
 cd build
 
