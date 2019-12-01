@@ -12,31 +12,6 @@ git:
 matrix:
   include:
 
-# Coverity build, must be the first!
-  - os: linux
-    compiler: gcc
-    env:
-      - MATRIX_EVAL="-DSCLOG_CTEST_TOOLCHAIN_FILE:STRING=/tmp/sclog/toolchains/x86-linux-gcc-5.cmake -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Debug"
-    before_install:
-      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-    addons:
-      coverity_scan:
-        project:
-          name: "gatzka/sclog"
-          description: "Build submitted via Travis CI"
-        notification_email: stephan.gatzka@gmail.com
-        #build_script_url: https://raw.githubusercontent.com/gatzka/sclog/coverity_scan/.travisci_build_coverity_scan.sh
-        #build_command_prepend: "cov-configure --comptype gcc"
-        build_command: "cmake -DCMAKE_BUILD_TYPE:STRING=Debug ./ ; cmake --build ./"
-        branch_pattern: coverity_scan
-      apt:
-        packages:
-        - cmake
-        - curl
-        - ca-certificates
-        - cmake-data
-        - ninja-build
-        - libsystemd-dev
 
   - os: linux
     compiler: gcc
@@ -58,8 +33,6 @@ matrix:
         - cmake-data
         - libsystemd-dev
 
-install:
-- pip install --user gcovr
 
 script:
 - if [ "$COVERITY_SCAN_BRANCH" != 1 ]; then

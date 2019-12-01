@@ -1,0 +1,39 @@
+name: 'cmake build'
+description: 'GitHub Action for coverity scan builds done by cmake'
+author: 'Stephan Gatzka <@gatzka>'
+inputs: 
+  coverity_token:
+    description: 'coverity access token'
+    required: true 
+  coverity_account:
+    description: 'coverity account name'
+    required: true 
+  coverity_project:
+    description: 'coverity project name'
+    required: true 
+  coverity_email:
+    description: 'coverity account email'
+    required: true 
+  coverity_version:
+    description: 'coverity build version'
+    required: true 
+  coverity_description:
+    description: 'coverity build description'
+    required: true 
+  install_deps:
+    description: 'User defined script to install build dependencies in ubuntu'
+    required: false 
+  cmake_build_type:
+    description: 'cmake build type like Debug|Release'
+    required: false 
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.coverity_token}}
+    - ${{ inputs.coverity_account}}
+    - ${{ inputs.coverity_project}}
+    - ${{ inputs.coverity_email}}
+    - ${{ inputs.install_deps}}
+    - ${{ inputs.cmake_build_type}}
+
