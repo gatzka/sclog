@@ -4,8 +4,7 @@ Copyright (c) 2019 Stephan Gatzka. See the [LICENSE](LICENSE) file for
 license rights and limitations (MIT).
 
 ## Build Status
-![](https://github.com/gatzka/sclog/workflows/CI%20build/badge.svg)
-[![Travis CI](https://travis-ci.org/gatzka/sclog.svg?branch=master)](https://travis-ci.org/gatzka/sclog)
+[![Github action](https://github.com/gatzka/sclog/workflows/CI%20build/badge.svg?branch=master)](https://github.com/gatzka/sclog/actions)
 [![Coverity](https://scan.coverity.com/projects/19467/badge.svg)](https://scan.coverity.com/projects/gatzka-sclog)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gatzka/sclog/master/LICENSE)
 [![codecov](https://codecov.io/gh/gatzka/sclog/branch/master/graph/badge.svg)](https://codecov.io/gh/gatzka/sclog)
