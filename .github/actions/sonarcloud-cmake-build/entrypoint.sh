@@ -16,9 +16,13 @@ CMAKE_OPTIONS+=${INPUT_CMAKE_BUILD_TYPE}
 wget --quiet http://sonarcloud.io/static/cpp/build-wrapper-linux-x86.zip
 unzip build-wrapper-linux-x86.zip
 export PATH=$PATH:`pwd`/build-wrapper-linux-x86/
+wget --quiet https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip
+unzip sonar-scanner-cli-4.2.0.1873-linux.zip
+export PATH=$PATH:`pwd`/sonar-scanner-4.2.0.1873-linux/bin/
+
 mkdir build
 cd build
 cmake .. ${CMAKE_OPTIONS}
 build-wrapper-linux-x86-64 --out-dir bw-output cmake --build .
-
+sonar-scanner
 
