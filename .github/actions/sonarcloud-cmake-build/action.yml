@@ -2,7 +2,7 @@ name: 'sonarcloud cmake build'
 description: 'GitHub Action for sonarcloud scan builds done by cmake'
 author: 'Stephan Gatzka <@gatzka>'
 inputs: 
-  sonarcloud_token:
+  sonar_token:
     description: 'sonarcloud access token'
     required: true 
   install_deps:
@@ -15,7 +15,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.sonarcloud_token}}
+    - ${{ inputs.sonar_token}}
     - ${{ inputs.install_deps}}
     - ${{ inputs.cmake_build_type}}
 

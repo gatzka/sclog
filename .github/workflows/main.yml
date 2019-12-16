@@ -214,7 +214,7 @@ jobs:
       uses: ./.github/actions/sonarcloud-cmake-build
       with:
         install_deps: ./.github/actions/sonarcloud-cmake-build/install-deps.sh
-        sonarcloud_token: ${{ secrets.SONARCLOUD_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         cmake_build_type: Debug
 
