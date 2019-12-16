@@ -3,6 +3,16 @@ name: CI build
 on: [push, pull_request]
 
 jobs:
+  windows-debug:
+    name: x86 windows Debug
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: ctest build
+      run: ctest -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Debug -S build.cmake
+
   gcc-9-debug:
     name: x86 gcc-9 Debug
     runs-on: ubuntu-latest
