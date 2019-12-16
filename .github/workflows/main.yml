@@ -203,6 +203,20 @@ jobs:
         path: build
         flags: unittests
 
+  sonarcloud:
+    name: sonarcloud scan build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: sonarcloud cmake build
+      uses: ./.github/actions/sonarcloud-cmake-build
+      with:
+        install_deps: ./.github/actions/sonarcloud-cmake-build/install-deps.sh
+        sonarcloud_token: ${{ secrets.SONARCLOUD_TOKEN }}
+        cmake_build_type: Debug
+
   doxygen:
     name: generate doxygen doumentation
     runs-on: ubuntu-latest
