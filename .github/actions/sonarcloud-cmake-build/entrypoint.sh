@@ -20,9 +20,7 @@ wget --quiet https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/son
 unzip sonar-scanner-cli-4.2.0.1873-linux.zip
 export PATH=$PATH:`pwd`/sonar-scanner-4.2.0.1873-linux/bin/
 
-mkdir build
-cd build
-cmake .. ${CMAKE_OPTIONS}
+cmake . ${CMAKE_OPTIONS}
 build-wrapper-linux-x86-64 --out-dir bw-output cmake --build .
 sonar-scanner
 
