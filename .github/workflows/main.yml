@@ -11,7 +11,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: ctest build
-      run: ctest -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Debug -S build.cmake
+      run: ctest -VV -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Debug -S build.cmake
 
   gcc-9-debug:
     name: x86 gcc-9 Debug
