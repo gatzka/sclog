@@ -7,6 +7,9 @@ if [ "x$INPUT_INSTALL_DEPS" != 'x' ]; then
   apt-get clean -y
 fi
 
+export GITHUB_TOKEN=${INPUT_GITHUB_TOKEN}
+export SONAR_TOKEN=${INPUT_SONAR_TOKEN}
+
 CMAKE_OPTIONS="-DCMAKE_BUILD_TYPE:STRING="
 if [ "x$INPUT_CMAKE_BUILD_TYPE" == 'x' ]; then
   INPUT_CMAKE_BUILD_TYPE="Debug"
