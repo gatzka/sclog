@@ -2,5 +2,5 @@
 set -ex
 
 apt-get update
-apt-get install -y libsystemd-dev unzip
+apt-get install -y libsystemd-dev
 
