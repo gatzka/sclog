@@ -233,7 +233,7 @@ jobs:
         install_deps: ./.github/workflows/install-deps.sh
         cmake_build_target: docs
     - name: GitHub Pages Deploy
-      uses: ./.github/actions/publish-gh-pages
+      uses: gatzka/publish-gh-pages-action@master
       env:
         BUILD_DIR: build/src/docs/
         GH_PAT: ${{ secrets.GH_PAT }}
