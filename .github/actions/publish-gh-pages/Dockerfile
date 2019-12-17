@@ -12,4 +12,6 @@ LABEL "com.github.actions.color"="blue"
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+RUN apk update && apk upgrade && apk add git
+
 ENTRYPOINT ["/entrypoint.sh"]
