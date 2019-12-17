@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       run: ctest -DSCLOG_CTEST_CMAKE_GENERATOR="Visual Studio 16 2019" -DSCLOG_CTEST_CONFIGURATION_TYPE:STRING=Debug -S build.cmake
 
@@ -19,7 +19,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -33,7 +33,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -47,7 +47,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -61,7 +61,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -75,7 +75,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -89,7 +89,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -103,7 +103,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -117,7 +117,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -131,7 +131,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -145,7 +145,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -159,7 +159,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -173,7 +173,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -188,7 +188,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: ctest build
       uses: ./.github/actions/ctest-build
       with:
@@ -209,7 +209,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: sonarcloud cmake build
       uses: ./.github/actions/sonarcloud-cmake-build
       with:
@@ -226,7 +226,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: cmake build
       uses: gatzka/cmake-build-action@master
       with:
@@ -246,7 +246,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: coverity cmake build
       uses: ./.github/actions/coverity-cmake-build
       with:
