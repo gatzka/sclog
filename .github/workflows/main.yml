@@ -21,9 +21,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-gcc-9.cmake
         ctest_configuration_type: Debug
 
@@ -35,9 +35,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-gcc-9.cmake
         ctest_configuration_type: Release
 
@@ -49,9 +49,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-gcc-9.cmake
         ctest_configuration_type: Valgrind
 
@@ -63,9 +63,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_configuration_type: Debug
 
@@ -77,9 +77,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_configuration_type: Release
 
@@ -91,9 +91,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_configuration_type: UndefinedBehaviorSanitizer
 
@@ -105,9 +105,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_configuration_type: LeakSanitizer
 
@@ -119,9 +119,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_configuration_type: MemorySanitizer
 
@@ -133,9 +133,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_configuration_type: AddressSanitizer
 
@@ -147,9 +147,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_analyzer: scan-build-9
 
@@ -161,9 +161,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/x86-linux-clang-9.cmake
         ctest_analyzer: clang-tidy-9
 
@@ -175,9 +175,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: /tmp/sclog/toolchains/arm-linux-gnueabihf-gcc-7.cmake
         ctest_configuration_type: Release
         cmake_options: SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF
@@ -190,9 +190,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: ctest build
-      uses: ./.github/actions/ctest-build
+      uses: gatzka/ctest-build-action@master
       with:
-        install_deps: ./.github/actions/ctest-build/install-deps.sh
+        install_deps: ./.github/workflows/install-deps.sh
         ctest_toolchain_file: build/toolchains/x86-linux-gcc-7.cmake
         ctest_configuration_type: Coverage
         ctest_binary_directory: build
