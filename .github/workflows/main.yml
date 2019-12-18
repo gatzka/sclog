@@ -197,7 +197,7 @@ jobs:
         ctest_configuration_type: Coverage
         ctest_binary_directory: build
     - name: coverage upload
-      uses: ./.github/actions/codecov
+      uses: gatzka/codecov-action@master
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         path: build
