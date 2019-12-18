@@ -248,7 +248,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: coverity cmake build
-      uses: ./.github/actions/coverity-cmake-build
       uses: gatzka/coverity-cmake-build-action@master
       with:
         install_deps: ./.github/workflows/install-deps.sh
