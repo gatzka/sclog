@@ -12,6 +12,7 @@
 # -DSCLOG_CTEST_DOCUMENTATION:BOOL=OFF|ON
 # -DSCLOG_CTEST_BINARY_DIRECTORY:STRING=<path/to/builddir>
 # -DSCLOG_CTEST_ANALYZER:STRING=scan-build-<version-number>|clang-tidy-<version-number>
+# -DSCLOG_CTEST_CMAKE_GENERATOR:STRING=Ninja|Unix Makefiles|...)
 
 set(CTEST_USE_LAUNCHERS 1)
 
