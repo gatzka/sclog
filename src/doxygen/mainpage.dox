@@ -12,6 +12,6 @@ see that in the
 <a href="https://github.com/gatzka/sclog/tree/master/examples">examples</a>.
 
 sclog is thread safe for the platform independent code. It's not
-necessarily for avery implemented log sink.
+necessarily for every implemented log sink.
 
 */
