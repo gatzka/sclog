@@ -71,10 +71,9 @@ static int rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 	if (rot_files > 0) {
 		snprintf(name_buffer, sizeof(name_buffer), "%s.%d", fr_sink->log_file_name, fr_sink->number_of_files - 1);
 		int ret = remove(name_buffer);
-		// Deliberately ignore return value of revmove().
-		// There is nothing specific we can do if an error happens
-		// and logging is a best effort service anyhow.
-		(void)ret;
+		if (ret < 0) {
+			return -1;
+		}
 	}
 
 	for (unsigned int i = rot_files; i > 1; i--) {
@@ -82,19 +81,18 @@ static int rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 		snprintf(name_buffer_to, sizeof(name_buffer_to), "%s.%d", fr_sink->log_file_name, i);
 		snprintf(name_buffer, sizeof(name_buffer), "%s.%d", fr_sink->log_file_name, i - 1);
 		int ret = rename(name_buffer, name_buffer_to);
-		// Deliberately ignore return value of rename().
-		// There is nothing specific we can do if an error happens
-		// and logging is a best effort service anyhow.
-		(void)ret;
+		if (ret < 0) {
+			return -1;
+		}
 	}
 
 	fclose(fr_sink->fp);
+	fr_sink->current_file_size = 0;
 	if (rot_files > 0) {
 		int ret = rename(fr_sink->log_file_name, name_buffer);
-		// Deliberately ignore return value of rename().
-		// There is nothing specific we can do if an error happens
-		// and logging is a best effort service anyhow.
-		(void)ret;
+		if (ret < 0) {
+			return -1;
+		}
 	}
 
 	fr_sink->fp = fopen(fr_sink->log_file_name, "ae");
@@ -102,7 +100,6 @@ static int rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 		return -1;
 	}
 
-	fr_sink->current_file_size = 0;
 	return 0;
 }
 
