@@ -66,20 +66,65 @@ int main(void)
 		return EXIT_FAILURE;
 	}
 
-	sc_log_message(&syslog_log, SC_LOG_ERROR, "Hello error!");
-	sc_log_message(&syslog_log, SC_LOG_WARNING, "Hello warning!");
-	sc_log_message(&syslog_log, SC_LOG_INFO, "Hello info!");
-	sc_log_message(&syslog_log, SC_LOG_DEBUG, "Hello debug!");
+	int ret = sc_log_message(&syslog_log, SC_LOG_ERROR, "Hello error!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
 
-	sc_log_message(&stderr_log, SC_LOG_ERROR, "Hello error!");
-	sc_log_message(&stderr_log, SC_LOG_WARNING, "Hello warning!");
-	sc_log_message(&stderr_log, SC_LOG_INFO, "Hello info!");
-	sc_log_message(&stderr_log, SC_LOG_DEBUG, "Hello debug!");
+	ret = sc_log_message(&syslog_log, SC_LOG_WARNING, "Hello warning!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
 
-	sc_log_message(&systemd_log, SC_LOG_ERROR, "Hello error!");
-	sc_log_message(&systemd_log, SC_LOG_WARNING, "Hello warning!");
-	sc_log_message(&systemd_log, SC_LOG_INFO, "Hello info!");
-	sc_log_message(&systemd_log, SC_LOG_DEBUG, "Hello debug!");
+	ret = sc_log_message(&syslog_log, SC_LOG_INFO, "Hello info!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&syslog_log, SC_LOG_DEBUG, "Hello debug!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&stderr_log, SC_LOG_ERROR, "Hello error!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&stderr_log, SC_LOG_WARNING, "Hello warning!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&stderr_log, SC_LOG_INFO, "Hello info!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&stderr_log, SC_LOG_DEBUG, "Hello debug!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&systemd_log, SC_LOG_ERROR, "Hello error!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&systemd_log, SC_LOG_WARNING, "Hello warning!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&systemd_log, SC_LOG_INFO, "Hello info!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
+
+	ret = sc_log_message(&systemd_log, SC_LOG_DEBUG, "Hello debug!");
+	if (ret < 0) {
+		return EXIT_FAILURE;
+	}
 
 	sc_log_close(&syslog_log);
 	sc_log_close(&stderr_log);
