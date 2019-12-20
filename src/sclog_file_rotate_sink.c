@@ -37,7 +37,7 @@
 
 static struct sc_log_file_rotate_sink *get_rotate_sink(void *context)
 {
-	struct sc_log *log = (struct sc_log *)context;
+	const struct sc_log *log = (const struct sc_log *)context;
 	struct sc_log_sink *sink = log->sink;
 	return sc_log_container_of(sink, struct sc_log_file_rotate_sink, sink);
 }
