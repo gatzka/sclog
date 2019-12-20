@@ -59,7 +59,9 @@ static int init(void *context)
 static void close(void *context)
 {
 	const struct sc_log_file_rotate_sink *fr_sink = get_rotate_sink(context);
-	fclose(fr_sink->fp);
+	if (fr_sink->fp != NULL) {
+		fclose(fr_sink->fp);
+	}
 }
 
 static int rotate_files(struct sc_log_file_rotate_sink *fr_sink)
