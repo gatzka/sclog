@@ -53,16 +53,17 @@ void sc_log_close(struct sc_log *log)
 
 // clang-format off
 __attribute__((format(printf, 3, 4)))
-void sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...)
+int sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...)
 // clang-format on
 {
 	if ((level == SC_LOG_NONE) || (level > log->guard_level)) {
-		return;
+		return -1;
 	}
 
 	va_list args;
 	va_start(args, format);
 	vsnprintf(log->log_buffer, sizeof(log->log_buffer), format, args);
-	log->sink->log_message(log->sink->context, level, log->application, log->log_buffer);
 	va_end(args);
+
+	return log->sink->log_message(log->sink->context, level, log->application, log->log_buffer);
 }

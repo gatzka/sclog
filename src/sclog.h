@@ -48,7 +48,7 @@ enum sc_log_level {
 struct sc_log_sink {
 	int (*init)(void *context);
 	void (*close)(void *context);
-	void (*log_message)(void *context, enum sc_log_level, const char *application, const char *message);
+	int (*log_message)(void *context, enum sc_log_level, const char *application, const char *message);
 	void *context;
 };
 
@@ -61,7 +61,7 @@ struct sc_log {
 
 SCLOG_EXPORT int sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink);
 SCLOG_EXPORT void sc_log_close(struct sc_log *log);
-SCLOG_EXPORT void sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...);
+SCLOG_EXPORT int sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...);
 
 #ifdef __cplusplus
 }

@@ -32,7 +32,7 @@
 
 int sc_log_gmtime(const time_t *time_p, struct tm *result)
 {
-	struct tm *ret = gmtime_r(time_p, result);
+	const struct tm *ret = gmtime_r(time_p, result);
 	if (ret == NULL) {
 		return -1;
 	}

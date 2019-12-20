@@ -78,7 +78,7 @@ long sc_log_log_get_log_message_length(const char *application, const char *mess
 	return (long)(MAX_TIME_STRING_LENGTH + strlen(application) + strlen("UNKNOWN") + strlen(message) + EXTRA_LOG_CHARACTERS);
 }
 
-void sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *application, const char *message)
+int sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *application, const char *message)
 {
 	char timestamp_buffer[MAX_TIME_STRING_LENGTH];
 
@@ -86,7 +86,12 @@ void sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *a
 
 	get_time(timestamp_buffer, sizeof(timestamp_buffer));
 
-	fprintf(fp, "%s %s: %s: %s\n", timestamp_buffer, application, level_string, message);
+	int ret = fprintf(fp, "%s %s: %s: %s\n", timestamp_buffer, application, level_string, message);
+	if (ret < 0) {
+		return -1;
+	}
+
 	fflush(fp);
+	return 0;
 }
 

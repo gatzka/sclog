@@ -37,7 +37,7 @@
 
 static struct sc_log_file_rotate_sink *get_rotate_sink(void *context)
 {
-	struct sc_log *log = (struct sc_log *)context;
+	const struct sc_log *log = (const struct sc_log *)context;
 	struct sc_log_sink *sink = log->sink;
 	return sc_log_container_of(sink, struct sc_log_file_rotate_sink, sink);
 }
@@ -58,11 +58,11 @@ static int init(void *context)
 
 static void close(void *context)
 {
-	struct sc_log_file_rotate_sink *fr_sink = get_rotate_sink(context);
+	const struct sc_log_file_rotate_sink *fr_sink = get_rotate_sink(context);
 	fclose(fr_sink->fp);
 }
 
-static void rotate_files(struct sc_log_file_rotate_sink *fr_sink)
+static int rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 {
 	unsigned int rot_files = fr_sink->number_of_files - 1;
 	char name_buffer[FILENAME_BUFFER_SIZE];
@@ -96,19 +96,32 @@ static void rotate_files(struct sc_log_file_rotate_sink *fr_sink)
 	}
 
 	fr_sink->fp = fopen(fr_sink->log_file_name, "ae");
+	if (fr_sink->fp == NULL) {
+		return -1;
+	}
+
 	fr_sink->current_file_size = 0;
+	return 0;
 }
 
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
+static int log_message(void *context, enum sc_log_level level, const char *application, const char *message)
 {
 	struct sc_log_file_rotate_sink *fr_sink = get_rotate_sink(context);
 	long message_length = sc_log_log_get_log_message_length(application, message);
 	if (fr_sink->current_file_size + message_length > fr_sink->single_file_size) {
-		rotate_files(fr_sink);
+		int ret = rotate_files(fr_sink);
+		if (ret < 0) {
+			return -1;
+		}
 	}
 
-	sc_log_log_message_to_file(fr_sink->fp, level, application, message);
+	int ret = sc_log_log_message_to_file(fr_sink->fp, level, application, message);
+	if (ret < 0) {
+		return -1;
+	}
+
 	fr_sink->current_file_size = ftell(fr_sink->fp);
+	return 0;
 }
 
 int sc_log_file_rotate_sink_init(struct sc_log_file_rotate_sink *fr_sink, struct sc_log *log)

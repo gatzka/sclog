@@ -37,7 +37,7 @@
 extern "C" {
 #endif
 
-void sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *application, const char *message);
+int sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *application, const char *message);
 long sc_log_log_get_log_message_length(const char *application, const char *message);
 
 #ifdef __cplusplus

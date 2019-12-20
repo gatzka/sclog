@@ -46,10 +46,10 @@ static void close(void *context)
 }
 
 
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
+static int log_message(void *context, enum sc_log_level level, const char *application, const char *message)
 {
 	(void)context;
-	sc_log_log_message_to_file(stderr, level, application, message);
+	return sc_log_log_message_to_file(stderr, level, application, message);
 }
 
 int sc_log_stderr_sink_init(struct sc_log_sink *sink)

@@ -44,12 +44,14 @@ static void close(void *context)
 	(void)context;
 }
 
-static void log_message(void *context, enum sc_log_level level, const char *application, const char *message)
+static int log_message(void *context, enum sc_log_level level, const char *application, const char *message)
 {
 	(void)context;
 	(void)application;
 
 	sd_journal_print(sc_log_get_syslog_priority(level), "%s", message);
+
+	return 0;
 }
 
 int sc_log_systemd_sink_init(struct sc_log_sink *sink)
