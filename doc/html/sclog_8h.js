@@ -12,5 +12,5 @@ var sclog_8h =
     ] ],
     [ "sc_log_close", "sclog_8h.html#a5aab25bee59d4d1835f2da89f6089bc8", null ],
     [ "sc_log_init", "sclog_8h.html#afdacc21b16dd6614f06a95885bcf3e31", null ],
-    [ "sc_log_message", "sclog_8h.html#ab00962e4ede259d76cb132e4b7461844", null ]
+    [ "sc_log_message", "sclog_8h.html#a3015fa8182971037b6da46d47fb936ae", null ]
 ];
