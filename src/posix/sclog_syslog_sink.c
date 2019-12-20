@@ -35,7 +35,7 @@
 
 static int init(void *context)
 {
-	struct sc_log *log = (struct sc_log *)context;
+	const struct sc_log *log = (struct sc_log *)context;
 	openlog(log->application, 0, LOG_USER);
 	return 0;
 }
