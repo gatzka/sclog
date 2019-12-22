@@ -32,12 +32,12 @@ add_custom_target(generate_semver
 
 include(CMakeDependentOption)
 
-SET(IS_POSIX OFF)
-SET(IS_LINUX OFF)
+set(IS_POSIX OFF)
+set(IS_LINUX OFF)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    SET(IS_POSIX ON)
-    SET(IS_LINUX ON)
+    set(IS_POSIX ON)
+    set(IS_LINUX ON)
 endif()
 
 cmake_dependent_option(SCLOG_CONFIG_POSIX "Add POSIX conformant logging support to the library" ON "IS_POSIX" OFF)
