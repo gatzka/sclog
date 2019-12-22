@@ -30,83 +30,21 @@
 #include <string.h>
 
 #include "linux/sclog_systemd_sink.h"
-#include "posix/sclog_syslog_sink.h"
 #include "sclog.h"
-#include "sclog_stderr_sink.h"
 
 int main(void)
 {
-	struct sc_log syslog_log;
-	struct sc_log_sink syslog_sink;
-	if (sc_log_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
-		return EXIT_FAILURE;
-	}
-
-	if (sc_log_init(&syslog_log, "syslog_log_example", SC_LOG_WARNING, &syslog_sink) != 0) {
-		return EXIT_FAILURE;
-	}
-
 	struct sc_log systemd_log;
 	struct sc_log_sink systemd_sink;
 	if (sc_log_systemd_sink_init(&systemd_sink) != 0) {
-		goto err_systemd_sink_init;
+		return EXIT_FAILURE;
 	}
 
-	if (sc_log_init(&systemd_log, "syslog_log_example", SC_LOG_WARNING, &systemd_sink) != 0) {
-		goto err_systemd_sink_init;
+	if (sc_log_init(&systemd_log, "systemd_log_example", SC_LOG_WARNING, &systemd_sink) != 0) {
+		return EXIT_FAILURE;
 	}
 
-	struct sc_log stderr_log;
-	struct sc_log_sink stderr_sink;
-	if (sc_log_stderr_sink_init(&stderr_sink) != 0) {
-		goto err_stderr_sink_init;
-	}
-
-	if (sc_log_init(&stderr_log, "stderr_log_example", SC_LOG_WARNING, &stderr_sink) != 0) {
-		goto err_stderr_sink_init;
-	}
-
-	int ret = sc_log_message(&syslog_log, SC_LOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sc_log_message(&syslog_log, SC_LOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sc_log_message(&syslog_log, SC_LOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sc_log_message(&syslog_log, SC_LOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sc_log_message(&stderr_log, SC_LOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sc_log_message(&stderr_log, SC_LOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sc_log_message(&stderr_log, SC_LOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sc_log_message(&stderr_log, SC_LOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sc_log_message(&systemd_log, SC_LOG_ERROR, "Hello error!");
+	int ret = sc_log_message(&systemd_log, SC_LOG_ERROR, "Hello error!");
 	if (ret < 0) {
 		goto err;
 	}
@@ -126,17 +64,10 @@ int main(void)
 		goto err;
 	}
 
-	sc_log_close(&stderr_log);
 	sc_log_close(&systemd_log);
-	sc_log_close(&syslog_log);
-
 	return EXIT_SUCCESS;
 
 err:
-	sc_log_close(&stderr_log);
-err_stderr_sink_init:
 	sc_log_close(&systemd_log);
-err_systemd_sink_init:
-	sc_log_close(&syslog_log);
 	return EXIT_FAILURE;
 }
