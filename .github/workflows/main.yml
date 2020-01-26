@@ -182,6 +182,21 @@ jobs:
         ctest_configuration_type: Release
         cmake_options: SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF
 
+  gcc-7-aarch64:
+    name: aarch64 gcc-7 Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: ctest build
+      uses: gatzka/ctest-build-action@v1.1.0
+      with:
+        install_deps: ./.github/workflows/install-deps.sh
+        ctest_toolchain_file: /tmp/sclog/toolchains/aarch64-linux-gnu-gcc-7.cmake
+        ctest_configuration_type: Release
+        cmake_options: SCLOG_CMAKE_OPTIONS:LIST=SCLOG_EXAMPLES=OFF;SCLOG_CONFIG_LINUX=OFF
+
   gcc-9-coverage:
     name: x86 code coverage
     runs-on: ubuntu-latest
