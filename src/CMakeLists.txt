@@ -52,16 +52,14 @@ add_library(${PROJECT_NAME}
 if(SCLOG_CONFIG_POSIX)
     target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:POSIX_OBJECTS>)
 endif()
-if(SCLOG_CONFIG_LINUX)
-    target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:LINUX_OBJECTS>)
-endif()
 
 if(${SCLOG_CONFIG_POSIX})
     include(posix/CMakeLists.txt)
 endif()
 
 if(${SCLOG_CONFIG_LINUX})
-    include(linux/CMakeLists.txt)
+    add_subdirectory(linux)
+	target_link_libraries(${PROJECT_NAME} PUBLIC SCLOG_LINUX)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
@@ -102,12 +100,14 @@ set_property(TARGET ${PROJECT_NAME}
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME} EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}_export.h)
 
-install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
+install(TARGETS ${PROJECT_NAME} SCLOG_LINUX
+    EXPORT ${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     PUBLIC_HEADER DESTINATION include/sclog
 )
 
+include(CMakePackageConfigHelpers)
 write_basic_package_version_file("${PROJECT_NAME}ConfigVersion.cmake"
     VERSION ${${PROJECT_NAME}_VERSION}
     COMPATIBILITY SameMajorVersion
