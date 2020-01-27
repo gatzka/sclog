@@ -49,17 +49,15 @@ add_library(${PROJECT_NAME}
     "sclog_stderr_sink.c"
     "sclog_version.c"
 )
-if(SCLOG_CONFIG_POSIX)
-    target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:POSIX_OBJECTS>)
-endif()
 
 if(${SCLOG_CONFIG_POSIX})
-    include(posix/CMakeLists.txt)
+    add_subdirectory(posix)
+    target_link_libraries(${PROJECT_NAME} PUBLIC SCLOG_POSIX)
 endif()
 
 if(${SCLOG_CONFIG_LINUX})
     add_subdirectory(linux)
-	target_link_libraries(${PROJECT_NAME} PUBLIC SCLOG_LINUX)
+    target_link_libraries(${PROJECT_NAME} PUBLIC SCLOG_LINUX)
 endif()
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
@@ -100,7 +98,7 @@ set_property(TARGET ${PROJECT_NAME}
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME} EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}_export.h)
 
-install(TARGETS ${PROJECT_NAME} SCLOG_LINUX
+install(TARGETS ${PROJECT_NAME} SCLOG_LINUX SCLOG_POSIX
     EXPORT ${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
