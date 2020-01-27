@@ -16,8 +16,6 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/../.git")
     endif()
 endif()
 
-include(CMakePackageConfigHelpers)
-
 add_custom_target(generate_semver
     COMMAND ${CMAKE_COMMAND}
         -DPROJECT_NAME=${PROJECT_NAME}
