@@ -1,31 +1,34 @@
 cmake_minimum_required(VERSION 3.8)
+project(sclog_linux LANGUAGES C)
 
-include(FindPkgConfig)
-pkg_check_modules(SYSTEMD libsystemd REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(SYSTEMD REQUIRED libsystemd)
 
-add_library(LINUX_OBJECTS OBJECT 
-    linux/sclog_systemd_sink.c
+if(SYSTEMD_FOUND AND SYSTEMD_LINK_LIBRARIES)
+else()
+endif()
+
+add_library(SCLOG_LINUX OBJECT 
+    sclog_systemd_sink.c
 )
 
-target_link_libraries(${PROJECT_NAME} INTERFACE ${SYSTEMD_LIBRARIES})
-
-set_property(TARGET LINUX_OBJECTS APPEND
+set_property(TARGET SCLOG_LINUX APPEND
     PROPERTY PUBLIC_HEADER "linux/sclog_systemd_sink.h"
 )
 
-target_include_directories(LINUX_OBJECTS PUBLIC
+target_link_libraries(SCLOG_LINUX INTERFACE ${SYSTEMD_LIBRARIES})
+
+target_include_directories(SCLOG_LINUX PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>/../
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/generated/>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/../generated/>
     $<INSTALL_INTERFACE:include/sclog/linux>
 )
 
-install(TARGETS LINUX_OBJECTS EXPORT LINUX_OBJECTS
+install(TARGETS SCLOG_LINUX EXPORT SCLOG_LINUX
     PUBLIC_HEADER DESTINATION include/sclog/linux
 )
 
-target_compile_features(LINUX_OBJECTS PUBLIC $<$<NOT:$<C_COMPILER_ID:MSVC>>:c_std_11>)
-
-set_target_properties(LINUX_OBJECTS PROPERTIES
+set_target_properties(SCLOG_LINUX PROPERTIES
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
     C_VISIBILITY_PRESET hidden

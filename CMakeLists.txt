@@ -80,7 +80,7 @@ option(SCLOG_EXAMPLES "build examples" ON)
 
 add_subdirectory(src)
 add_subdirectory(tests)
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux" AND SCLOG_EXAMPLES)
+if(SCLOG_EXAMPLES)
   add_subdirectory(examples)
 endif()
 

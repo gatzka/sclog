@@ -28,19 +28,6 @@ add_custom_target(generate_semver
         -P ${CMAKE_CURRENT_SOURCE_DIR}/generate_version.cmake
 )
 
-include(CMakeDependentOption)
-
-set(IS_POSIX OFF)
-set(IS_LINUX OFF)
-
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    set(IS_POSIX ON)
-    set(IS_LINUX ON)
-endif()
-
-cmake_dependent_option(SCLOG_CONFIG_POSIX "Add POSIX conformant logging support to the library" ON "IS_POSIX" OFF)
-cmake_dependent_option(SCLOG_CONFIG_LINUX "Add Linux dependent support to the library" ON "IS_LINUX" OFF)
-
 add_library(${PROJECT_NAME}
     "sclog.c"
     "sclog_file_rotate_sink.c"
@@ -49,27 +36,46 @@ add_library(${PROJECT_NAME}
     "sclog_stderr_sink.c"
     "sclog_version.c"
 )
-if(SCLOG_CONFIG_POSIX)
-    target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:POSIX_OBJECTS>)
-endif()
-if(SCLOG_CONFIG_LINUX)
-    target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:LINUX_OBJECTS>)
-endif()
 
-if(${SCLOG_CONFIG_POSIX})
-    include(posix/CMakeLists.txt)
-endif()
+set(INSTALL_TARGET_LIST)
 
-if(${SCLOG_CONFIG_LINUX})
-    include(linux/CMakeLists.txt)
-endif()
+set(IS_LINUX OFF)
+set(IS_WINDOWS OFF)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    set(IS_LINUX ON)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+    set(IS_WINDOWS ON)
+endif()
+
+if(IS_LINUX)
+    find_library(SYSD_LIB systemd)
+    if(SYSD_LIB)
+        option(SCLOG_CONFIG_SYSTEMD "Add support for systemd log facility" ON)
+    endif()
+
+    option(SCLOG_CONFIG_SYSLOG "Add support for syslog log facility" ON)
+
+    if(SCLOG_CONFIG_SYSLOG)
+        add_subdirectory(posix)
+        target_link_libraries(${PROJECT_NAME} PUBLIC SCLOG_POSIX)
+        list(APPEND INSTALL_TARGET_LIST SCLOG_POSIX)
+    endif()
+
+    if(SCLOG_CONFIG_SYSTEMD)
+        add_subdirectory(linux)
+        target_link_libraries(${PROJECT_NAME} PUBLIC SCLOG_LINUX)
+        list(APPEND INSTALL_TARGET_LIST SCLOG_LINUX)
+    endif()
+endif()
+
+
+if(IS_LINUX)
     include(platform/linux/CMakeLists.txt)
     target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:LINUX_PLATFORM_OBJECTS>)
 endif()
 
-if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+if(IS_WINDOWS)
     include(platform/windows/CMakeLists.txt)
     target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:WINDOWS_PLATFORM_OBJECTS>)
 endif()
@@ -102,12 +108,14 @@ set_property(TARGET ${PROJECT_NAME}
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME} EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}_export.h)
 
-install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
+install(TARGETS ${PROJECT_NAME} ${INSTALL_TARGET_LIST}
+    EXPORT ${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     PUBLIC_HEADER DESTINATION include/sclog
 )
 
+include(CMakePackageConfigHelpers)
 write_basic_package_version_file("${PROJECT_NAME}ConfigVersion.cmake"
     VERSION ${${PROJECT_NAME}_VERSION}
     COMPATIBILITY SameMajorVersion
