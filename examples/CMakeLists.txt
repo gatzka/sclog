@@ -32,7 +32,7 @@ get_property(targets DIRECTORY "${CMAKE_CURRENT_LIST_DIR}" PROPERTY BUILDSYSTEM_
 foreach(tgt ${targets})
     get_target_property(target_type ${tgt} TYPE)
     if (target_type STREQUAL "EXECUTABLE")
-        target_link_libraries(${tgt} sclog:sclog)
+        target_link_libraries(${tgt} sclog::sclog)
         set_target_properties(${tgt} PROPERTIES
     		C_STANDARD_REQUIRED ON
     		C_EXTENSIONS OFF
