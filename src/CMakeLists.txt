@@ -80,7 +80,7 @@ if(IS_WINDOWS)
     target_sources(${PROJECT_NAME} PRIVATE $<TARGET_OBJECTS:WINDOWS_PLATFORM_OBJECTS>)
 endif()
 
-add_library(${PROJECT_NAME}:${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 add_dependencies(${PROJECT_NAME} generate_semver)
 
