@@ -15,15 +15,20 @@ set_target_properties(unity PROPERTIES
 )
 target_include_directories(unity PUBLIC ${CMAKE_CURRENT_LIST_DIR}/unity/src/)
 
-
-add_executable(test_sclog_version test_sclog_version.c)
+add_executable(test_sclog_version
+    test_sclog_version.c
+    ../src/sclog_version.c
+)
 add_test(NAME sclog.common.test_version COMMAND test_sclog_version)
 
+get_property(includes TARGET sclog::sclog PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
 get_property(targets DIRECTORY "${CMAKE_CURRENT_LIST_DIR}" PROPERTY BUILDSYSTEM_TARGETS)
 foreach(tgt ${targets})
     get_target_property(target_type ${tgt} TYPE)
     if (target_type STREQUAL "EXECUTABLE")
-        target_link_libraries(${tgt} fff unity sclog::sclog)
+        add_dependencies(${tgt} sclog::sclog) # Necessary to generage sclog_version_private.h before compiling the tests.
+        target_link_libraries(${tgt} fff unity)
+        target_include_directories(${tgt} PUBLIC ${includes})
         set_target_properties(${tgt} PROPERTIES
             C_STANDARD_REQUIRED ON
             C_EXTENSIONS OFF
