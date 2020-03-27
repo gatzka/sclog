@@ -30,11 +30,20 @@ add_custom_target(generate_semver
 
 add_library(${PROJECT_NAME}
     "sclog.c"
+    "sclog.h"
+    "sclog_compiler.h"
+    "sclog_file_rotate.h"
     "sclog_file_rotate_sink.c"
     "sclog_file_write.c"
+    "sclog_file_write.h"
     "sclog_null_sink.c"
+    "sclog_null_sink.h"
     "sclog_stderr_sink.c"
+    "sclog_stderr_sink.h"
+    "sclog_time.h"
+    "sclog_util.h"
     "sclog_version.c"
+    "sclog_version.h"
 )
 
 set(INSTALL_TARGET_LIST)
@@ -108,11 +117,12 @@ set_property(TARGET ${PROJECT_NAME}
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME} EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/generated/${PROJECT_NAME}_export.h)
 
+include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME} ${INSTALL_TARGET_LIST}
     EXPORT ${PROJECT_NAME}
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    PUBLIC_HEADER DESTINATION include/sclog
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
 include(CMakePackageConfigHelpers)

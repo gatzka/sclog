@@ -9,7 +9,8 @@ else()
 endif()
 
 add_library(SCLOG_LINUX OBJECT 
-    sclog_systemd_sink.c
+    "sclog_systemd_sink.c"
+    "sclog_systemd_sink.h"
 )
 
 set_property(TARGET SCLOG_LINUX APPEND

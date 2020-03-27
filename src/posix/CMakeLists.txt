@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.8)
 
 add_library(SCLOG_POSIX OBJECT 
-    sclog_syslog_sink.c
-    sclog_posix_util.c
+    "sclog_posix_util.c"
+    "sclog_posix_util.h"
+    "sclog_syslog_sink.c"
+    "sclog_syslog_sink.h"
 )
 
 set_property(TARGET SCLOG_POSIX APPEND
