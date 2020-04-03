@@ -31,7 +31,7 @@
 #include "sclog.h"
 #include "sclog_posix_util.h"
 
-int sc_log_get_syslog_priority(enum sc_log_level level)
+int sclog_get_syslog_priority(enum sclog_level level)
 {
 	switch (level) {
 	case SCLOG_NONE:

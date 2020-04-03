@@ -30,7 +30,7 @@
 
 #include "sclog_time.h"
 
-int sc_log_gmtime(const time_t *time_p, struct tm *result)
+int sclog_gmtime(const time_t *time_p, struct tm *result)
 {
 	const struct tm *ret = gmtime_r(time_p, result);
 	if (ret == NULL) {

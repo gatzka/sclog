@@ -37,7 +37,7 @@ extern "C" {
 
 #define SCLOG_BUFFER_SIZE 200
 
-enum sc_log_level {
+enum sclog_level {
 	SCLOG_NONE,
 	SCLOG_ERROR,
 	SCLOG_WARNING,
@@ -45,23 +45,23 @@ enum sc_log_level {
 	SCLOG_DEBUG
 };
 
-struct sc_log_sink {
+struct sclog_sink {
 	int (*init)(void *context);
 	void (*close)(void *context);
-	int (*log_message)(void *context, enum sc_log_level, const char *application, const char *message);
+	int (*log_message)(void *context, enum sclog_level, const char *application, const char *message);
 	void *context;
 };
 
-struct sc_log {
+struct sclog {
 	const char *application;
-	enum sc_log_level guard_level;
+	enum sclog_level guard_level;
 	char log_buffer[SCLOG_BUFFER_SIZE];
-	struct sc_log_sink *sink;
+	struct sclog_sink *sink;
 };
 
-SCLOG_EXPORT int sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink);
-SCLOG_EXPORT void sc_log_close(struct sc_log *log);
-SCLOG_EXPORT int sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...);
+SCLOG_EXPORT int sclog_init(struct sclog *log, const char *application, enum sclog_level init_level, struct sclog_sink *sink);
+SCLOG_EXPORT void sclog_close(struct sclog *log);
+SCLOG_EXPORT int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...);
 
 #ifdef __cplusplus
 }

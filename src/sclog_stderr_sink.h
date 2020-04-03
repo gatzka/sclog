@@ -36,7 +36,7 @@ extern "C" {
 #include "sclog.h"
 #include "sclog_export.h"
 
-SCLOG_EXPORT int sc_log_stderr_sink_init(struct sc_log_sink *sink);
+SCLOG_EXPORT int sclog_stderr_sink_init(struct sclog_sink *sink);
 
 #ifdef __cplusplus
 }

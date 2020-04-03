@@ -35,42 +35,42 @@
 int main(void)
 {
 
-	struct sc_log stderr_log;
-	struct sc_log_sink stderr_sink;
-	if (sc_log_stderr_sink_init(&stderr_sink) != 0) {
+	struct sclog stderr_log;
+	struct sclog_sink stderr_sink;
+	if (sclog_stderr_sink_init(&stderr_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	if (sc_log_init(&stderr_log, "stderr_log_example", SCLOG_WARNING, &stderr_sink) != 0) {
+	if (sclog_init(&stderr_log, "stderr_log_example", SCLOG_WARNING, &stderr_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
 
-	int ret = sc_log_message(&stderr_log, SCLOG_ERROR, "Hello error!");
+	int ret = sclog_message(&stderr_log, SCLOG_ERROR, "Hello error!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&stderr_log, SCLOG_WARNING, "Hello warning!");
+	ret = sclog_message(&stderr_log, SCLOG_WARNING, "Hello warning!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&stderr_log, SCLOG_INFO, "Hello info!");
+	ret = sclog_message(&stderr_log, SCLOG_INFO, "Hello info!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&stderr_log, SCLOG_DEBUG, "Hello debug!");
+	ret = sclog_message(&stderr_log, SCLOG_DEBUG, "Hello debug!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	sc_log_close(&stderr_log);
+	sclog_close(&stderr_log);
 
 	return EXIT_SUCCESS;
 
 err:
-	sc_log_close(&stderr_log);
+	sclog_close(&stderr_log);
 	return EXIT_FAILURE;
 }

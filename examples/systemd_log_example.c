@@ -34,40 +34,40 @@
 
 int main(void)
 {
-	struct sc_log systemd_log;
-	struct sc_log_sink systemd_sink;
-	if (sc_log_systemd_sink_init(&systemd_sink) != 0) {
+	struct sclog systemd_log;
+	struct sclog_sink systemd_sink;
+	if (sclog_systemd_sink_init(&systemd_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	if (sc_log_init(&systemd_log, "systemd_log_example", SCLOG_WARNING, &systemd_sink) != 0) {
+	if (sclog_init(&systemd_log, "systemd_log_example", SCLOG_WARNING, &systemd_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	int ret = sc_log_message(&systemd_log, SCLOG_ERROR, "Hello error!");
+	int ret = sclog_message(&systemd_log, SCLOG_ERROR, "Hello error!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&systemd_log, SCLOG_WARNING, "Hello warning!");
+	ret = sclog_message(&systemd_log, SCLOG_WARNING, "Hello warning!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&systemd_log, SCLOG_INFO, "Hello info!");
+	ret = sclog_message(&systemd_log, SCLOG_INFO, "Hello info!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&systemd_log, SCLOG_DEBUG, "Hello debug!");
+	ret = sclog_message(&systemd_log, SCLOG_DEBUG, "Hello debug!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	sc_log_close(&systemd_log);
+	sclog_close(&systemd_log);
 	return EXIT_SUCCESS;
 
 err:
-	sc_log_close(&systemd_log);
+	sclog_close(&systemd_log);
 	return EXIT_FAILURE;
 }

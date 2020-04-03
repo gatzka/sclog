@@ -38,7 +38,7 @@ extern "C" {
 
 #include "sclog_export.h"
 
-SCLOG_EXPORT int sc_log_gmtime(const time_t *time_p, struct tm *result);
+SCLOG_EXPORT int sclog_gmtime(const time_t *time_p, struct tm *result);
 
 #ifdef __cplusplus
 }

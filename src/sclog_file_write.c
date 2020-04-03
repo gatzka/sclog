@@ -45,7 +45,7 @@ static void get_time(char *buffer, size_t buffer_size)
 	}
 
 	struct tm result;
-	int ret = sc_log_gmtime(&t, &result);
+	int ret = sclog_gmtime(&t, &result);
 	if (ret < 0) {
 		buffer[0] = '\0';
 		return;
@@ -54,7 +54,7 @@ static void get_time(char *buffer, size_t buffer_size)
 	buffer[strftime(buffer, buffer_size, "%FT%H:%M:%SZ", &result)] = '\0';
 }
 
-static const char *get_level_string(enum sc_log_level level)
+static const char *get_level_string(enum sclog_level level)
 {
 	switch (level) {
 	case SCLOG_NONE:
@@ -74,12 +74,12 @@ static const char *get_level_string(enum sc_log_level level)
 
 enum { EXTRA_LOG_CHARACTERS = 6}; // white spaces and ":"
 
-long sc_log_log_get_log_message_length(const char *application, const char *message)
+long sclog_log_get_log_message_length(const char *application, const char *message)
 {
 	return (long)(MAX_TIME_STRING_LENGTH + strlen(application) + strlen("UNKNOWN") + strlen(message) + EXTRA_LOG_CHARACTERS);
 }
 
-int sc_log_log_message_to_file(FILE *fp, enum sc_log_level level, const char *application, const char *message)
+int sclog_log_message_to_file(FILE *fp, enum sclog_level level, const char *application, const char *message)
 {
 	char timestamp_buffer[MAX_TIME_STRING_LENGTH];
 

@@ -43,7 +43,7 @@ static void close(void *context)
 	(void)context;
 }
 
-static int log_message(void *context, enum sc_log_level level, const char *application, const char *message)
+static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
 {
 	(void)context;
 	(void)level;
@@ -52,7 +52,7 @@ static int log_message(void *context, enum sc_log_level level, const char *appli
 	return 0;
 }
 
-int sc_log_null_sink_init(struct sc_log_sink *sink)
+int sclog_null_sink_init(struct sclog_sink *sink)
 {
 	if (sink == NULL) {
 		return -1;

@@ -33,7 +33,7 @@
 #include "sclog.h"
 #include "sclog_compiler.h"
 
-int sc_log_init(struct sc_log *log, const char *application, enum sc_log_level init_level, struct sc_log_sink *sink)
+int sclog_init(struct sclog *log, const char *application, enum sclog_level init_level, struct sclog_sink *sink)
 {
 	if ((log == NULL) || (sink == NULL)) {
 		return -1;
@@ -46,14 +46,14 @@ int sc_log_init(struct sc_log *log, const char *application, enum sc_log_level i
 	return log->sink->init(log->sink->context);
 }
 
-void sc_log_close(struct sc_log *log)
+void sclog_close(struct sclog *log)
 {
 	log->sink->close(log->sink->context);
 }
 
 // clang-format off
 __attribute__((format(printf, 3, 4)))
-int sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...)
+int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...)
 // clang-format on
 {
 	if ((level == SCLOG_NONE) || (level > log->guard_level)) {

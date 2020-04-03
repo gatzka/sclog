@@ -35,7 +35,7 @@ extern "C" {
 
 #include "sclog.h"
 
-int sc_log_get_syslog_priority(enum sc_log_level level);
+int sclog_get_syslog_priority(enum sclog_level level);
 
 #ifdef __cplusplus
 }
