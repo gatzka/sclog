@@ -56,7 +56,7 @@ static int init(const void *context)
 	return 0;
 }
 
-static void close(void *context)
+static void close(const void *context)
 {
 	const struct sclog_file_rotate_sink *fr_sink = get_rotate_sink(context);
 	if (fr_sink->fp != NULL) {

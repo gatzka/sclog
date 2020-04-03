@@ -40,7 +40,7 @@ static int init(const void *context)
 	return 0;
 }
 
-static void close(void *context)
+static void close(const void *context)
 {
 	(void)context;
 }

@@ -47,7 +47,7 @@ enum sclog_level {
 
 struct sclog_sink {
 	int (*init)(const void *context);
-	void (*close)(void *context);
+	void (*close)(const void *context);
 	int (*log_message)(const void *context, enum sclog_level, const char *application, const char *message);
 	void *context;
 };
