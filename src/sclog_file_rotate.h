@@ -26,8 +26,8 @@
  * SOFTWARE.
  */
 
-#ifndef SC_LOG_FILE_ROTATE_H
-#define SC_LOG_FILE_ROTATE_H
+#ifndef SCLOG_FILE_ROTATE_H
+#define SCLOG_FILE_ROTATE_H
 
 #ifdef __cplusplus
 extern "C" {

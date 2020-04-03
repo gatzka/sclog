@@ -26,8 +26,8 @@
  * SOFTWARE.
  */
 
-#ifndef SC_LOG_FILE_WRITE_H
-#define SC_LOG_FILE_WRITE_H
+#ifndef SCLOG_FILE_WRITE_H
+#define SCLOG_FILE_WRITE_H
 
 #include <stdio.h>
 

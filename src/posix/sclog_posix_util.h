@@ -26,8 +26,8 @@
  * SOFTWARE.
  */
 
-#ifndef SC_LOG_POSIX_UTIL_H
-#define SC_LOG_POSIX_UTIL_H
+#ifndef SCLOG_POSIX_UTIL_H
+#define SCLOG_POSIX_UTIL_H
 
 #ifdef __cplusplus
 extern "C" {

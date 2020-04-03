@@ -56,7 +56,7 @@ __attribute__((format(printf, 3, 4)))
 int sc_log_message(struct sc_log *log, enum sc_log_level level, const char *format, ...)
 // clang-format on
 {
-	if ((level == SC_LOG_NONE) || (level > log->guard_level)) {
+	if ((level == SCLOG_NONE) || (level > log->guard_level)) {
 		return -1;
 	}
 

@@ -40,26 +40,26 @@ int main(void)
 		return EXIT_FAILURE;
 	}
 
-	if (sc_log_init(&systemd_log, "systemd_log_example", SC_LOG_WARNING, &systemd_sink) != 0) {
+	if (sc_log_init(&systemd_log, "systemd_log_example", SCLOG_WARNING, &systemd_sink) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	int ret = sc_log_message(&systemd_log, SC_LOG_ERROR, "Hello error!");
+	int ret = sc_log_message(&systemd_log, SCLOG_ERROR, "Hello error!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&systemd_log, SC_LOG_WARNING, "Hello warning!");
+	ret = sc_log_message(&systemd_log, SCLOG_WARNING, "Hello warning!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&systemd_log, SC_LOG_INFO, "Hello info!");
+	ret = sc_log_message(&systemd_log, SCLOG_INFO, "Hello info!");
 	if (ret < 0) {
 		goto err;
 	}
 
-	ret = sc_log_message(&systemd_log, SC_LOG_DEBUG, "Hello debug!");
+	ret = sc_log_message(&systemd_log, SCLOG_DEBUG, "Hello debug!");
 	if (ret < 0) {
 		goto err;
 	}

@@ -26,8 +26,8 @@
  * SOFTWARE.
  */
 
-#ifndef SC_LOG_H
-#define SC_LOG_H
+#ifndef SCLOG_H
+#define SCLOG_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,11 +38,11 @@ extern "C" {
 #define SCLOG_BUFFER_SIZE 200
 
 enum sc_log_level {
-	SC_LOG_NONE,
-	SC_LOG_ERROR,
-	SC_LOG_WARNING,
-	SC_LOG_INFO,
-	SC_LOG_DEBUG
+	SCLOG_NONE,
+	SCLOG_ERROR,
+	SCLOG_WARNING,
+	SCLOG_INFO,
+	SCLOG_DEBUG
 };
 
 struct sc_log_sink {

@@ -27,8 +27,8 @@
  */
 
 
-#ifndef SC_LOG_TIME_H
-#define SC_LOG_TIME_H
+#ifndef SCLOG_TIME_H
+#define SCLOG_TIME_H
 
 #ifdef __cplusplus
 extern "C" {

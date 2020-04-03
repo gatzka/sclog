@@ -26,8 +26,8 @@
  * SOFTWARE.
  */
 
-#ifndef SC_LOG_SYSLOG_H
-#define SC_LOG_SYSLOG_H
+#ifndef SCLOG_SYSLOG_H
+#define SCLOG_SYSLOG_H
 
 #ifdef __cplusplus
 extern "C" {

@@ -57,22 +57,23 @@ static void get_time(char *buffer, size_t buffer_size)
 static const char *get_level_string(enum sc_log_level level)
 {
 	switch (level) {
-	case SC_LOG_NONE:
+	case SCLOG_NONE:
 		return "NONE";
-	case SC_LOG_ERROR:
+	case SCLOG_ERROR:
 		return "ERROR";
-	case SC_LOG_WARNING:
+	case SCLOG_WARNING:
 		return "WARNING";
-	case SC_LOG_INFO:
+	case SCLOG_INFO:
 		return "INFO";
-	case SC_LOG_DEBUG:
+	case SCLOG_DEBUG:
 		return "DEBUG";
 	default:
 		return "UNKNOWN";
 	}
 }
 
-#define EXTRA_LOG_CHARACTERS 6 // white spaces and ":"
+enum { EXTRA_LOG_CHARACTERS = 6}; // white spaces and ":"
+
 long sc_log_log_get_log_message_length(const char *application, const char *message)
 {
 	return (long)(MAX_TIME_STRING_LENGTH + strlen(application) + strlen("UNKNOWN") + strlen(message) + EXTRA_LOG_CHARACTERS);

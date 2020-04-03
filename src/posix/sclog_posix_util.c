@@ -34,15 +34,15 @@
 int sc_log_get_syslog_priority(enum sc_log_level level)
 {
 	switch (level) {
-	case SC_LOG_NONE:
+	case SCLOG_NONE:
 		return LOG_INFO;
-	case SC_LOG_ERROR:
+	case SCLOG_ERROR:
 		return LOG_ERR;
-	case SC_LOG_WARNING:
+	case SCLOG_WARNING:
 		return LOG_WARNING;
-	case SC_LOG_INFO:
+	case SCLOG_INFO:
 		return LOG_INFO;
-	case SC_LOG_DEBUG:
+	case SCLOG_DEBUG:
 		return LOG_DEBUG;
 	default:
 		return -1;
