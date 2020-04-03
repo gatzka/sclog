@@ -35,7 +35,7 @@
 
 #define FILENAME_BUFFER_SIZE 255
 
-static struct sc_log_file_rotate_sink *get_rotate_sink(void *context)
+static struct sc_log_file_rotate_sink *get_rotate_sink(const void *context)
 {
 	const struct sc_log *log = (const struct sc_log *)context;
 	struct sc_log_sink *sink = log->sink;
