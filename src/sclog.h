@@ -60,7 +60,7 @@ struct sclog {
 };
 
 SCLOG_EXPORT int sclog_init(struct sclog *log, const char *application, enum sclog_level init_level, struct sclog_sink *sink);
-SCLOG_EXPORT void sclog_close(struct sclog *log);
+SCLOG_EXPORT void sclog_close(const struct sclog *log);
 SCLOG_EXPORT int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...);
 
 #ifdef __cplusplus

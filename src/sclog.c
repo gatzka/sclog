@@ -46,7 +46,7 @@ int sclog_init(struct sclog *log, const char *application, enum sclog_level init
 	return log->sink->init(log->sink->context);
 }
 
-void sclog_close(struct sclog *log)
+void sclog_close(const struct sclog *log)
 {
 	log->sink->close(log->sink->context);
 }
