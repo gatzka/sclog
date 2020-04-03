@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['single_5ffile_5fsize',['single_file_size',['../structsc__log__file__rotate__sink.html#a77f0291555605fdf728822ac56a73ee7',1,'sc_log_file_rotate_sink']]],
-  ['sink',['sink',['../structsc__log.html#a615125334866c2345b30df55412580df',1,'sc_log::sink()'],['../structsc__log__file__rotate__sink.html#a1575b53ca8c08cd7995b608b253d6cb5',1,'sc_log_file_rotate_sink::sink()']]]
+  ['single_5ffile_5fsize',['single_file_size',['../structsclog__file__rotate__sink.html#a9397bc6eacf0f5a25f83f1d633823ff4',1,'sclog_file_rotate_sink']]],
+  ['sink',['sink',['../structsclog.html#a15d1fb54d75caedd94a4b540e63dbd7a',1,'sclog::sink()'],['../structsclog__file__rotate__sink.html#a8e0f51671cb6cc79b9d927567561f125',1,'sclog_file_rotate_sink::sink()']]]
 ];

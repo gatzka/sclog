@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fp',['fp',['../structsc__log__file__rotate__sink.html#ab348aae4f814646534108758fee45122',1,'sc_log_file_rotate_sink']]]
+  ['fp',['fp',['../structsclog__file__rotate__sink.html#ab5b7ecf797cf274e429e633ddc584b02',1,'sclog_file_rotate_sink']]]
 ];

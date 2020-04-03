@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['init',['init',['../structsc__log__sink.html#a9a821a63c763a9077e9895675bcb89dd',1,'sc_log_sink']]]
+  ['init',['init',['../structsclog__sink.html#a03763378443cb68d091bb8c6f010547a',1,'sclog_sink']]]
 ];

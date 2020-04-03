@@ -1,16 +1,16 @@
 var sclog_8h =
 [
-    [ "sc_log_sink", "structsc__log__sink.html", "structsc__log__sink" ],
-    [ "sc_log", "structsc__log.html", "structsc__log" ],
+    [ "sclog_sink", "structsclog__sink.html", "structsclog__sink" ],
+    [ "sclog", "structsclog.html", "structsclog" ],
     [ "SCLOG_BUFFER_SIZE", "sclog_8h.html#a66c87549a0942921baf4d98ba5612c98", null ],
-    [ "sc_log_level", "sclog_8h.html#a81673e4989ba1aaac056411593d2dc2a", [
-      [ "SC_LOG_NONE", "sclog_8h.html#a81673e4989ba1aaac056411593d2dc2aaa3658e32b0a776f8b7ea602047dcf265", null ],
-      [ "SC_LOG_ERROR", "sclog_8h.html#a81673e4989ba1aaac056411593d2dc2aa4f607c3a80b85141aaa11e3680cb93df", null ],
-      [ "SC_LOG_WARNING", "sclog_8h.html#a81673e4989ba1aaac056411593d2dc2aaf59da6628db75da1ba66b3f61182331b", null ],
-      [ "SC_LOG_INFO", "sclog_8h.html#a81673e4989ba1aaac056411593d2dc2aa326b830e1ca8acd2ef77426022c887cc", null ],
-      [ "SC_LOG_DEBUG", "sclog_8h.html#a81673e4989ba1aaac056411593d2dc2aacb855a5e44d833d43deb9d0fec971b6e", null ]
+    [ "sclog_level", "sclog_8h.html#a062f3f6ec329773c88498ab66772116d", [
+      [ "SCLOG_NONE", "sclog_8h.html#a062f3f6ec329773c88498ab66772116da5c13be0af255a76bb0320949f47ad4f0", null ],
+      [ "SCLOG_ERROR", "sclog_8h.html#a062f3f6ec329773c88498ab66772116da1a83cd773ab7e1d095e4857d1bd1fb21", null ],
+      [ "SCLOG_WARNING", "sclog_8h.html#a062f3f6ec329773c88498ab66772116daea28ced466a08c2ff956d70b1db24233", null ],
+      [ "SCLOG_INFO", "sclog_8h.html#a062f3f6ec329773c88498ab66772116da5a88f74c769fbaee9fe6faecedb7911b", null ],
+      [ "SCLOG_DEBUG", "sclog_8h.html#a062f3f6ec329773c88498ab66772116da42fdbd3b2c98cac7afc0c271c834ef9d", null ]
     ] ],
-    [ "sc_log_close", "sclog_8h.html#a5aab25bee59d4d1835f2da89f6089bc8", null ],
-    [ "sc_log_init", "sclog_8h.html#afdacc21b16dd6614f06a95885bcf3e31", null ],
-    [ "sc_log_message", "sclog_8h.html#a3015fa8182971037b6da46d47fb936ae", null ]
+    [ "sclog_close", "sclog_8h.html#a6a40699acf6c86f7554b7085ab2373d7", null ],
+    [ "sclog_init", "sclog_8h.html#aaf9cc3e9cc658b16ddd4eb3513b0cb76", null ],
+    [ "sclog_message", "sclog_8h.html#a9d26d47adda1eb7d321a0b18f33bb315", null ]
 ];

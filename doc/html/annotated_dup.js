@@ -1,6 +1,6 @@
 var annotated_dup =
 [
-    [ "sc_log", "structsc__log.html", "structsc__log" ],
-    [ "sc_log_file_rotate_sink", "structsc__log__file__rotate__sink.html", "structsc__log__file__rotate__sink" ],
-    [ "sc_log_sink", "structsc__log__sink.html", "structsc__log__sink" ]
+    [ "sclog", "structsclog.html", "structsclog" ],
+    [ "sclog_file_rotate_sink", "structsclog__file__rotate__sink.html", "structsclog__file__rotate__sink" ],
+    [ "sclog_sink", "structsclog__sink.html", "structsclog__sink" ]
 ];

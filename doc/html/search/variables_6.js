@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['number_5fof_5ffiles',['number_of_files',['../structsc__log__file__rotate__sink.html#a4acfd67b847acd1bef4b1f8a1101f067',1,'sc_log_file_rotate_sink']]]
+  ['number_5fof_5ffiles',['number_of_files',['../structsclog__file__rotate__sink.html#a7984d4312a6a5b85a5a5c75bf5667e16',1,'sclog_file_rotate_sink']]]
 ];

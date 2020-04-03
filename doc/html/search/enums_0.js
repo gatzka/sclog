@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sc_5flog_5flevel',['sc_log_level',['../sclog_8h.html#a81673e4989ba1aaac056411593d2dc2a',1,'sclog.h']]]
+  ['sclog_5flevel',['sclog_level',['../sclog_8h.html#a062f3f6ec329773c88498ab66772116d',1,'sclog.h']]]
 ];

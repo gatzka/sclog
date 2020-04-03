@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sc_5flog',['sc_log',['../structsc__log.html',1,'']]],
-  ['sc_5flog_5ffile_5frotate_5fsink',['sc_log_file_rotate_sink',['../structsc__log__file__rotate__sink.html',1,'']]],
-  ['sc_5flog_5fsink',['sc_log_sink',['../structsc__log__sink.html',1,'']]]
+  ['sclog',['sclog',['../structsclog.html',1,'']]],
+  ['sclog_5ffile_5frotate_5fsink',['sclog_file_rotate_sink',['../structsclog__file__rotate__sink.html',1,'']]],
+  ['sclog_5fsink',['sclog_sink',['../structsclog__sink.html',1,'']]]
 ];
