@@ -3,7 +3,7 @@ var searchData=
   ['sclog',['sclog',['../structsclog.html',1,'']]],
   ['sclog_2eh',['sclog.h',['../sclog_8h.html',1,'']]],
   ['sclog_5fbuffer_5fsize',['SCLOG_BUFFER_SIZE',['../sclog_8h.html#a66c87549a0942921baf4d98ba5612c98',1,'sclog.h']]],
-  ['sclog_5fclose',['sclog_close',['../sclog_8h.html#a6a40699acf6c86f7554b7085ab2373d7',1,'sclog.h']]],
+  ['sclog_5fclose',['sclog_close',['../sclog_8h.html#afcca1103d9f4a280e87d635328d12c1d',1,'sclog.h']]],
   ['sclog_5fcompiler_2eh',['sclog_compiler.h',['../sclog__compiler_8h.html',1,'']]],
   ['sclog_5fconst_5fcontainer_5fof',['sclog_const_container_of',['../sclog__util_8h.html#aecd018f5aabc125629759b683dee9045',1,'sclog_util.h']]],
   ['sclog_5fcontainer_5fof',['sclog_container_of',['../sclog__util_8h.html#ac738d89131fb3b10d82c351340d1d669',1,'sclog_util.h']]],

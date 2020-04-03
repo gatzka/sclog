@@ -10,7 +10,7 @@ var sclog_8h =
       [ "SCLOG_INFO", "sclog_8h.html#a062f3f6ec329773c88498ab66772116da5a88f74c769fbaee9fe6faecedb7911b", null ],
       [ "SCLOG_DEBUG", "sclog_8h.html#a062f3f6ec329773c88498ab66772116da42fdbd3b2c98cac7afc0c271c834ef9d", null ]
     ] ],
-    [ "sclog_close", "sclog_8h.html#a6a40699acf6c86f7554b7085ab2373d7", null ],
+    [ "sclog_close", "sclog_8h.html#afcca1103d9f4a280e87d635328d12c1d", null ],
     [ "sclog_init", "sclog_8h.html#aaf9cc3e9cc658b16ddd4eb3513b0cb76", null ],
     [ "sclog_message", "sclog_8h.html#a9d26d47adda1eb7d321a0b18f33bb315", null ]
 ];
