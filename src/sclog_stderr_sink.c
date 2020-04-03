@@ -46,7 +46,7 @@ static void close(void *context)
 }
 
 
-static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
+static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
 {
 	(void)context;
 	return sclog_log_message_to_file(stderr, level, application, message);

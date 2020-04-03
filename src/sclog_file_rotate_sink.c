@@ -103,7 +103,7 @@ static int rotate_files(struct sclog_file_rotate_sink *fr_sink)
 	return 0;
 }
 
-static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
+static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
 {
 	struct sclog_file_rotate_sink *fr_sink = get_rotate_sink(context);
 	long message_length = sclog_log_get_log_message_length(application, message);

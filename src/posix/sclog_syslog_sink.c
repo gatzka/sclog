@@ -46,7 +46,7 @@ static void close(void *context)
 	closelog();
 }
 
-static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
+static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
 {
 	(void)context;
 	(void)application;
