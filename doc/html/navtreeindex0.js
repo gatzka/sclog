@@ -72,8 +72,8 @@ var NAVTREEINDEX0 =
 "structsclog__file__rotate__sink.html#aaee262c849b162f2c4acbe8261daca9d":[0,0,1,0],
 "structsclog__file__rotate__sink.html#ab5b7ecf797cf274e429e633ddc584b02":[0,0,1,1],
 "structsclog__sink.html":[0,0,2],
-"structsclog__sink.html#a03763378443cb68d091bb8c6f010547a":[0,0,2,2],
-"structsclog__sink.html#a2144bfd2ddcffd6ff74c15f7443becd1":[0,0,2,0],
-"structsclog__sink.html#a339682a72ec7968eb994f1d01ed07fc3":[0,0,2,3],
+"structsclog__sink.html#a4f8fa8f5261dd1429e36584b970d8f5c":[0,0,2,3],
+"structsclog__sink.html#a8198f9019cb16e62d7fc1da60d838995":[0,0,2,0],
+"structsclog__sink.html#a83e231943165623cd1765a6edf0850ac":[0,0,2,2],
 "structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc":[0,0,2,1]
 };

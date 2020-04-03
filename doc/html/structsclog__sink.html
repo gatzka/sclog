@@ -92,24 +92,24 @@ $(document).ready(function(){initNavTree('structsclog__sink.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a03763378443cb68d091bb8c6f010547a"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsclog__sink.html#a03763378443cb68d091bb8c6f010547a">init</a> )(void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>)</td></tr>
-<tr class="separator:a03763378443cb68d091bb8c6f010547a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2144bfd2ddcffd6ff74c15f7443becd1"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsclog__sink.html#a2144bfd2ddcffd6ff74c15f7443becd1">close</a> )(void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>)</td></tr>
-<tr class="separator:a2144bfd2ddcffd6ff74c15f7443becd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a339682a72ec7968eb994f1d01ed07fc3"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsclog__sink.html#a339682a72ec7968eb994f1d01ed07fc3">log_message</a> )(void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a>, const char *application, const char *message)</td></tr>
-<tr class="separator:a339682a72ec7968eb994f1d01ed07fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83e231943165623cd1765a6edf0850ac"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsclog__sink.html#a83e231943165623cd1765a6edf0850ac">init</a> )(const void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>)</td></tr>
+<tr class="separator:a83e231943165623cd1765a6edf0850ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8198f9019cb16e62d7fc1da60d838995"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsclog__sink.html#a8198f9019cb16e62d7fc1da60d838995">close</a> )(const void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>)</td></tr>
+<tr class="separator:a8198f9019cb16e62d7fc1da60d838995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f8fa8f5261dd1429e36584b970d8f5c"><td class="memItemLeft" align="right" valign="top">int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsclog__sink.html#a4f8fa8f5261dd1429e36584b970d8f5c">log_message</a> )(const void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a>, const char *application, const char *message)</td></tr>
+<tr class="separator:a4f8fa8f5261dd1429e36584b970d8f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac60ea665ced14cd7395abd54e4d422dc"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a></td></tr>
 <tr class="separator:ac60ea665ced14cd7395abd54e4d422dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="a2144bfd2ddcffd6ff74c15f7443becd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2144bfd2ddcffd6ff74c15f7443becd1">&#9670;&nbsp;</a></span>close</h2>
+<a id="a8198f9019cb16e62d7fc1da60d838995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8198f9019cb16e62d7fc1da60d838995">&#9670;&nbsp;</a></span>close</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* sclog_sink::close) (void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>)</td>
+          <td class="memname">void(* sclog_sink::close) (const void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -130,28 +130,28 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a03763378443cb68d091bb8c6f010547a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03763378443cb68d091bb8c6f010547a">&#9670;&nbsp;</a></span>init</h2>
+<a id="a83e231943165623cd1765a6edf0850ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83e231943165623cd1765a6edf0850ac">&#9670;&nbsp;</a></span>init</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int(* sclog_sink::init) (void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>)</td>
+          <td class="memname">int(* sclog_sink::init) (const void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a339682a72ec7968eb994f1d01ed07fc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a339682a72ec7968eb994f1d01ed07fc3">&#9670;&nbsp;</a></span>log_message</h2>
+<a id="a4f8fa8f5261dd1429e36584b970d8f5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f8fa8f5261dd1429e36584b970d8f5c">&#9670;&nbsp;</a></span>log_message</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int(* sclog_sink::log_message) (void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a>, const char *application, const char *message)</td>
+          <td class="memname">int(* sclog_sink::log_message) (const void *<a class="el" href="structsclog__sink.html#ac60ea665ced14cd7395abd54e4d422dc">context</a>, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a>, const char *application, const char *message)</td>
         </tr>
       </table>
 </div><div class="memdoc">
