@@ -33,7 +33,7 @@
 #include "sclog.h"
 #include "sclog_systemd_sink.h"
 
-static int init(void *context)
+static int init(const void *context)
 {
 	(void)context;
 	return 0;

@@ -33,9 +33,9 @@
 #include "sclog_posix_util.h"
 #include "sclog_syslog_sink.h"
 
-static int init(void *context)
+static int init(const void *context)
 {
-	const struct sclog *log = (struct sclog *)context;
+	const struct sclog *log = (const struct sclog *)context;
 	openlog(log->application, 0, LOG_USER);
 	return 0;
 }

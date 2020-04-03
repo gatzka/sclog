@@ -34,7 +34,7 @@
 #include "sclog_file_write.h"
 #include "sclog_stderr_sink.h"
 
-static int init(void *context)
+static int init(const void *context)
 {
 	(void)context;
 	return 0;

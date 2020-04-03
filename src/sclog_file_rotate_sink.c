@@ -42,7 +42,7 @@ static struct sclog_file_rotate_sink *get_rotate_sink(const void *context)
 	return sclog_container_of(sink, struct sclog_file_rotate_sink, sink);
 }
 
-static int init(void *context)
+static int init(const void *context)
 {
 	struct sclog_file_rotate_sink *fr_sink = get_rotate_sink(context);
 
