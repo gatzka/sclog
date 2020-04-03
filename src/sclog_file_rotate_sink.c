@@ -33,7 +33,7 @@
 #include "sclog_file_write.h"
 #include "sclog_util.h"
 
-#define FILENAME_BUFFER_SIZE 255
+enum { FILENAME_BUFFER_SIZE = 255 };
 
 static struct sc_log_file_rotate_sink *get_rotate_sink(const void *context)
 {
