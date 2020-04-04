@@ -164,7 +164,7 @@ if (DOXYGEN_FOUND)
     set(DOXYGEN_PROJECT_NAME ${CMAKE_PROJECT_NAME})
     set(DOXYGEN_EXCLUDE_PATTERNS "*private*;*.c")
 
-    doxygen_add_docs(docs
+    doxygen_add_docs(${PROJECT_NAME}_docs
         ${PROJECT_SOURCE_DIR}
         ${PROJECT_SOURCE_DIR}/doxygen/mainpage.dox
         ${CMAKE_CURRENT_BINARY_DIR}/generated/
