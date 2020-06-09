@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "sclog-all", "index.html", [
+  [ "sclog", "index.html", [
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
