@@ -248,7 +248,7 @@ jobs:
   doxygen:
     name: generate doxygen documentation
     runs-on: ubuntu-latest
-    needs: [gcc-9-debug, gcc-9-release, gcc-valgrind, clang-9-debug, clang-9-release, clang-9-UndefinedBehaviorSanitizer, clang-9-LeakSanitizer, clang-9-MemorySanitizer, clang-9-AddressSanitizer, clang-9-scanbuild, clang-9-clangtidy]
+    needs: [gcc-10-debug, gcc-10-release, gcc-10-valgrind, clang-10-debug, clang-10-release, clang-10-UndefinedBehaviorSanitizer, clang-10-LeakSanitizer, clang-10-MemorySanitizer, clang-10-AddressSanitizer, clang-10-scanbuild, clang-10-clangtidy]
     if: contains(github.ref, 'master')
 
     steps:
