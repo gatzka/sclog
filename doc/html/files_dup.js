@@ -1,5 +1,6 @@
-var files =
+var files_dup =
 [
+    [ "doxygen", "dir_4e8d938e9ddb5a617c200d5739d1f41a.html", null ],
     [ "sclog_export.h", "sclog__export_8h.html", "sclog__export_8h" ],
     [ "sclog.h", "sclog_8h.html", "sclog_8h" ],
     [ "sclog_compiler.h", "sclog__compiler_8h.html", null ],
