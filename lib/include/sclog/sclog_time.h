@@ -26,48 +26,22 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
 
-#include "sclog/sclog_syslog_sink.h"
-#include "sclog/sclog.h"
+#ifndef SCLOG_TIME_H
+#define SCLOG_TIME_H
 
-int main(void)
-{
-	struct sclog syslog_log;
-	struct sclog_sink syslog_sink;
-	if (sclog_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
-		return EXIT_FAILURE;
-	}
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-	if (sclog_init(&syslog_log, "syslog_log_example", SCLOG_WARNING, &syslog_sink) != 0) {
-		return EXIT_FAILURE;
-	}
+#include <time.h>
 
-	int ret = sclog_message(&syslog_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
+#include "sclog/export.h"
 
-	ret = sclog_message(&syslog_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
+SCLOG_EXPORT int sclog_gmtime(const time_t *time_p, struct tm *result);
 
-	ret = sclog_message(&syslog_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&syslog_log);
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&syslog_log);
-	return EXIT_FAILURE;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

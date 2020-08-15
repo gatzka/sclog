@@ -26,48 +26,27 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef SCLOG_VERSION_H
+#define SCLOG_VERSION_H
 
-#include "sclog/sclog_syslog_sink.h"
-#include "sclog/sclog.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-int main(void)
-{
-	struct sclog syslog_log;
-	struct sclog_sink syslog_sink;
-	if (sclog_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
-		return EXIT_FAILURE;
-	}
+#include "sclog/export.h"
 
-	if (sclog_init(&syslog_log, "syslog_log_example", SCLOG_WARNING, &syslog_sink) != 0) {
-		return EXIT_FAILURE;
-	}
+/**
+ * @file
+ * @brief This file contains version information.
+ */
 
-	int ret = sclog_message(&syslog_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
+SCLOG_EXPORT const char *sclog_get_version_string(void);
+SCLOG_EXPORT unsigned int sclog_get_version_major(void);
+SCLOG_EXPORT unsigned int sclog_get_version_minor(void);
+SCLOG_EXPORT unsigned int sclog_get_version_patch(void);
 
-	ret = sclog_message(&syslog_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&syslog_log);
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&syslog_log);
-	return EXIT_FAILURE;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

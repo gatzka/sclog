@@ -26,48 +26,20 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef SCLOG_STDERR_H
+#define SCLOG_STDERR_H
 
-#include "sclog/sclog_syslog_sink.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "sclog/sclog.h"
+#include "sclog/export.h"
 
-int main(void)
-{
-	struct sclog syslog_log;
-	struct sclog_sink syslog_sink;
-	if (sclog_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
-		return EXIT_FAILURE;
-	}
+SCLOG_EXPORT int sclog_stderr_sink_init(struct sclog_sink *sink);
 
-	if (sclog_init(&syslog_log, "syslog_log_example", SCLOG_WARNING, &syslog_sink) != 0) {
-		return EXIT_FAILURE;
-	}
-
-	int ret = sclog_message(&syslog_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&syslog_log);
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&syslog_log);
-	return EXIT_FAILURE;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

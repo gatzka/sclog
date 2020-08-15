@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: MIT
  *
- * The MIT License (MIT)
+ *The MIT License (MIT)
  *
  * Copyright (c) <2019> <Stephan Gatzka>
  *
@@ -26,48 +26,19 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef SCLOG_POSIX_UTIL_H
+#define SCLOG_POSIX_UTIL_H
 
-#include "sclog/sclog_syslog_sink.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "sclog/sclog.h"
 
-int main(void)
-{
-	struct sclog syslog_log;
-	struct sclog_sink syslog_sink;
-	if (sclog_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
-		return EXIT_FAILURE;
-	}
+int sclog_get_syslog_priority(enum sclog_level level);
 
-	if (sclog_init(&syslog_log, "syslog_log_example", SCLOG_WARNING, &syslog_sink) != 0) {
-		return EXIT_FAILURE;
-	}
-
-	int ret = sclog_message(&syslog_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&syslog_log);
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&syslog_log);
-	return EXIT_FAILURE;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

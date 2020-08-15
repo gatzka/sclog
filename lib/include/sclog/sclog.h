@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: MIT
  *
- * The MIT License (MIT)
+ *The MIT License (MIT)
  *
  * Copyright (c) <2019> <Stephan Gatzka>
  *
@@ -26,48 +26,45 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef SCLOG_H
+#define SCLOG_H
 
-#include "sclog/sclog_syslog_sink.h"
-#include "sclog/sclog.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-int main(void)
-{
-	struct sclog syslog_log;
-	struct sclog_sink syslog_sink;
-	if (sclog_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
-		return EXIT_FAILURE;
-	}
+#include "sclog/export.h"
 
-	if (sclog_init(&syslog_log, "syslog_log_example", SCLOG_WARNING, &syslog_sink) != 0) {
-		return EXIT_FAILURE;
-	}
+#define SCLOG_BUFFER_SIZE 200
 
-	int ret = sclog_message(&syslog_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
+enum sclog_level {
+	SCLOG_NONE,
+	SCLOG_ERROR,
+	SCLOG_WARNING,
+	SCLOG_INFO,
+	SCLOG_DEBUG
+};
 
-	ret = sclog_message(&syslog_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
+struct sclog_sink {
+	int (*init)(const void *context);
+	void (*close)(const void *context);
+	int (*log_message)(const void *context, enum sclog_level, const char *application, const char *message);
+	void *context;
+};
 
-	ret = sclog_message(&syslog_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
+struct sclog {
+	const char *application;
+	enum sclog_level guard_level;
+	char log_buffer[SCLOG_BUFFER_SIZE];
+	struct sclog_sink *sink;
+};
 
-	ret = sclog_message(&syslog_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
+SCLOG_EXPORT int sclog_init(struct sclog *log, const char *application, enum sclog_level init_level, struct sclog_sink *sink);
+SCLOG_EXPORT void sclog_close(const struct sclog *log);
+SCLOG_EXPORT int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...);
 
-	sclog_close(&syslog_log);
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&syslog_log);
-	return EXIT_FAILURE;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

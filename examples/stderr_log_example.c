@@ -29,8 +29,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "sclog.h"
-#include "sclog_stderr_sink.h"
+#include "sclog/sclog.h"
+#include "sclog/sclog_stderr_sink.h"
 
 int main(void)
 {

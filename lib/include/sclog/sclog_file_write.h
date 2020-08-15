@@ -26,48 +26,22 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef SCLOG_FILE_WRITE_H
+#define SCLOG_FILE_WRITE_H
 
-#include "sclog/sclog_syslog_sink.h"
+#include <stdio.h>
+
 #include "sclog/sclog.h"
 
-int main(void)
-{
-	struct sclog syslog_log;
-	struct sclog_sink syslog_sink;
-	if (sclog_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
-		return EXIT_FAILURE;
-	}
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-	if (sclog_init(&syslog_log, "syslog_log_example", SCLOG_WARNING, &syslog_sink) != 0) {
-		return EXIT_FAILURE;
-	}
+int sclog_log_message_to_file(FILE *fp, enum sclog_level level, const char *application, const char *message);
+long sclog_log_get_log_message_length(const char *application, const char *message);
 
-	int ret = sclog_message(&syslog_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&syslog_log);
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&syslog_log);
-	return EXIT_FAILURE;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

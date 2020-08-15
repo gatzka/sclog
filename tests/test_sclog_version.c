@@ -29,8 +29,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#include "sclog_version.h"
-#include "sclog_version_private.h"
+#include "sclog/sclog_version.h"
+#include "sclog/sclog_version_private.h"
+
 #include "fff.h"
 #include "unity.h"
 

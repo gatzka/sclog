@@ -26,48 +26,31 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef SCLOG_FILE_ROTATE_H
+#define SCLOG_FILE_ROTATE_H
 
-#include "sclog/sclog_syslog_sink.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdio.h>
+
 #include "sclog/sclog.h"
+#include "sclog/export.h"
 
-int main(void)
-{
-	struct sclog syslog_log;
-	struct sclog_sink syslog_sink;
-	if (sclog_syslog_sink_init(&syslog_sink, &syslog_log) != 0) {
-		return EXIT_FAILURE;
-	}
+struct sclog_file_rotate_sink {
+	struct sclog_sink sink;
+	const char *log_file_name;
+	unsigned int number_of_files;
+	long single_file_size;
+	FILE *fp;
+	long current_file_size;
+};
 
-	if (sclog_init(&syslog_log, "syslog_log_example", SCLOG_WARNING, &syslog_sink) != 0) {
-		return EXIT_FAILURE;
-	}
+SCLOG_EXPORT int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, struct sclog *log);
 
-	int ret = sclog_message(&syslog_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&syslog_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&syslog_log);
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&syslog_log);
-	return EXIT_FAILURE;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

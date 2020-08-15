@@ -17,7 +17,7 @@ target_include_directories(unity PUBLIC ${CMAKE_CURRENT_LIST_DIR}/unity/src/)
 
 add_executable(test_sclog_version
     test_sclog_version.c
-    ../src/sclog_version.c
+    ../lib/src/sclog_version.c
 )
 add_test(NAME sclog.common.test_version COMMAND test_sclog_version)
 
