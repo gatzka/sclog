@@ -33,8 +33,8 @@
 extern "C" {
 #endif
 
-#include "sclog/sclog.h"
 #include "sclog/export.h"
+#include "sclog/sclog.h"
 
 SCLOG_EXPORT int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log);
 

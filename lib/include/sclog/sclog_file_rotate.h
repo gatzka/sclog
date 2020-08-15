@@ -35,8 +35,8 @@ extern "C" {
 
 #include <stdio.h>
 
-#include "sclog/sclog.h"
 #include "sclog/export.h"
+#include "sclog/sclog.h"
 
 struct sclog_file_rotate_sink {
 	struct sclog_sink sink;
