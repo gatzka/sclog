@@ -181,6 +181,7 @@ if(DOXYGEN_FOUND)
         ${CMAKE_CURRENT_SOURCE_DIR}/include/sclog/
         ${CMAKE_CURRENT_SOURCE_DIR}/include/platform/posix/sclog/
         ${CMAKE_CURRENT_SOURCE_DIR}/include/platform/linux/sclog/
+        ${CMAKE_CURRENT_SOURCE_DIR}/doxygen/
     )
     set(DOXYGEN_WARN_AS_ERROR YES)
     set(DOXYGEN_PROJECT_NAME ${PROJECT_NAME})
