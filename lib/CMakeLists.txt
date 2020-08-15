@@ -177,15 +177,24 @@ if(DOXYGEN_FOUND)
     set(DOXYGEN_QUIET YES)
     set(DOXYGEN_RECURSIVE NO)
     set(DOXYGEN_STRICT_PROTO_MATCHING YES)
-    set(DOXYGEN_STRIP_FROM_PATH ${CMAKE_CURRENT_BINARY_DIR}/generated/ ${CMAKE_CURRENT_SOURCE_DIR})
+    set(DOXYGEN_STRIP_FROM_PATH
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/sclog/
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/platform/posix/sclog/
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/platform/linux/sclog/
+    )
     set(DOXYGEN_WARN_AS_ERROR YES)
     set(DOXYGEN_PROJECT_NAME ${PROJECT_NAME})
-    set(DOXYGEN_EXCLUDE_PATTERNS "*private*;*.c")
+    set(DOXYGEN_ENABLE_PREPROCESSING YES)
+    set(DOXYGEN_MACRO_EXPANSION YES)
+    set(DOXYGEN_EXPAND_ONLY_PREDEF YES)
+    set(DOXYGEN_PREDEFINED SCLOG_EXPORT)
 
     doxygen_add_docs(${PROJECT_NAME}_docs
-        ${PROJECT_SOURCE_DIR}
-        ${PROJECT_SOURCE_DIR}/doxygen/mainpage.dox
-        ${CMAKE_CURRENT_BINARY_DIR}/generated/
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/sclog/
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/platform/posix/sclog/
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/platform/linux/sclog/
+        ${CMAKE_CURRENT_SOURCE_DIR}/doxygen/mainpage.dox
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
         COMMENT "Generating API documentation with Doxygen"
     )
 else(DOXYGEN_FOUND)
