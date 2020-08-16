@@ -129,7 +129,7 @@ if(CTEST_CONFIGURATION_TYPE STREQUAL "Coverage" AND GCOVR_BIN)
   set(SCLOG_CTEST_COVERAGE_DIR "${CTEST_BINARY_DIRECTORY}cov-html/${SCLOG_CTEST_TIMESTAMP}")
   set(CTEST_CUSTOM_POST_TEST
       "cmake -E make_directory ${SCLOG_CTEST_COVERAGE_DIR}"
-          	"${GCOVR_BIN} --html --html-details --html-title sclog -f ${CTEST_SCRIPT_DIRECTORY}/src/\\* --exclude-directories .\\*CompilerIdC\\* -r ${CTEST_SCRIPT_DIRECTORY} --object-directory=${SCLOG_OBJECT_DIRECTORY} -o ${SCLOG_CTEST_COVERAGE_DIR}/index.html")
+          	"${GCOVR_BIN} --html --html-details --html-title sclog -f ${CTEST_SCRIPT_DIRECTORY}/lib/\\* --exclude-directories .\\*CompilerIdC\\* -r ${CTEST_SCRIPT_DIRECTORY} --object-directory=${SCLOG_OBJECT_DIRECTORY} -o ${SCLOG_CTEST_COVERAGE_DIR}/index.html")
   set(CTEST_CUSTOM_COVERAGE_EXCLUDE ${CTEST_CUSTOM_COVERAGE_EXCLUDE} ".*/tests/.*")
 endif()
  
