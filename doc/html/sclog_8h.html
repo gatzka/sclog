@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('sclog_8h.html',''); initResizable(); }
 <div class="title">sclog.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="sclog__export_8h_source.html">sclog_export.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;sclog/export.h&quot;</code><br />
 </div>
 <p><a href="sclog_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -123,12 +123,12 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aaf9cc3e9cc658b16ddd4eb3513b0cb76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sclog__export_8h.html#a7e696ffac9d1ff608a67336a880f50ce">SCLOG_EXPORT</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sclog_8h.html#aaf9cc3e9cc658b16ddd4eb3513b0cb76">sclog_init</a> (struct <a class="el" href="structsclog.html">sclog</a> *log, const char *application, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a> init_level, struct <a class="el" href="structsclog__sink.html">sclog_sink</a> *sink)</td></tr>
-<tr class="separator:aaf9cc3e9cc658b16ddd4eb3513b0cb76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcca1103d9f4a280e87d635328d12c1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sclog__export_8h.html#a7e696ffac9d1ff608a67336a880f50ce">SCLOG_EXPORT</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sclog_8h.html#afcca1103d9f4a280e87d635328d12c1d">sclog_close</a> (const struct <a class="el" href="structsclog.html">sclog</a> *log)</td></tr>
-<tr class="separator:afcca1103d9f4a280e87d635328d12c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d26d47adda1eb7d321a0b18f33bb315"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sclog__export_8h.html#a7e696ffac9d1ff608a67336a880f50ce">SCLOG_EXPORT</a> int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sclog_8h.html#a9d26d47adda1eb7d321a0b18f33bb315">sclog_message</a> (struct <a class="el" href="structsclog.html">sclog</a> *log, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a> level, const char *format,...)</td></tr>
-<tr class="separator:a9d26d47adda1eb7d321a0b18f33bb315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f26b4c526b56c9b31ece4b7064ecc8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sclog_8h.html#ae0f26b4c526b56c9b31ece4b7064ecc8">sclog_init</a> (struct <a class="el" href="structsclog.html">sclog</a> *log, const char *application, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a> init_level, struct <a class="el" href="structsclog__sink.html">sclog_sink</a> *sink)</td></tr>
+<tr class="separator:ae0f26b4c526b56c9b31ece4b7064ecc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a872da51f8b81f28aec029d7123059dbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sclog_8h.html#a872da51f8b81f28aec029d7123059dbd">sclog_close</a> (const struct <a class="el" href="structsclog.html">sclog</a> *log)</td></tr>
+<tr class="separator:a872da51f8b81f28aec029d7123059dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a675b55eeefddf7dca3fde2868fdf279c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sclog_8h.html#a675b55eeefddf7dca3fde2868fdf279c">sclog_message</a> (struct <a class="el" href="structsclog.html">sclog</a> *log, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a> level, const char *format,...)</td></tr>
+<tr class="separator:a675b55eeefddf7dca3fde2868fdf279c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a66c87549a0942921baf4d98ba5612c98"></a>
@@ -168,14 +168,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="afcca1103d9f4a280e87d635328d12c1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcca1103d9f4a280e87d635328d12c1d">&#9670;&nbsp;</a></span>sclog_close()</h2>
+<a id="a872da51f8b81f28aec029d7123059dbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a872da51f8b81f28aec029d7123059dbd">&#9670;&nbsp;</a></span>sclog_close()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sclog__export_8h.html#a7e696ffac9d1ff608a67336a880f50ce">SCLOG_EXPORT</a> void sclog_close </td>
+          <td class="memname">void sclog_close </td>
           <td>(</td>
           <td class="paramtype">const struct <a class="el" href="structsclog.html">sclog</a> *&#160;</td>
           <td class="paramname"><em>log</em></td><td>)</td>
@@ -186,14 +186,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aaf9cc3e9cc658b16ddd4eb3513b0cb76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf9cc3e9cc658b16ddd4eb3513b0cb76">&#9670;&nbsp;</a></span>sclog_init()</h2>
+<a id="ae0f26b4c526b56c9b31ece4b7064ecc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0f26b4c526b56c9b31ece4b7064ecc8">&#9670;&nbsp;</a></span>sclog_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sclog__export_8h.html#a7e696ffac9d1ff608a67336a880f50ce">SCLOG_EXPORT</a> int sclog_init </td>
+          <td class="memname">int sclog_init </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structsclog.html">sclog</a> *&#160;</td>
           <td class="paramname"><em>log</em>, </td>
@@ -226,14 +226,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9d26d47adda1eb7d321a0b18f33bb315"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d26d47adda1eb7d321a0b18f33bb315">&#9670;&nbsp;</a></span>sclog_message()</h2>
+<a id="a675b55eeefddf7dca3fde2868fdf279c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a675b55eeefddf7dca3fde2868fdf279c">&#9670;&nbsp;</a></span>sclog_message()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sclog__export_8h.html#a7e696ffac9d1ff608a67336a880f50ce">SCLOG_EXPORT</a> int sclog_message </td>
+          <td class="memname">int sclog_message </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structsclog.html">sclog</a> *&#160;</td>
           <td class="paramname"><em>log</em>, </td>
