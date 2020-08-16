@@ -29,8 +29,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "posix/sclog_syslog_sink.h"
-#include "sclog.h"
+#include "sclog/sclog.h"
+#include "sclog/syslog_sink.h"
 
 int main(void)
 {

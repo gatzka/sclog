@@ -1,7 +1,7 @@
 /*
  * SPDX-License-Identifier: MIT
  *
- * The MIT License (MIT)
+ *The MIT License (MIT)
  *
  * Copyright (c) <2019> <Stephan Gatzka>
  *
@@ -26,51 +26,20 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef SCLOG_SYSTEMD_H
+#define SCLOG_SYSTEMD_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "sclog/export.h"
 #include "sclog/sclog.h"
-#include "sclog/stderr_sink.h"
 
-int main(void)
-{
+SCLOG_EXPORT int sclog_systemd_sink_init(struct sclog_sink *sink);
 
-	struct sclog stderr_log;
-	struct sclog_sink stderr_sink;
-	if (sclog_stderr_sink_init(&stderr_sink) != 0) {
-		return EXIT_FAILURE;
-	}
-
-	if (sclog_init(&stderr_log, "stderr_log_example", SCLOG_WARNING, &stderr_sink) != 0) {
-		return EXIT_FAILURE;
-	}
-
-
-	int ret = sclog_message(&stderr_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&stderr_log);
-
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&stderr_log);
-	return EXIT_FAILURE;
+#ifdef __cplusplus
 }
+#endif
+
+#endif

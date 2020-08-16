@@ -26,51 +26,44 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdio.h>
 
+#include "sclog/compiler.h"
 #include "sclog/sclog.h"
-#include "sclog/stderr_sink.h"
 
-int main(void)
+int sclog_init(struct sclog *log, const char *application, enum sclog_level init_level, struct sclog_sink *sink)
 {
-
-	struct sclog stderr_log;
-	struct sclog_sink stderr_sink;
-	if (sclog_stderr_sink_init(&stderr_sink) != 0) {
-		return EXIT_FAILURE;
+	if ((log == NULL) || (sink == NULL)) {
+		return -1;
 	}
 
-	if (sclog_init(&stderr_log, "stderr_log_example", SCLOG_WARNING, &stderr_sink) != 0) {
-		return EXIT_FAILURE;
+	log->application = application;
+	log->guard_level = init_level;
+	log->sink = sink;
+
+	return log->sink->init(log->sink->context);
+}
+
+void sclog_close(const struct sclog *log)
+{
+	log->sink->close(log->sink->context);
+}
+
+// clang-format off
+__attribute__((format(printf, 3, 4)))
+int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...)
+// clang-format on
+{
+	if ((level == SCLOG_NONE) || (level > log->guard_level)) {
+		return -1;
 	}
 
+	va_list args;
+	va_start(args, format);
+	vsnprintf(log->log_buffer, sizeof(log->log_buffer), format, args);
+	va_end(args);
 
-	int ret = sclog_message(&stderr_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&stderr_log);
-
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&stderr_log);
-	return EXIT_FAILURE;
+	return log->sink->log_message(log->sink->context, level, log->application, log->log_buffer);
 }

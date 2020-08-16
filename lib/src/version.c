@@ -3,7 +3,7 @@
  *
  * The MIT License (MIT)
  *
- * Copyright (c) <2019> <Stephan Gatzka>
+ * Copyright (c) <2017> <Stephan Gatzka>
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,51 +26,24 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#include "sclog/version.h"
+#include "sclog/version_private.h"
 
-#include "sclog/sclog.h"
-#include "sclog/stderr_sink.h"
-
-int main(void)
+const char *sclog_get_version_string(void)
 {
+	return SCLOG_VERSION;
+}
 
-	struct sclog stderr_log;
-	struct sclog_sink stderr_sink;
-	if (sclog_stderr_sink_init(&stderr_sink) != 0) {
-		return EXIT_FAILURE;
-	}
+unsigned int sclog_get_version_major(void)
+{
+	return SCLOG_VERSION_MAJOR;
+}
 
-	if (sclog_init(&stderr_log, "stderr_log_example", SCLOG_WARNING, &stderr_sink) != 0) {
-		return EXIT_FAILURE;
-	}
-
-
-	int ret = sclog_message(&stderr_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&stderr_log);
-
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&stderr_log);
-	return EXIT_FAILURE;
+unsigned int sclog_get_version_minor(void)
+{
+	return SCLOG_VERSION_MINOR;
+}
+unsigned int sclog_get_version_patch(void)
+{
+	return SCLOG_VERSION_PATCH;
 }

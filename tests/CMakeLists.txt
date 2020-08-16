@@ -1,5 +1,21 @@
 cmake_minimum_required(VERSION 3.7)
 project(sclog_unit_test C)
+
+find_package(Git QUIET REQUIRED)
+if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/../.git")
+# Update submodules as needed
+    option(GIT_SUBMODULE "Check submodules during build" ON)
+    if(GIT_SUBMODULE)
+        message(STATUS "Submodule update")
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
+        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+            message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+        endif()
+    endif()
+endif()
+
 enable_testing()
 
 add_library(fff INTERFACE)
@@ -17,7 +33,7 @@ target_include_directories(unity PUBLIC ${CMAKE_CURRENT_LIST_DIR}/unity/src/)
 
 add_executable(test_sclog_version
     test_sclog_version.c
-    ../src/sclog_version.c
+    ../lib/src/version.c
 )
 add_test(NAME sclog.common.test_version COMMAND test_sclog_version)
 

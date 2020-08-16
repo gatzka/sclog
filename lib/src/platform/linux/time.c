@@ -26,51 +26,16 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#include <time.h>
 
-#include "sclog/sclog.h"
-#include "sclog/stderr_sink.h"
+#include "sclog/time.h"
 
-int main(void)
+int sclog_gmtime(const time_t *time_p, struct tm *result)
 {
-
-	struct sclog stderr_log;
-	struct sclog_sink stderr_sink;
-	if (sclog_stderr_sink_init(&stderr_sink) != 0) {
-		return EXIT_FAILURE;
+	const struct tm *ret = gmtime_r(time_p, result);
+	if (ret == NULL) {
+		return -1;
 	}
 
-	if (sclog_init(&stderr_log, "stderr_log_example", SCLOG_WARNING, &stderr_sink) != 0) {
-		return EXIT_FAILURE;
-	}
-
-
-	int ret = sclog_message(&stderr_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&stderr_log);
-
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&stderr_log);
-	return EXIT_FAILURE;
+	return 0;
 }

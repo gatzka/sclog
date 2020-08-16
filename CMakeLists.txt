@@ -78,12 +78,11 @@ include(CTest)
 
 option(SCLOG_EXAMPLES "build examples" ON)
 
-add_subdirectory(src)
+add_subdirectory(lib)
 add_subdirectory(tests)
 if(SCLOG_EXAMPLES)
   add_subdirectory(examples)
 endif()
-
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/)
 
@@ -92,10 +91,13 @@ include(ClangFormat)
 file(GLOB FILES_TO_FORMAT
   ${PROJECT_SOURCE_DIR}/examples/*.c
   ${PROJECT_SOURCE_DIR}/examples/*.h
-  ${PROJECT_SOURCE_DIR}/src/*.c
-  ${PROJECT_SOURCE_DIR}/src/*.h
-  ${PROJECT_SOURCE_DIR}/src/posix/*.c
-  ${PROJECT_SOURCE_DIR}/src/posix/*.h
+  ${PROJECT_SOURCE_DIR}/lib/src/*.c
+  ${PROJECT_SOURCE_DIR}/lib/src/platform/linux/*.c
+  ${PROJECT_SOURCE_DIR}/lib/src/platform/posix/*.c
+  ${PROJECT_SOURCE_DIR}/lib/src/platform/windows/*.c
+  ${PROJECT_SOURCE_DIR}/lib/include/sclog/*.h
+  ${PROJECT_SOURCE_DIR}/lib/include/platform/linux/sclog/*.h
+  ${PROJECT_SOURCE_DIR}/lib/include/platform/posix/sclog/*.h
   ${PROJECT_SOURCE_DIR}/tests/*.c
   ${PROJECT_SOURCE_DIR}/tests/*.h
 )

@@ -26,51 +26,43 @@
  * SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#include <stddef.h>
+#include <systemd/sd-journal.h>
 
+#include "sclog/posix_util.h"
 #include "sclog/sclog.h"
-#include "sclog/stderr_sink.h"
+#include "sclog/systemd_sink.h"
 
-int main(void)
+static int init(const void *context)
 {
+	(void)context;
+	return 0;
+}
 
-	struct sclog stderr_log;
-	struct sclog_sink stderr_sink;
-	if (sclog_stderr_sink_init(&stderr_sink) != 0) {
-		return EXIT_FAILURE;
+static void close(const void *context)
+{
+	(void)context;
+}
+
+static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
+{
+	(void)context;
+	(void)application;
+
+	sd_journal_print(sclog_get_syslog_priority(level), "%s", message);
+
+	return 0;
+}
+
+int sclog_systemd_sink_init(struct sclog_sink *sink)
+{
+	if (sink == NULL) {
+		return -1;
 	}
 
-	if (sclog_init(&stderr_log, "stderr_log_example", SCLOG_WARNING, &stderr_sink) != 0) {
-		return EXIT_FAILURE;
-	}
+	sink->init = init;
+	sink->close = close;
+	sink->log_message = log_message;
 
-
-	int ret = sclog_message(&stderr_log, SCLOG_ERROR, "Hello error!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_WARNING, "Hello warning!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_INFO, "Hello info!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	ret = sclog_message(&stderr_log, SCLOG_DEBUG, "Hello debug!");
-	if (ret < 0) {
-		goto err;
-	}
-
-	sclog_close(&stderr_log);
-
-	return EXIT_SUCCESS;
-
-err:
-	sclog_close(&stderr_log);
-	return EXIT_FAILURE;
+	return 0;
 }
