@@ -26,7 +26,6 @@
  * SOFTWARE.
  */
 
-
 #ifndef SCLOG_TIME_H
 #define SCLOG_TIME_H
 

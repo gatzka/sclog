@@ -91,13 +91,13 @@ include(ClangFormat)
 file(GLOB FILES_TO_FORMAT
   ${PROJECT_SOURCE_DIR}/examples/*.c
   ${PROJECT_SOURCE_DIR}/examples/*.h
+  ${PROJECT_SOURCE_DIR}/lib/include/platform/linux/sclog/*.h
+  ${PROJECT_SOURCE_DIR}/lib/include/platform/posix/sclog/*.h
+  ${PROJECT_SOURCE_DIR}/lib/include/sclog/*.h
   ${PROJECT_SOURCE_DIR}/lib/src/*.c
   ${PROJECT_SOURCE_DIR}/lib/src/platform/linux/*.c
   ${PROJECT_SOURCE_DIR}/lib/src/platform/posix/*.c
   ${PROJECT_SOURCE_DIR}/lib/src/platform/windows/*.c
-  ${PROJECT_SOURCE_DIR}/lib/include/sclog/*.h
-  ${PROJECT_SOURCE_DIR}/lib/include/platform/linux/sclog/*.h
-  ${PROJECT_SOURCE_DIR}/lib/include/platform/posix/sclog/*.h
   ${PROJECT_SOURCE_DIR}/tests/*.c
   ${PROJECT_SOURCE_DIR}/tests/*.h
 )

@@ -45,7 +45,6 @@ int main(void)
 		return EXIT_FAILURE;
 	}
 
-
 	int ret = sclog_message(&stderr_log, SCLOG_ERROR, "Hello error!");
 	if (ret < 0) {
 		goto err;

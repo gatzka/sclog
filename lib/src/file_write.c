@@ -34,7 +34,7 @@
 #include "sclog/file_write.h"
 #include "sclog/time.h"
 
-enum {MAX_TIME_STRING_LENGTH = 21};
+enum { MAX_TIME_STRING_LENGTH = 21 };
 
 static void get_time(char *buffer, size_t buffer_size)
 {
@@ -72,7 +72,7 @@ static const char *get_level_string(enum sclog_level level)
 	}
 }
 
-enum { EXTRA_LOG_CHARACTERS = 6}; // white spaces and ":"
+enum { EXTRA_LOG_CHARACTERS = 6 }; // white spaces and ":"
 
 long sclog_log_get_log_message_length(const char *application, const char *message)
 {
@@ -95,4 +95,3 @@ int sclog_log_message_to_file(FILE *fp, enum sclog_level level, const char *appl
 	fflush(fp);
 	return 0;
 }
-

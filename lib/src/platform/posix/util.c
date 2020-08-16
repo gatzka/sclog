@@ -48,4 +48,3 @@ int sclog_get_syslog_priority(enum sclog_level level)
 		return -1;
 	}
 }
-
