@@ -61,6 +61,10 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 endif()
 
 if(IS_LINUX)
+    target_sources(${PROJECT_NAME} PRIVATE
+        src/platform/linux/sclog_linux_time.c
+    )
+
     find_library(SYSD_LIB systemd)
     if(SYSD_LIB)
         option(SCLOG_CONFIG_SYSTEMD "Add support for systemd log facility" ON)
@@ -88,7 +92,6 @@ if(IS_LINUX)
         pkg_check_modules(SYSTEMD REQUIRED libsystemd)
 
         target_sources(${PROJECT_NAME} PRIVATE
-            src/platform/linux/sclog_linux_time.c
             src/platform/linux/sclog_systemd_sink.c
         )
 
