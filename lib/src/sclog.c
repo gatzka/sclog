@@ -30,8 +30,8 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#include "sclog/compiler.h"
 #include "sclog/sclog.h"
-#include "sclog/sclog_compiler.h"
 
 int sclog_init(struct sclog *log, const char *application, enum sclog_level init_level, struct sclog_sink *sink)
 {

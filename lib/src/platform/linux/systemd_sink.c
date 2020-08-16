@@ -27,23 +27,21 @@
  */
 
 #include <stddef.h>
-#include <syslog.h>
+#include <systemd/sd-journal.h>
 
+#include "sclog/posix_util.h"
 #include "sclog/sclog.h"
-#include "sclog/sclog_posix_util.h"
-#include "sclog/sclog_syslog_sink.h"
+#include "sclog/systemd_sink.h"
 
 static int init(const void *context)
 {
-	const struct sclog *log = (const struct sclog *)context;
-	openlog(log->application, 0, LOG_USER);
+	(void)context;
 	return 0;
 }
 
 static void close(const void *context)
 {
 	(void)context;
-	closelog();
 }
 
 static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
@@ -51,12 +49,12 @@ static int log_message(const void *context, enum sclog_level level, const char *
 	(void)context;
 	(void)application;
 
-	syslog(sclog_get_syslog_priority(level), "%s", message);
+	sd_journal_print(sclog_get_syslog_priority(level), "%s", message);
 
 	return 0;
 }
 
-int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log)
+int sclog_systemd_sink_init(struct sclog_sink *sink)
 {
 	if (sink == NULL) {
 		return -1;
@@ -65,7 +63,6 @@ int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log)
 	sink->init = init;
 	sink->close = close;
 	sink->log_message = log_message;
-	sink->context = log;
 
 	return 0;
 }

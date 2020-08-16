@@ -26,43 +26,16 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
-#include <systemd/sd-journal.h>
+#include <time.h>
 
-#include "sclog/sclog.h"
-#include "sclog/sclog_posix_util.h"
-#include "sclog/sclog_systemd_sink.h"
+#include "sclog/time.h"
 
-static int init(const void *context)
+int sclog_gmtime(const time_t *time_p, struct tm *result)
 {
-	(void)context;
-	return 0;
-}
-
-static void close(const void *context)
-{
-	(void)context;
-}
-
-static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
-{
-	(void)context;
-	(void)application;
-
-	sd_journal_print(sclog_get_syslog_priority(level), "%s", message);
-
-	return 0;
-}
-
-int sclog_systemd_sink_init(struct sclog_sink *sink)
-{
-	if (sink == NULL) {
+	errno_t err = gmtime_s(result, time_p);
+	if (err == 0) {
 		return -1;
 	}
-
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
 
 	return 0;
 }

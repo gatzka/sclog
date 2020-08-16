@@ -1,21 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 project(sclog VERSION 0.0.1 LANGUAGES C)
 
-find_package(Git QUIET REQUIRED)
-if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/../.git")
-# Update submodules as needed
-    option(GIT_SUBMODULE "Check submodules during build" ON)
-    if(GIT_SUBMODULE)
-        message(STATUS "Submodule update")
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
-        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-            message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-        endif()
-    endif()
-endif()
-
 add_custom_target(${PROJECT_NAME}_generate_semver
     COMMAND ${CMAKE_COMMAND}
         -DPROJECT_NAME=${PROJECT_NAME}
@@ -23,27 +8,27 @@ add_custom_target(${PROJECT_NAME}_generate_semver
         -DPROJECT_VERSION_MINOR=${${PROJECT_NAME}_VERSION_MINOR}
         -DPROJECT_VERSION_PATCH=${${PROJECT_NAME}_VERSION_PATCH}
         -DGIT_WORK_DIR=${CMAKE_CURRENT_LIST_DIR}
-        -DINPUT_FILE=${CMAKE_CURRENT_LIST_DIR}/include/sclog/sclog_version_private.h.in
-        -DOUTPUT_FILE=${CMAKE_CURRENT_BINARY_DIR}/generated/sclog/sclog_version_private.h
+        -DINPUT_FILE=${CMAKE_CURRENT_LIST_DIR}/include/sclog/version_private.h.in
+        -DOUTPUT_FILE=${CMAKE_CURRENT_BINARY_DIR}/generated/sclog/version_private.h
         -P ${CMAKE_CURRENT_SOURCE_DIR}/generate_version.cmake
 )
 
 add_library(${PROJECT_NAME}
+    include/sclog/compiler.h
+    include/sclog/file_rotate.h
+    include/sclog/file_write.h
+    include/sclog/null_sink.h
     include/sclog/sclog.h
-    include/sclog/sclog_compiler.h
-    include/sclog/sclog_file_rotate.h
-    include/sclog/sclog_file_write.h
-    include/sclog/sclog_null_sink.h
-    include/sclog/sclog_stderr_sink.h
-    include/sclog/sclog_time.h
-    include/sclog/sclog_util.h
-    include/sclog/sclog_version.h
+    include/sclog/stderr_sink.h
+    include/sclog/time.h
+    include/sclog/util.h
+    include/sclog/version.h
+    src/file_rotate_sink.c
+    src/file_write.c
+    src/null_sink.c
     src/sclog.c
-    src/sclog_file_rotate_sink.c
-    src/sclog_file_write.c
-    src/sclog_null_sink.c
-    src/sclog_stderr_sink.c
-    src/sclog_version.c
+    src/stderr_sink.c
+    src/version.c
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -62,7 +47,7 @@ endif()
 
 if(IS_LINUX)
     target_sources(${PROJECT_NAME} PRIVATE
-        src/platform/linux/sclog_linux_time.c
+        src/platform/linux/time.c
     )
 
     find_library(SYSD_LIB systemd)
@@ -74,16 +59,16 @@ if(IS_LINUX)
 
     if(SCLOG_CONFIG_SYSLOG)
         target_sources(${PROJECT_NAME} PRIVATE
-            src/platform/posix/sclog_posix_util.c
-            src/platform/posix/sclog_syslog_sink.c
+            src/platform/posix/syslog_sink.c
+            src/platform/posix/util.c
         )
         
         target_include_directories(${PROJECT_NAME} PUBLIC
             $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include/platform/posix/>
         )
         set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY PUBLIC_HEADER
-            include/platform/posix/sclog/sclog_posix_util.h
-            include/platform/posix/sclog/sclog_syslog_sink.h
+            include/platform/posix/sclog/posix_util.h
+            include/platform/posix/sclog/syslog_sink.h
         )
     endif()
 
@@ -92,7 +77,7 @@ if(IS_LINUX)
         pkg_check_modules(SYSTEMD REQUIRED libsystemd)
 
         target_sources(${PROJECT_NAME} PRIVATE
-            src/platform/linux/sclog_systemd_sink.c
+            src/platform/linux/systemd_sink.c
         )
 
         target_include_directories(${PROJECT_NAME} PUBLIC
@@ -102,12 +87,12 @@ if(IS_LINUX)
         target_link_libraries(${PROJECT_NAME} INTERFACE ${SYSTEMD_LIBRARIES})
 
         set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY PUBLIC_HEADER
-            include/platform/linux/sclog/sclog_systemd_sink.h
+            include/platform/linux/sclog/systemd_sink.h
         )
     endif()
 elseif(IS_WINDOWS)
     target_sources(${PROJECT_NAME} PRIVATE
-        src/platform/windows/sclog_windows_time.c
+        src/platform/windows/time.c
     )
 endif()
 
@@ -127,12 +112,12 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 
 set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY PUBLIC_HEADER
+    include/sclog/compiler.h
+    include/sclog/file_rotate.h
+    include/sclog/null_sink.h
     include/sclog/sclog.h
-    include/sclog/sclog_version.h
-    include/sclog/sclog_file_rotate.h
-    include/sclog/sclog_compiler.h
-    include/sclog/sclog_null_sink.h
-    include/sclog/sclog_stderr_sink.h
+    include/sclog/stderr_sink.h
+    include/sclog/version.h
 )
 
 include(GenerateExportHeader)

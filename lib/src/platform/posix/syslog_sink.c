@@ -3,7 +3,7 @@
  *
  * The MIT License (MIT)
  *
- * Copyright (c) <2017> <Stephan Gatzka>
+ * Copyright (c) <2019> <Stephan Gatzka>
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,24 +26,46 @@
  * SOFTWARE.
  */
 
-#include "sclog/sclog_version.h"
-#include "sclog/sclog_version_private.h"
+#include <stddef.h>
+#include <syslog.h>
 
-const char *sclog_get_version_string(void)
+#include "sclog/posix_util.h"
+#include "sclog/sclog.h"
+#include "sclog/syslog_sink.h"
+
+static int init(const void *context)
 {
-	return SCLOG_VERSION;
+	const struct sclog *log = (const struct sclog *)context;
+	openlog(log->application, 0, LOG_USER);
+	return 0;
 }
 
-unsigned int sclog_get_version_major(void)
+static void close(const void *context)
 {
-	return SCLOG_VERSION_MAJOR;
+	(void)context;
+	closelog();
 }
 
-unsigned int sclog_get_version_minor(void)
+static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
 {
-	return SCLOG_VERSION_MINOR;
+	(void)context;
+	(void)application;
+
+	syslog(sclog_get_syslog_priority(level), "%s", message);
+
+	return 0;
 }
-unsigned int sclog_get_version_patch(void)
+
+int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log)
 {
-	return SCLOG_VERSION_PATCH;
+	if (sink == NULL) {
+		return -1;
+	}
+
+	sink->init = init;
+	sink->close = close;
+	sink->log_message = log_message;
+	sink->context = log;
+
+	return 0;
 }

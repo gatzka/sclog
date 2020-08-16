@@ -31,8 +31,8 @@
 #include <string.h>
 #include <time.h>
 
-#include "sclog/sclog_file_write.h"
-#include "sclog/sclog_time.h"
+#include "sclog/file_write.h"
+#include "sclog/time.h"
 
 enum {MAX_TIME_STRING_LENGTH = 21};
 

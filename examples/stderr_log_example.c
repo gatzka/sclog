@@ -30,7 +30,7 @@
 #include <string.h>
 
 #include "sclog/sclog.h"
-#include "sclog/sclog_stderr_sink.h"
+#include "sclog/stderr_sink.h"
 
 int main(void)
 {

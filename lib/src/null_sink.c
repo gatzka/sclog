@@ -26,16 +26,41 @@
  * SOFTWARE.
  */
 
-#include <time.h>
+#include <stddef.h>
+#include <stdio.h>
 
-#include "sclog/sclog_time.h"
+#include "sclog/null_sink.h"
+#include "sclog/sclog.h"
 
-int sclog_gmtime(const time_t *time_p, struct tm *result)
+static int init(const void *context)
 {
-	const struct tm *ret = gmtime_r(time_p, result);
-	if (ret == NULL) {
+	(void)context;
+	return 0;
+}
+
+static void close(const void *context)
+{
+	(void)context;
+}
+
+static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
+{
+	(void)context;
+	(void)level;
+	(void)application;
+	(void)message;
+	return 0;
+}
+
+int sclog_null_sink_init(struct sclog_sink *sink)
+{
+	if (sink == NULL) {
 		return -1;
 	}
+
+	sink->init = init;
+	sink->close = close;
+	sink->log_message = log_message;
 
 	return 0;
 }

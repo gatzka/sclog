@@ -26,41 +26,16 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
-#include <stdio.h>
 #include <time.h>
 
-#include "sclog/sclog.h"
-#include "sclog/sclog_file_write.h"
-#include "sclog/sclog_stderr_sink.h"
+#include "sclog/time.h"
 
-static int init(const void *context)
+int sclog_gmtime(const time_t *time_p, struct tm *result)
 {
-	(void)context;
-	return 0;
-}
-
-static void close(const void *context)
-{
-	(void)context;
-}
-
-
-static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
-{
-	(void)context;
-	return sclog_log_message_to_file(stderr, level, application, message);
-}
-
-int sclog_stderr_sink_init(struct sclog_sink *sink)
-{
-	if (sink == NULL) {
+	const struct tm *ret = gmtime_r(time_p, result);
+	if (ret == NULL) {
 		return -1;
 	}
-
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
 
 	return 0;
 }

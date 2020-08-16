@@ -26,26 +26,41 @@
  * SOFTWARE.
  */
 
-#include <syslog.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <time.h>
 
+#include "sclog/file_write.h"
 #include "sclog/sclog.h"
-#include "sclog/sclog_posix_util.h"
+#include "sclog/stderr_sink.h"
 
-int sclog_get_syslog_priority(enum sclog_level level)
+static int init(const void *context)
 {
-	switch (level) {
-	case SCLOG_NONE:
-		return LOG_INFO;
-	case SCLOG_ERROR:
-		return LOG_ERR;
-	case SCLOG_WARNING:
-		return LOG_WARNING;
-	case SCLOG_INFO:
-		return LOG_INFO;
-	case SCLOG_DEBUG:
-		return LOG_DEBUG;
-	default:
-		return -1;
-	}
+	(void)context;
+	return 0;
 }
 
+static void close(const void *context)
+{
+	(void)context;
+}
+
+
+static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
+{
+	(void)context;
+	return sclog_log_message_to_file(stderr, level, application, message);
+}
+
+int sclog_stderr_sink_init(struct sclog_sink *sink)
+{
+	if (sink == NULL) {
+		return -1;
+	}
+
+	sink->init = init;
+	sink->close = close;
+	sink->log_message = log_message;
+
+	return 0;
+}

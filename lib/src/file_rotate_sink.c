@@ -29,9 +29,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "sclog/sclog_file_rotate.h"
-#include "sclog/sclog_file_write.h"
-#include "sclog/sclog_util.h"
+#include "sclog/file_rotate.h"
+#include "sclog/file_write.h"
+#include "sclog/util.h"
 
 enum { FILENAME_BUFFER_SIZE = 255 };
 

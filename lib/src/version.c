@@ -3,7 +3,7 @@
  *
  * The MIT License (MIT)
  *
- * Copyright (c) <2019> <Stephan Gatzka>
+ * Copyright (c) <2017> <Stephan Gatzka>
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -26,41 +26,24 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
-#include <stdio.h>
+#include "sclog/version.h"
+#include "sclog/version_private.h"
 
-#include "sclog/sclog.h"
-#include "sclog/sclog_null_sink.h"
-
-static int init(const void *context)
+const char *sclog_get_version_string(void)
 {
-	(void)context;
-	return 0;
+	return SCLOG_VERSION;
 }
 
-static void close(const void *context)
+unsigned int sclog_get_version_major(void)
 {
-	(void)context;
+	return SCLOG_VERSION_MAJOR;
 }
 
-static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
+unsigned int sclog_get_version_minor(void)
 {
-	(void)context;
-	(void)level;
-	(void)application;
-	(void)message;
-	return 0;
+	return SCLOG_VERSION_MINOR;
 }
-
-int sclog_null_sink_init(struct sclog_sink *sink)
+unsigned int sclog_get_version_patch(void)
 {
-	if (sink == NULL) {
-		return -1;
-	}
-
-	sink->init = init;
-	sink->close = close;
-	sink->log_message = log_message;
-
-	return 0;
+	return SCLOG_VERSION_PATCH;
 }

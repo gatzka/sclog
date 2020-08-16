@@ -26,16 +26,26 @@
  * SOFTWARE.
  */
 
-#include <time.h>
+#include <syslog.h>
 
-#include "sclog/sclog_time.h"
+#include "sclog/posix_util.h"
+#include "sclog/sclog.h"
 
-int sclog_gmtime(const time_t *time_p, struct tm *result)
+int sclog_get_syslog_priority(enum sclog_level level)
 {
-	errno_t err = gmtime_s(result, time_p);
-	if (err == 0) {
+	switch (level) {
+	case SCLOG_NONE:
+		return LOG_INFO;
+	case SCLOG_ERROR:
+		return LOG_ERR;
+	case SCLOG_WARNING:
+		return LOG_WARNING;
+	case SCLOG_INFO:
+		return LOG_INFO;
+	case SCLOG_DEBUG:
+		return LOG_DEBUG;
+	default:
 		return -1;
 	}
-
-	return 0;
 }
+
