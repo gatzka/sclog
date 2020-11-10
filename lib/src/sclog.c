@@ -61,5 +61,11 @@ int sclog_message(struct sclog *log, enum sclog_level level, const char *format,
 	vsnprintf(log->log_buffer, sizeof(log->log_buffer), format, args);
 	va_end(args);
 
-	return log->sink->log_message(log->sink->context, level, log->application, log->log_buffer);
+	int ret = 0;
+
+	for (size_t i = 0; i < log->number_of_sinks; i++) {
+		ret |= log->sink[i].log_message(log->sink->context, level, log->application, log->log_buffer);
+	}
+
+	return ret;
 }
