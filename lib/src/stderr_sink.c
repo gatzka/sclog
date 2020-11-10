@@ -47,7 +47,7 @@ static void close(const void *context)
 
 static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
 {
-	struct sclog_sink *sink = (struct sclog_sink *)context;
+	const struct sclog_sink *sink = (const struct sclog_sink *)context;
 	if ((level == SCLOG_NONE) || (level > sink->guard_level)) {
 		return -1;
 	}
