@@ -33,6 +33,8 @@
 extern "C" {
 #endif
 
+#include <stddef.h>
+
 #include "sclog/export.h"
 
 #define SCLOG_BUFFER_SIZE 200
@@ -49,17 +51,18 @@ struct sclog_sink {
 	int (*init)(const void *context);
 	void (*close)(const void *context);
 	int (*log_message)(const void *context, enum sclog_level, const char *application, const char *message);
+	enum sclog_level guard_level;
 	void *context;
 };
 
 struct sclog {
 	const char *application;
-	enum sclog_level guard_level;
 	char log_buffer[SCLOG_BUFFER_SIZE];
+	size_t number_of_sinks;
 	struct sclog_sink *sink;
 };
 
-SCLOG_EXPORT int sclog_init(struct sclog *log, const char *application, enum sclog_level init_level, struct sclog_sink *sink);
+SCLOG_EXPORT int sclog_init(struct sclog *log, const char *application, struct sclog_sink *sink, size_t number_of_sinks);
 SCLOG_EXPORT void sclog_close(const struct sclog *log);
 SCLOG_EXPORT int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...);
 

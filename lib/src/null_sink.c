@@ -61,6 +61,7 @@ int sclog_null_sink_init(struct sclog_sink *sink)
 	sink->init = init;
 	sink->close = close;
 	sink->log_message = log_message;
+	sink->guard_level = SCLOG_INFO;
 
 	return 0;
 }

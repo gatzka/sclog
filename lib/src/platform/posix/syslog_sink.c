@@ -56,7 +56,7 @@ static int log_message(const void *context, enum sclog_level level, const char *
 	return 0;
 }
 
-int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log)
+int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log, enum sclog_level level)
 {
 	if (sink == NULL) {
 		return -1;
@@ -66,6 +66,6 @@ int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log)
 	sink->close = close;
 	sink->log_message = log_message;
 	sink->context = log;
-
+	sink->guard_level = level;
 	return 0;
 }

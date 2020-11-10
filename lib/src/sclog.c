@@ -33,15 +33,15 @@
 #include "sclog/compiler.h"
 #include "sclog/sclog.h"
 
-int sclog_init(struct sclog *log, const char *application, enum sclog_level init_level, struct sclog_sink *sink)
+int sclog_init(struct sclog *log, const char *application, struct sclog_sink *sink, size_t number_of_sinks)
 {
 	if ((log == NULL) || (sink == NULL)) {
 		return -1;
 	}
 
 	log->application = application;
-	log->guard_level = init_level;
 	log->sink = sink;
+	log->number_of_sinks = number_of_sinks;
 
 	return log->sink->init(log->sink->context);
 }
@@ -56,10 +56,6 @@ __attribute__((format(printf, 3, 4)))
 int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...)
 // clang-format on
 {
-	if ((level == SCLOG_NONE) || (level > log->guard_level)) {
-		return -1;
-	}
-
 	va_list args;
 	va_start(args, format);
 	vsnprintf(log->log_buffer, sizeof(log->log_buffer), format, args);
