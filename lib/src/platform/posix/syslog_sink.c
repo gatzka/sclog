@@ -35,7 +35,7 @@
 
 static int init(const void *context)
 {
-	struct sclog_syslog_sink *sink = (struct sclog_syslog_sink *)context;
+	const struct sclog_syslog_sink *sink = (const struct sclog_syslog_sink *)context;
 	openlog(sink->log->application, 0, LOG_USER);
 	return 0;
 }
@@ -50,7 +50,7 @@ static int log_message(const void *context, enum sclog_level level, const char *
 {
 	(void)application;
 
-	struct sclog_syslog_sink *sink = (struct sclog_syslog_sink *)context;
+	const struct sclog_syslog_sink *sink = (const struct sclog_syslog_sink *)context;
 
 	if ((level == SCLOG_NONE) || (level > sink->sink.guard_level)) {
 		return -1;
