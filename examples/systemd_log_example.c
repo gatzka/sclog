@@ -36,11 +36,11 @@ int main(void)
 {
 	struct sclog systemd_log;
 	struct sclog_sink systemd_sink;
-	if (sclog_systemd_sink_init(&systemd_sink) != 0) {
+	if (sclog_systemd_sink_init(&systemd_sink, SCLOG_WARNING) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	if (sclog_init(&systemd_log, "systemd_log_example", SCLOG_WARNING, &systemd_sink) != 0) {
+	if (sclog_init(&systemd_log, "systemd_log_example", &systemd_sink, 1) != 0) {
 		return EXIT_FAILURE;
 	}
 

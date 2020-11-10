@@ -47,7 +47,7 @@ struct sclog_file_rotate_sink {
 	long current_file_size;
 };
 
-SCLOG_EXPORT int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, struct sclog *log);
+SCLOG_EXPORT int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, struct sclog *log, enum sclog_level level);
 
 #ifdef __cplusplus
 }

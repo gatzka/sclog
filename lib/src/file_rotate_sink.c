@@ -123,7 +123,7 @@ static int log_message(const void *context, enum sclog_level level, const char *
 	return 0;
 }
 
-int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, struct sclog *log)
+int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, struct sclog *log, enum sclog_level level)
 {
 	if ((fr_sink == NULL) || (fr_sink->number_of_files < 1)) {
 		return -1;
@@ -133,5 +133,6 @@ int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, struct s
 	fr_sink->sink.close = close;
 	fr_sink->sink.log_message = log_message;
 	fr_sink->sink.context = log;
+	fr_sink->sink.guard_level = level;
 	return 0;
 }
