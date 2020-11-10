@@ -36,7 +36,12 @@ extern "C" {
 #include "sclog/export.h"
 #include "sclog/sclog.h"
 
-SCLOG_EXPORT int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log, enum sclog_level level);
+struct sclog_syslog_sink {
+	struct sclog_sink sink;
+    struct sclog *log;
+};
+
+SCLOG_EXPORT int sclog_syslog_sink_init(struct sclog_syslog_sink *sink, struct sclog *log, enum sclog_level level);
 
 #ifdef __cplusplus
 }
