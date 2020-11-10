@@ -47,7 +47,11 @@ static void close(const void *context)
 
 static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
 {
-	(void)context;
+	struct sclog_sink *sink = (struct sclog_sink *)context;
+	if ((level == SCLOG_NONE) || (level > sink->guard_level)) {
+		return -1;
+	}
+
 	return sclog_log_message_to_file(stderr, level, application, message);
 }
 
@@ -61,6 +65,7 @@ int sclog_stderr_sink_init(struct sclog_sink *sink, enum sclog_level level)
 	sink->close = close;
 	sink->log_message = log_message;
 	sink->guard_level = level;
+	sink->context = sink;
 
 	return 0;
 }

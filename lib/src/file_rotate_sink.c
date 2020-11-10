@@ -106,6 +106,11 @@ static int rotate_files(struct sclog_file_rotate_sink *fr_sink)
 static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
 {
 	struct sclog_file_rotate_sink *fr_sink = get_rotate_sink(context);
+
+	if ((level == SCLOG_NONE) || (level > fr_sink->sink.guard_level)) {
+		return -1;
+	}
+
 	long message_length = sclog_log_get_log_message_length(application, message);
 	if (fr_sink->current_file_size + message_length > fr_sink->single_file_size) {
 		int ret = rotate_files(fr_sink);

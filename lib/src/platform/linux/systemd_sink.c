@@ -46,8 +46,13 @@ static void close(const void *context)
 
 static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
 {
-	(void)context;
 	(void)application;
+
+	struct sclog_sink *sink = (struct sclog_sink *)context;
+
+	if ((level == SCLOG_NONE) || (level > sink->guard_level)) {
+		return -1;
+	}
 
 	sd_journal_print(sclog_get_syslog_priority(level), "%s", message);
 
@@ -64,6 +69,7 @@ int sclog_systemd_sink_init(struct sclog_sink *sink, enum sclog_level level)
 	sink->close = close;
 	sink->log_message = log_message;
 	sink->guard_level = level;
+	sink->context = sink;
 
 	return 0;
 }
