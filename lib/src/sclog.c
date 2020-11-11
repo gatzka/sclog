@@ -65,6 +65,17 @@ void sclog_close(const struct sclog *log)
 	}
 }
 
+static int send_buffer_to_sinks(const struct sclog *log, enum sclog_level level)
+{
+	int ret = 0;
+
+	for (size_t i = 0; i < log->number_of_sinks; i++) {
+		ret |= log->sinks[i]->log_message(log->sinks[i]->context, level, log->application, log->log_buffer);
+	}
+
+	return ret;
+}
+
 // clang-format off
 __attribute__((format(printf, 3, 4)))
 int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...)
@@ -75,11 +86,14 @@ int sclog_message(struct sclog *log, enum sclog_level level, const char *format,
 	vsnprintf(log->log_buffer, sizeof(log->log_buffer), format, args);
 	va_end(args);
 
-	int ret = 0;
+	return send_buffer_to_sinks(log, level);
+}
 
-	for (size_t i = 0; i < log->number_of_sinks; i++) {
-		ret |= log->sinks[i]->log_message(log->sinks[i]->context, level, log->application, log->log_buffer);
-	}
-
-	return ret;
+// clang-format off
+__attribute__((format(printf, 3, 0)))
+int sclog_message_va(struct sclog *log, enum sclog_level level, const char *format, va_list args)
+// clang-format on
+{
+	vsnprintf(log->log_buffer, sizeof(log->log_buffer), format, args);
+	return send_buffer_to_sinks(log, level);
 }

@@ -33,6 +33,7 @@
 extern "C" {
 #endif
 
+#include <stdarg.h>
 #include <stddef.h>
 
 #include "sclog/export.h"
@@ -65,6 +66,7 @@ struct sclog {
 SCLOG_EXPORT int sclog_init(struct sclog *log, const char *application, struct sclog_sink *sinks[], size_t number_of_sinks);
 SCLOG_EXPORT void sclog_close(const struct sclog *log);
 SCLOG_EXPORT int sclog_message(struct sclog *log, enum sclog_level level, const char *format, ...);
+SCLOG_EXPORT int sclog_message_va(struct sclog *log, enum sclog_level level, const char *format, va_list args);
 
 #ifdef __cplusplus
 }
