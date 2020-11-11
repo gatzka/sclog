@@ -92,7 +92,8 @@ $(document).ready(function(){initNavTree('sclog_8h.html',''); initResizable(); }
 <div class="title">sclog.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stddef.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;stdarg.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &quot;sclog/export.h&quot;</code><br />
 </div>
 <p><a href="sclog_8h_source.html">Go to the source code of this file.</a></p>
@@ -130,6 +131,8 @@ Functions</h2></td></tr>
 <tr class="separator:a872da51f8b81f28aec029d7123059dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a675b55eeefddf7dca3fde2868fdf279c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sclog_8h.html#a675b55eeefddf7dca3fde2868fdf279c">sclog_message</a> (struct <a class="el" href="structsclog.html">sclog</a> *log, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a> level, const char *format,...)</td></tr>
 <tr class="separator:a675b55eeefddf7dca3fde2868fdf279c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54ce8b2419e853f5773109a1b0ecd992"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sclog_8h.html#a54ce8b2419e853f5773109a1b0ecd992">sclog_message_va</a> (struct <a class="el" href="structsclog.html">sclog</a> *log, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a> level, const char *format, va_list args)</td></tr>
+<tr class="separator:a54ce8b2419e853f5773109a1b0ecd992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a66c87549a0942921baf4d98ba5612c98"></a>
@@ -256,6 +259,46 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a54ce8b2419e853f5773109a1b0ecd992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54ce8b2419e853f5773109a1b0ecd992">&#9670;&nbsp;</a></span>sclog_message_va()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sclog_message_va </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structsclog.html">sclog</a> *&#160;</td>
+          <td class="paramname"><em>log</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a>&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">va_list&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
