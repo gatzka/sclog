@@ -33,22 +33,32 @@
 #include "sclog/compiler.h"
 #include "sclog/sclog.h"
 
-int sclog_init(struct sclog *log, const char *application, struct sclog_sink *sink, size_t number_of_sinks)
+int sclog_init(struct sclog *log, const char *application, struct sclog_sink **sinks, size_t number_of_sinks)
 {
-	if ((log == NULL) || (sink == NULL)) {
+	if (log == NULL) {
 		return -1;
 	}
 
 	log->application = application;
-	log->sink = sink;
+	log->sinks = sinks;
 	log->number_of_sinks = number_of_sinks;
 
-	return log->sink->init(log->sink->context);
+	log->sinks[0]->init(log->sinks[0]->context);
+
+	int ret = 0;
+
+	for (size_t i = 0; i < log->number_of_sinks; i++) {
+		ret |= log->sinks[i]->init(log->sinks[i]->context);
+	}
+
+	return ret;
 }
 
 void sclog_close(const struct sclog *log)
 {
-	log->sink->close(log->sink->context);
+	for (size_t i = 0; i < log->number_of_sinks; i++) {
+		log->sinks[i]->close(log->sinks[i]->context);
+	}
 }
 
 // clang-format off
@@ -64,7 +74,7 @@ int sclog_message(struct sclog *log, enum sclog_level level, const char *format,
 	int ret = 0;
 
 	for (size_t i = 0; i < log->number_of_sinks; i++) {
-		ret |= log->sink[i].log_message(log->sink->context, level, log->application, log->log_buffer);
+		ret |= log->sinks[i]->log_message(log->sinks[i]->context, level, log->application, log->log_buffer);
 	}
 
 	return ret;

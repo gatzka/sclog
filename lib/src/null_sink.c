@@ -32,7 +32,7 @@
 #include "sclog/null_sink.h"
 #include "sclog/sclog.h"
 
-static int init(const void *context)
+static int init(void *context)
 {
 	(void)context;
 	return 0;
@@ -43,7 +43,7 @@ static void close(const void *context)
 	(void)context;
 }
 
-static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
+static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
 {
 	(void)context;
 	(void)level;

@@ -34,14 +34,16 @@
 
 int main(void)
 {
-
-	struct sclog stderr_log;
 	struct sclog_sink stderr_sink;
+
 	if (sclog_stderr_sink_init(&stderr_sink, SCLOG_WARNING) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	if (sclog_init(&stderr_log, "stderr_log_example", &stderr_sink, 1) != 0) {
+	struct sclog_sink *sinks[] = {&stderr_sink};
+	struct sclog stderr_log;
+
+	if (sclog_init(&stderr_log, "stderr_log_example", sinks, 1) != 0) {
 		return EXIT_FAILURE;
 	}
 

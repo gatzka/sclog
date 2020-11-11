@@ -34,13 +34,14 @@
 
 int main(void)
 {
-	struct sclog syslog_log;
 	struct sclog_syslog_sink syslog_sink;
+	struct sclog syslog_log;
 	if (sclog_syslog_sink_init(&syslog_sink, &syslog_log, SCLOG_WARNING) != 0) {
 		return EXIT_FAILURE;
 	}
 
-	if (sclog_init(&syslog_log, "syslog_log_example", &syslog_sink.sink, 1) != 0) {
+	struct sclog_sink *sinks[] = {&syslog_sink.sink};
+	if (sclog_init(&syslog_log, "syslog_log_example", sinks, 1) != 0) {
 		return EXIT_FAILURE;
 	}
 
