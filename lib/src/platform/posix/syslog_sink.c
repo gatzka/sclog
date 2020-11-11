@@ -33,7 +33,7 @@
 #include "sclog/sclog.h"
 #include "sclog/syslog_sink.h"
 
-static int init(const void *context)
+static int init(void *context)
 {
 	const struct sclog_syslog_sink *sink = (const struct sclog_syslog_sink *)context;
 	openlog(sink->log->application, 0, LOG_USER);
@@ -46,7 +46,7 @@ static void close(const void *context)
 	closelog();
 }
 
-static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
+static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
 {
 	(void)application;
 

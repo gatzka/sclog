@@ -35,16 +35,9 @@
 
 enum { FILENAME_BUFFER_SIZE = 255 };
 
-static struct sclog_file_rotate_sink *get_rotate_sink(const void *context)
+static int init(void *context)
 {
-	const struct sclog *log = (const struct sclog *)context;
-	struct sclog_sink *sink = log->sink;
-	return sclog_container_of(sink, struct sclog_file_rotate_sink, sink);
-}
-
-static int init(const void *context)
-{
-	struct sclog_file_rotate_sink *fr_sink = get_rotate_sink(context);
+	struct sclog_file_rotate_sink *fr_sink = (struct sclog_file_rotate_sink *)context;
 
 	fr_sink->fp = fopen(fr_sink->log_file_name, "ae");
 	if (fr_sink->fp == NULL) {
@@ -58,7 +51,7 @@ static int init(const void *context)
 
 static void close(const void *context)
 {
-	const struct sclog_file_rotate_sink *fr_sink = get_rotate_sink(context);
+	const struct sclog_file_rotate_sink *fr_sink = (const struct sclog_file_rotate_sink *)context;
 	if (fr_sink->fp != NULL) {
 		fclose(fr_sink->fp);
 	}
@@ -103,9 +96,9 @@ static int rotate_files(struct sclog_file_rotate_sink *fr_sink)
 	return 0;
 }
 
-static int log_message(const void *context, enum sclog_level level, const char *application, const char *message)
+static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
 {
-	struct sclog_file_rotate_sink *fr_sink = get_rotate_sink(context);
+	struct sclog_file_rotate_sink *fr_sink = (struct sclog_file_rotate_sink *)context;
 
 	if ((level == SCLOG_NONE) || (level > fr_sink->sink.guard_level)) {
 		return -1;
@@ -128,7 +121,7 @@ static int log_message(const void *context, enum sclog_level level, const char *
 	return 0;
 }
 
-int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, struct sclog *log, enum sclog_level level)
+int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, enum sclog_level level)
 {
 	if ((fr_sink == NULL) || (fr_sink->number_of_files < 1)) {
 		return -1;
@@ -137,7 +130,7 @@ int sclog_file_rotate_sink_init(struct sclog_file_rotate_sink *fr_sink, struct s
 	fr_sink->sink.init = init;
 	fr_sink->sink.close = close;
 	fr_sink->sink.log_message = log_message;
-	fr_sink->sink.context = log;
+	fr_sink->sink.context = fr_sink;
 	fr_sink->sink.guard_level = level;
 	return 0;
 }
