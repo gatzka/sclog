@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['guard_5flevel_91',['guard_level',['../structsclog.html#a36800c14ab869164ff2211460f018be3',1,'sclog']]]
+  ['guard_5flevel_96',['guard_level',['../structsclog__sink.html#a4288dc334bfaeba1172e036486c8cef3',1,'sclog_sink']]]
 ];

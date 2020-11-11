@@ -84,6 +84,7 @@ $(document).ready(function(){initNavTree('syslog__sink_8h.html',''); initResizab
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">syslog_sink.h File Reference</div>  </div>
@@ -94,14 +95,19 @@ $(document).ready(function(){initNavTree('syslog__sink_8h.html',''); initResizab
 </div>
 <p><a href="syslog__sink_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsclog__syslog__sink.html">sclog_syslog_sink</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a73cec4a7e8d28604f992e31a75740e93"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syslog__sink_8h.html#a73cec4a7e8d28604f992e31a75740e93">sclog_syslog_sink_init</a> (struct <a class="el" href="structsclog__sink.html">sclog_sink</a> *sink, struct <a class="el" href="structsclog.html">sclog</a> *log)</td></tr>
-<tr class="separator:a73cec4a7e8d28604f992e31a75740e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dfab8827f293adacee573af669c14ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="syslog__sink_8h.html#a1dfab8827f293adacee573af669c14ad">sclog_syslog_sink_init</a> (struct <a class="el" href="structsclog__syslog__sink.html">sclog_syslog_sink</a> *sink, struct <a class="el" href="structsclog.html">sclog</a> *log, enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a> level)</td></tr>
+<tr class="separator:a1dfab8827f293adacee573af669c14ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a73cec4a7e8d28604f992e31a75740e93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73cec4a7e8d28604f992e31a75740e93">&#9670;&nbsp;</a></span>sclog_syslog_sink_init()</h2>
+<a id="a1dfab8827f293adacee573af669c14ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dfab8827f293adacee573af669c14ad">&#9670;&nbsp;</a></span>sclog_syslog_sink_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -109,14 +115,20 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int sclog_syslog_sink_init </td>
           <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structsclog__sink.html">sclog_sink</a> *&#160;</td>
+          <td class="paramtype">struct <a class="el" href="structsclog__syslog__sink.html">sclog_syslog_sink</a> *&#160;</td>
           <td class="paramname"><em>sink</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct <a class="el" href="structsclog.html">sclog</a> *&#160;</td>
-          <td class="paramname"><em>log</em>&#160;</td>
+          <td class="paramname"><em>log</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a>&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

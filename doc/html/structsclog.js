@@ -1,7 +1,7 @@
 var structsclog =
 [
     [ "application", "structsclog.html#a66c85518aecd892ff1884dd0ddba5740", null ],
-    [ "guard_level", "structsclog.html#a36800c14ab869164ff2211460f018be3", null ],
     [ "log_buffer", "structsclog.html#a5bb04f50ca9abbc57bb110812865bbd5", null ],
-    [ "sink", "structsclog.html#a15d1fb54d75caedd94a4b540e63dbd7a", null ]
+    [ "number_of_sinks", "structsclog.html#ac7d6c82d8fe437e7c29e61c726d042ee", null ],
+    [ "sinks", "structsclog.html#ae3b4f11c005e9cad2980fb495b67efa1", null ]
 ];

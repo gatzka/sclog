@@ -125,19 +125,28 @@ $(document).ready(function(){initNavTree('syslog__sink_8h_source.html',''); init
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;sclog/export.h&quot;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="sclog_8h.html">sclog/sclog.h</a>&quot;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;SCLOG_EXPORT <span class="keywordtype">int</span> <a class="code" href="syslog__sink_8h.html#a73cec4a7e8d28604f992e31a75740e93">sclog_syslog_sink_init</a>(<span class="keyword">struct</span> <a class="code" href="structsclog__sink.html">sclog_sink</a> *sink, <span class="keyword">struct</span> <a class="code" href="structsclog.html">sclog</a> *log);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structsclog__syslog__sink.html">   39</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structsclog__syslog__sink.html">sclog_syslog_sink</a> {</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structsclog__syslog__sink.html#a256f737a8ea020db9d312a9c52de9f6e">   40</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structsclog__sink.html">sclog_sink</a> <a class="code" href="structsclog__syslog__sink.html#a256f737a8ea020db9d312a9c52de9f6e">sink</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="structsclog__syslog__sink.html#a95927efc24ce45fc9ae4c75d22c551b6">   41</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structsclog.html">sclog</a> *<a class="code" href="structsclog__syslog__sink.html#a95927efc24ce45fc9ae4c75d22c551b6">log</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;SCLOG_EXPORT <span class="keywordtype">int</span> <a class="code" href="syslog__sink_8h.html#a1dfab8827f293adacee573af669c14ad">sclog_syslog_sink_init</a>(<span class="keyword">struct</span> <a class="code" href="structsclog__syslog__sink.html">sclog_syslog_sink</a> *sink, <span class="keyword">struct</span> <a class="code" href="structsclog.html">sclog</a> *log, <span class="keyword">enum</span> <a class="code" href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a> level);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="asclog_8h_html"><div class="ttname"><a href="sclog_8h.html">sclog.h</a></div></div>
-<div class="ttc" id="asyslog__sink_8h_html_a73cec4a7e8d28604f992e31a75740e93"><div class="ttname"><a href="syslog__sink_8h.html#a73cec4a7e8d28604f992e31a75740e93">sclog_syslog_sink_init</a></div><div class="ttdeci">int sclog_syslog_sink_init(struct sclog_sink *sink, struct sclog *log)</div></div>
-<div class="ttc" id="astructsclog__sink_html"><div class="ttname"><a href="structsclog__sink.html">sclog_sink</a></div><div class="ttdef"><b>Definition:</b> sclog.h:48</div></div>
-<div class="ttc" id="astructsclog_html"><div class="ttname"><a href="structsclog.html">sclog</a></div><div class="ttdef"><b>Definition:</b> sclog.h:55</div></div>
+<div class="ttc" id="asclog_8h_html_a062f3f6ec329773c88498ab66772116d"><div class="ttname"><a href="sclog_8h.html#a062f3f6ec329773c88498ab66772116d">sclog_level</a></div><div class="ttdeci">sclog_level</div><div class="ttdef"><b>Definition:</b> sclog.h:42</div></div>
+<div class="ttc" id="astructsclog__sink_html"><div class="ttname"><a href="structsclog__sink.html">sclog_sink</a></div><div class="ttdef"><b>Definition:</b> sclog.h:50</div></div>
+<div class="ttc" id="asyslog__sink_8h_html_a1dfab8827f293adacee573af669c14ad"><div class="ttname"><a href="syslog__sink_8h.html#a1dfab8827f293adacee573af669c14ad">sclog_syslog_sink_init</a></div><div class="ttdeci">int sclog_syslog_sink_init(struct sclog_syslog_sink *sink, struct sclog *log, enum sclog_level level)</div></div>
+<div class="ttc" id="astructsclog_html"><div class="ttname"><a href="structsclog.html">sclog</a></div><div class="ttdef"><b>Definition:</b> sclog.h:58</div></div>
+<div class="ttc" id="astructsclog__syslog__sink_html_a256f737a8ea020db9d312a9c52de9f6e"><div class="ttname"><a href="structsclog__syslog__sink.html#a256f737a8ea020db9d312a9c52de9f6e">sclog_syslog_sink::sink</a></div><div class="ttdeci">struct sclog_sink sink</div><div class="ttdef"><b>Definition:</b> syslog_sink.h:40</div></div>
+<div class="ttc" id="astructsclog__syslog__sink_html_a95927efc24ce45fc9ae4c75d22c551b6"><div class="ttname"><a href="structsclog__syslog__sink.html#a95927efc24ce45fc9ae4c75d22c551b6">sclog_syslog_sink::log</a></div><div class="ttdeci">struct sclog * log</div><div class="ttdef"><b>Definition:</b> syslog_sink.h:41</div></div>
+<div class="ttc" id="astructsclog__syslog__sink_html"><div class="ttname"><a href="structsclog__syslog__sink.html">sclog_syslog_sink</a></div><div class="ttdef"><b>Definition:</b> syslog_sink.h:39</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

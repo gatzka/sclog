@@ -11,6 +11,6 @@ var sclog_8h =
       [ "SCLOG_DEBUG", "sclog_8h.html#a062f3f6ec329773c88498ab66772116da42fdbd3b2c98cac7afc0c271c834ef9d", null ]
     ] ],
     [ "sclog_close", "sclog_8h.html#a872da51f8b81f28aec029d7123059dbd", null ],
-    [ "sclog_init", "sclog_8h.html#ae0f26b4c526b56c9b31ece4b7064ecc8", null ],
+    [ "sclog_init", "sclog_8h.html#abb27a32fc7fe817dabaf33c94ed681fb", null ],
     [ "sclog_message", "sclog_8h.html#a675b55eeefddf7dca3fde2868fdf279c", null ]
 ];
