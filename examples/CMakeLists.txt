@@ -20,6 +20,11 @@ if(IS_LINUX)
             systemd_log_example.c
         )
         target_link_libraries (systemd_log_example)
+
+        add_executable(multiple_sinks_example
+            multiple_sinks_example.c
+        )
+        target_link_libraries (multiple_sinks_example)
     endif()
 
     add_executable(syslog_log_example
@@ -27,10 +32,6 @@ if(IS_LINUX)
     )
     target_link_libraries (syslog_log_example)
 
-    add_executable(multiple_sinks_example
-        multiple_sinks_example.c
-    )
-    target_link_libraries (multiple_sinks_example)
 endif()
 
 get_property(targets DIRECTORY "${CMAKE_CURRENT_LIST_DIR}" PROPERTY BUILDSYSTEM_TARGETS)
