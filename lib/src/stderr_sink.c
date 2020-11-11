@@ -34,17 +34,6 @@
 #include "sclog/sclog.h"
 #include "sclog/stderr_sink.h"
 
-static int init(void *context)
-{
-	(void)context;
-	return 0;
-}
-
-static void close(const void *context)
-{
-	(void)context;
-}
-
 static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
 {
 	const struct sclog_sink *sink = (const struct sclog_sink *)context;
@@ -61,8 +50,8 @@ int sclog_stderr_sink_init(struct sclog_sink *sink, enum sclog_level level)
 		return -1;
 	}
 
-	sink->init = init;
-	sink->close = close;
+	sink->init = NULL;
+	sink->close = NULL;
 	sink->log_message = log_message;
 	sink->guard_level = level;
 	sink->context = sink;
