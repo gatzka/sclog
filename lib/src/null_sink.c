@@ -32,17 +32,6 @@
 #include "sclog/null_sink.h"
 #include "sclog/sclog.h"
 
-static int init(void *context)
-{
-	(void)context;
-	return 0;
-}
-
-static void close(const void *context)
-{
-	(void)context;
-}
-
 static int log_message(void *context, enum sclog_level level, const char *application, const char *message)
 {
 	(void)context;
@@ -58,8 +47,8 @@ int sclog_null_sink_init(struct sclog_sink *sink)
 		return -1;
 	}
 
-	sink->init = init;
-	sink->close = close;
+	sink->init = NULL;
+	sink->close = NULL;
 	sink->log_message = log_message;
 	sink->guard_level = SCLOG_INFO;
 

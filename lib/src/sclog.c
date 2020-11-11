@@ -43,12 +43,13 @@ int sclog_init(struct sclog *log, const char *application, struct sclog_sink **s
 	log->sinks = sinks;
 	log->number_of_sinks = number_of_sinks;
 
-	log->sinks[0]->init(log->sinks[0]->context);
-
 	int ret = 0;
 
 	for (size_t i = 0; i < log->number_of_sinks; i++) {
-		ret |= log->sinks[i]->init(log->sinks[i]->context);
+		int (*sink_init)(void *) = log->sinks[i]->init;
+		if (sink_init != NULL) {
+			ret |= sink_init(log->sinks[i]->context);
+		}
 	}
 
 	return ret;
@@ -57,7 +58,10 @@ int sclog_init(struct sclog *log, const char *application, struct sclog_sink **s
 void sclog_close(const struct sclog *log)
 {
 	for (size_t i = 0; i < log->number_of_sinks; i++) {
-		log->sinks[i]->close(log->sinks[i]->context);
+		void (*sink_close)(const void *) = log->sinks[i]->close;
+		if (sink_close != NULL) {
+			sink_close(log->sinks[i]->context);
+		}
 	}
 }
 
