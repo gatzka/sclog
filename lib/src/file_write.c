@@ -51,7 +51,7 @@ static void get_time(char *buffer, size_t buffer_size)
 		return;
 	}
 
-	buffer[strftime(buffer, buffer_size, "%FT%H:%M:%SZ", &result)] = '\0';
+	buffer[strftime(buffer, buffer_size, "%Y-%m-%dT%H:%M:%SZ", &result)] = '\0';
 }
 
 static const char *get_level_string(enum sclog_level level)
