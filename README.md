@@ -3,6 +3,9 @@
 Copyright (c) 2019 Stephan Gatzka. See the [LICENSE](LICENSE) file for
 license rights and limitations (MIT).
 
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgatzka%2Fsclog.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgatzka%2Fsclog?ref=badge_large)
+
 ## Build Status
 [![Github action](https://github.com/gatzka/sclog/workflows/CI%20build/badge.svg?branch=master)](https://github.com/gatzka/sclog/actions)
 [![Coverity](https://scan.coverity.com/projects/19467/badge.svg)](https://scan.coverity.com/projects/gatzka-sclog)
@@ -11,6 +14,7 @@ license rights and limitations (MIT).
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.gatzka.sclog&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.gatzka.sclog)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/gatzka/sclog.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/gatzka/sclog/alerts/)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/gatzka/sclog.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/gatzka/sclog/context:cpp)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgatzka%2Fsclog.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgatzka%2Fsclog?ref=badge_shield)
 
 [![Open Hub](https://img.shields.io/badge/Open-Hub-0185CA.svg)](https://www.openhub.net/p/sclog)
 
@@ -36,4 +40,3 @@ cmake -DBUILD_SHARED_LIBS=ON <path-to-sclog-project>
 
 The generated [doxygen](http://www.doxygen.nl/) documentation can be found
 [here](https://gatzka.github.io/sclog/doc/html).
-
