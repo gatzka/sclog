@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.11)
 project(sclog_unit_test C)
 
 find_package(Git QUIET REQUIRED)

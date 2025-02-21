@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.11)
 project(sclog VERSION 0.0.1 LANGUAGES C)
 
 add_custom_target(${PROJECT_NAME}_generate_semver
