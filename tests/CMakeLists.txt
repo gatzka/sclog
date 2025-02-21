@@ -18,18 +18,18 @@ endif()
 
 enable_testing()
 
-add_library(fff INTERFACE)
-target_include_directories(fff INTERFACE fff)
+add_library(fff_sclog INTERFACE)
+target_include_directories(fff_sclog INTERFACE fff)
 
-add_library(unity
+add_library(unity_sclog
     unity/src/unity.c
 )
-set_target_properties(unity PROPERTIES
+set_target_properties(unity_sclog PROPERTIES
     C_CLANG_TIDY ""
     COMPILE_OPTIONS "$<$<OR:$<C_COMPILER_ID:GNU>,$<C_COMPILER_ID:Clang>>:-Wno-strict-overflow>"
     
 )
-target_include_directories(unity PUBLIC ${CMAKE_CURRENT_LIST_DIR}/unity/src/)
+target_include_directories(unity_sclog PUBLIC ${CMAKE_CURRENT_LIST_DIR}/unity/src/)
 
 add_executable(test_sclog_version
     test_sclog_version.c
@@ -43,7 +43,7 @@ foreach(tgt ${targets})
     get_target_property(target_type ${tgt} TYPE)
     if (target_type STREQUAL "EXECUTABLE")
         add_dependencies(${tgt} sclog::sclog) # Necessary to generage sclog_version_private.h before compiling the tests.
-        target_link_libraries(${tgt} fff unity)
+        target_link_libraries(${tgt} fff_sclog unity_sclog)
         target_include_directories(${tgt} PUBLIC ${includes})
         set_target_properties(${tgt} PROPERTIES
             C_STANDARD_REQUIRED ON
